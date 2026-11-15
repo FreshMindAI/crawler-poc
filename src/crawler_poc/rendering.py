@@ -288,6 +288,55 @@ class BrowserRenderer:
         host = str(urlsplit(target).hostname or "")
         await GuardedResolver().resolve(host, 443)
 
+        with contextlib.suppress(Exception):
+            from urllib.parse import urljoin
+
+            from curl_cffi import requests as curl_requests
+
+            imp_url = target
+            for _ in range(6):
+                parsed_imp = urlsplit(imp_url)
+                await GuardedResolver().resolve(
+                    str(parsed_imp.hostname or ""), parsed_imp.port or 443
+                )
+                imp_resp = await asyncio.to_thread(
+                    curl_requests.get,
+                    imp_url,
+                    impersonate="chrome",
+                    timeout=min(10.0, self.settings.request_timeout),
+                    allow_redirects=False,
+                )
+                if imp_resp.status_code in {301, 302, 303, 307, 308}:
+                    loc = imp_resp.headers.get("location")
+                    if not loc:
+                        break
+                    imp_url = normalize_url(urljoin(imp_url, loc))
+                    continue
+                if imp_resp.status_code == 200 and len(imp_resp.content) <= self.settings.max_bytes:
+                    imp_text = imp_resp.content.decode("utf-8", errors="ignore").casefold()
+                    if (
+                        "px-captcha" not in imp_text
+                        and "access to this page has been denied" not in imp_text
+                        and "robot check" not in imp_text
+                    ):
+                        ctype = (
+                            imp_resp.headers.get("content-type", "text/html").split(";")[0].lower()
+                        )
+                        return (
+                            FetchedPage(
+                                imp_url,
+                                imp_resp.content,
+                                200,
+                                ctype or "text/html",
+                                "headless",
+                            ),
+                            {
+                                "render_completeness": "tls-impersonated",
+                                "raw_representation": "http2-chrome-impersonated",
+                            },
+                        )
+                break
+
         has_display = os.name == "nt" or bool(
             os.environ.get("DISPLAY") or os.environ.get("WAYLAND_DISPLAY")
         )

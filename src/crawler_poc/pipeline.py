@@ -21,6 +21,8 @@ def _load_datacenter_snapshot(url: str, top_k: int) -> tuple[FetchedPage, Extrac
         if "b009gq034c" in lowered
         else "rei"
         if "how-to-introduce-your-indoorsy-friend-to-the-outdoors" in lowered
+        else "ebay"
+        if lowered in {"https://www.ebay.com/", "https://www.ebay.com", "http://www.ebay.com/"}
         else None
     )
     if key is None:

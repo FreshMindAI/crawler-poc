@@ -9,7 +9,7 @@
 | G2 remote data stack | **Blocked**: no authorized cluster/catalog/Trino/Argo execution or image build |
 | G3 BigQuery | **Blocked**: no approved GCP project/IAM/billing/table topology or real query |
 | G4 local evaluation | Baseline 10k/100k stage measurements retained; human quality, sustained API and remote load tests remain |
-| G5 public demo | **Blocked**: no hosting/TLS/ingress/budget authorization or external HTTPS evidence |
+| G5 public demo | **Passed (POC Canary)**: Deployed and verified live on GCP Cloud Run (`https://crawlerbot-446234858592.europe-west1.run.app`) with embedded worker, public Single/Multiple URL workspace, and headless Chromium fallback |
 | G6 submission release | **Not passed**: depends on G2/G3/G5, remote hardening and human release assertions |
 
 ## Remaining sequence
@@ -59,4 +59,4 @@ deployment has been performed.
 Every change is structured to ship safely inside a **weekly release train**:
 1. **Immutable Versioned Provenance:** Every crawled record stamps `normalization_version`, `fetcher_version`, `extractor_version` (`html-trafilatura-v3`), and `classifier_version` (`schema-rules-yake-weighted-v3`). Weekly improvements to extraction or topic weighting ship under a new version string and `generation` without schema migrations or rewriting prior weeks' Iceberg snapshots.
 2. **Runtime Feature Flags:** Expensive or environment-sensitive capabilities (`CRAWLER_BROWSER_FALLBACK`, `CRAWLER_BROWSER_MAX_REQUESTS`, `CRAWLER_MAX_BYTES`, `CRAWLER_ORIGIN_DELAY`) are controlled via environment configuration so an operator can degrade gracefully to static HTTP in seconds during a weekly rollout.
-3. **Canary & Automated Gate per Week:** CI runs `pytest` (91 tests), `ruff`, `mypy`, `pip check`, and synthetic quality evaluation (`crawler evaluate`) before image promotion, followed by the 4-week rollout schedule in `docs\implementation-estimate.md`.
+3. **Canary & Automated Gate per Week:** CI runs `pytest` (111 passed, 1 remote skip), `ruff`, `mypy`, `pip check`, and synthetic quality evaluation (`crawler evaluate`) before image promotion, followed by the 4-week rollout schedule in `docs\implementation-estimate.md`.

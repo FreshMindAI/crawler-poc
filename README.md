@@ -31,5 +31,4 @@ limitations.
 
 ## Status
 
-Local POC evidence is available. Cloud deployment and remote integration
-verification remain outstanding; see the linked release and submission details.
+Local POC evidence and the public GCP Cloud Run demo (`https://crawlerbot-446234858592.europe-west1.run.app`) are live and verified. Remote multi-node Trino/Argo/BigQuery cluster execution remains documented and gated on production cluster provisioning; see the linked release and submission details.

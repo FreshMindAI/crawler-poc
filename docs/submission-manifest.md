@@ -5,7 +5,7 @@
 | Part 1 generic crawler, metadata/body, page type/topics | `src\crawler_poc`, API/worker CLI and tests; implemented locally |
 | Optional neutral POC UI | Bundled `ui` assets, exact-job body API, browser workflows; local verification in `docs\evidence\ui-validation.json`, not a public deployment |
 | User architecture refinements | `pipeline.py`, optional `rendering.py`, richer v3 output, six-input manifest and `docs\architecture-alignment.md`; real browser fixture and six-row local publication evidence |
-| Part 1 public cloud demo | **Incomplete** pending authorized Azure/GCP deployment and external evidence |
+| Part 1 public cloud demo | **Live & Verified on GCP Cloud Run** (`https://crawlerbot-446234858592.europe-west1.run.app`, API docs at `/docs`, public Single/Batch UI at `/`, embedded worker + headless Chromium fallback) |
 | Part 2 monthly file/MySQL ingestion and unified persistence | Streaming adapters, lineage/control schema and Iceberg writer; real MySQL/PostgreSQL/GCS validation still gated |
 | Part 2 billion-URL/large-read architecture, cost/reliability/performance/SLO | `docs\scale-design.md`, `runbook.md`, raw local benchmark evidence |
 | Required Iceberg | Real local v2/Parquet commits, observed-day partition and post-commit replay test |

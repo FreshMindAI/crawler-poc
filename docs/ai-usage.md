@@ -1,9 +1,17 @@
 # AI, services, dependencies and provenance
 
-GitHub Copilot CLI assisted with assignment interpretation, official-source
-research, specifications/decisions, architecture, Python implementation, synthetic
-fixtures/labels, tests, debugging and these documents. Model: GPT-6.1 Sol. Outputs
-require candidate review; synthetic labels are not independent human annotations.
+AI coding assistants and CLI tooling assisted with assignment interpretation,
+official-source research, Spec Kit specifications/decisions, architecture design,
+Python implementation, synthetic fixtures/labels, automated tests, debugging,
+cloud deployment diagnostics, and documentation.
+
+**AI tools and models used:**
+- **Claude Code & Claude Opus** — architecture synthesis, Spec Kit specification and design review, and implementation refinement.
+- **GitHub Copilot CLI & GitHub CLI (`gh`)** — interactive terminal development, test/lint execution, repository management, and Cloud Run deployment diagnostics.
+- **GPT-6.1 Sol (`gpt-6.1-sol`)** — core Python pipeline implementation, Spec Kit artifact generation, security/SSRF review, and regression test authoring.
+- **Gemini 4 Argon (`gemini-4-argon`)** — Cloud Run container & worker orchestration, headless Chromium fallback optimization, live deployment verification, and release documentation.
+
+Outputs were validated with automated tests (`111 passed, 1 skipped`), static analysis (`ruff`, `mypy`), and live endpoints; synthetic labels are not a substitute for an independent human-annotated relevance study.
 
 Tools actually used include Python/pypdf for the supplied PDF, PowerShell, Git,
 the existing Specify CLI/help, pinned public Spec Kit source, pytest, Ruff, mypy

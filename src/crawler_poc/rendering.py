@@ -291,26 +291,27 @@ class BrowserRenderer:
         has_display = os.name == "nt" or bool(
             os.environ.get("DISPLAY") or os.environ.get("WAYLAND_DISPLAY")
         )
-        modes: tuple[bool, ...] = (True, False) if has_display else (True,)
+        modes: tuple[str, ...] = (
+            ("headless_new", "headed") if has_display else ("headless_new", "headless")
+        )
         last_status: int | None = None
         last_url: str = target
-        for headless in modes:
+        for mode in modes:
+            headless = mode == "headless"
             failure: FetchError | None = None
             requests, blocked = 0, 0
             browser: Any = None
             args: list[str] = [
                 "--disable-dev-shm-usage",
                 "--disable-blink-features=AutomationControlled",
+                "--disable-features=HttpsFirstBalancedModeAutoEnable",
             ]
-            if not headless:
-                args.extend(
-                    [
-                        "--window-position=-2000,-2000",
-                        "--disable-features=HttpsFirstBalancedModeAutoEnable",
-                    ]
-                )
+            if mode == "headless_new":
+                args.append("--headless=new")
+            elif mode == "headed":
+                args.append("--window-position=-2000,-2000")
             try:
-                async with asyncio.timeout(min(12.0, self.settings.request_timeout)):
+                async with asyncio.timeout(min(15.0, self.settings.request_timeout)):
                     async with self.slot, async_playwright() as runtime:
                         browser = await runtime.chromium.launch(
                             channel=_launch_channel(self.settings.browser_channel),
@@ -325,7 +326,7 @@ class BrowserRenderer:
                             "viewport": {"width": 1366, "height": 768},
                             "locale": "en-US",
                         }
-                        if headless:
+                        if mode != "headed":
                             ctx_kwargs["user_agent"] = (
                                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                                 "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0"
@@ -379,7 +380,7 @@ class BrowserRenderer:
                                 )
                             final_url = normalize_url(page.url)
                             last_status, last_url = status, final_url
-                            if headless and (
+                            if mode != modes[-1] and (
                                 status in {403, 503}
                                 or "px-captcha" in source.casefold()
                                 or "access to this page has been denied" in source.casefold()
@@ -420,12 +421,12 @@ class BrowserRenderer:
             except FetchError:
                 raise
             except (BrowserTimeout, TimeoutError) as exc:
-                if headless == modes[-1]:
+                if mode == modes[-1]:
                     raise failure or FetchError(
                         Outcome.UNSUPPORTED, "browser_timeout", stage="render"
                     ) from exc
             except BrowserError as exc:
-                if headless == modes[-1]:
+                if mode == modes[-1]:
                     raise failure or FetchError(
                         Outcome.UNSUPPORTED,
                         "browser_runtime_or_navigation_failed",

@@ -361,9 +361,14 @@ class BrowserRenderer:
                         try:
                             resp = await page.goto(
                                 target,
-                                wait_until="domcontentloaded",
-                                timeout=min(10000, self.settings.request_timeout * 1000),
+                                wait_until="commit",
+                                timeout=min(8000, self.settings.request_timeout * 1000),
                             )
+                            with contextlib.suppress(BrowserTimeout):
+                                await page.wait_for_load_state(
+                                    "domcontentloaded",
+                                    timeout=min(4000, self.settings.request_timeout * 1000),
+                                )
                             await page.wait_for_timeout(400)
                             if failure is not None:
                                 raise failure
@@ -422,8 +427,24 @@ class BrowserRenderer:
                 raise
             except (BrowserTimeout, TimeoutError) as exc:
                 if headless == modes[-1]:
+                    if last_status in {401, 403, 503}:
+                        raise FetchError(
+                            Outcome.TARGET_BLOCKED
+                            if last_status in {401, 403}
+                            else Outcome.RETRY_EXHAUSTED,
+                            "target_access_denied"
+                            if last_status in {401, 403}
+                            else "transient_http_status",
+                            http_status=last_status,
+                            url=last_url,
+                            content_type="text/html",
+                            stage="render",
+                        ) from exc
                     raise failure or FetchError(
-                        Outcome.UNSUPPORTED, "browser_timeout", stage="render"
+                        Outcome.UNSUPPORTED,
+                        "browser_timeout",
+                        stage="render",
+                        details={"browser_error": type(exc).__name__},
                     ) from exc
             except BrowserError as exc:
                 if headless == modes[-1]:
@@ -431,6 +452,7 @@ class BrowserRenderer:
                         Outcome.UNSUPPORTED,
                         "browser_runtime_or_navigation_failed",
                         stage="render",
+                        details={"browser_error": str(exc)[:180]},
                     ) from exc
         raise FetchError(
             Outcome.TARGET_BLOCKED,

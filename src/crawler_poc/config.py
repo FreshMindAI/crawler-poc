@@ -28,7 +28,9 @@ class Settings(BaseSettings):
     browser_sandbox: bool = True
     browser_max_requests: int = Field(default=16, ge=1, le=64)
     user_agent: str = Field(
-        default="CrawlerPOC/0.1 (+assignment research; respects robots.txt)",
+        default=(
+            "CrawlerPOC/0.1 (+https://github.com/FreshMindAI/crawler-poc; research@freshmindai.org)"
+        ),
         pattern=r"^[A-Za-z][A-Za-z0-9._-]*(?:/[^\r\n]*)?$",
         max_length=256,
     )

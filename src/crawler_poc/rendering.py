@@ -26,6 +26,10 @@ async def deny_browser_egress() -> AsyncIterator[int]:
         await server.wait_closed()
 
 
+def _launch_channel(channel: str) -> str | None:
+    return None if channel == "chromium" else channel
+
+
 class BrowserRenderer:
     """Execute a JS shell, fulfilling every network request through SafeFetcher."""
 
@@ -62,15 +66,16 @@ class BrowserRenderer:
                 "LOCALAPPDATA",
                 "LANG",
                 "LC_ALL",
+                "PLAYWRIGHT_BROWSERS_PATH",
             }
         }
         try:
             async with asyncio.timeout(self.settings.request_timeout):
                 async with self.slot, deny_browser_egress() as port, async_playwright() as runtime:
                     browser = await runtime.chromium.launch(
-                        channel=self.settings.browser_channel,
+                        channel=_launch_channel(self.settings.browser_channel),
                         headless=True,
-                        chromium_sandbox=True,
+                        chromium_sandbox=self.settings.browser_sandbox,
                         env=environment,
                         proxy={"server": f"http://127.0.0.1:{port}"},
                         args=[
@@ -78,6 +83,7 @@ class BrowserRenderer:
                             "--host-resolver-rules=MAP * ~NOTFOUND",
                             "--disable-quic",
                             "--force-webrtc-ip-handling-policy=disable_non_proxied_udp",
+                            "--disable-dev-shm-usage",
                         ],
                     )
                     context = await browser.new_context(
@@ -282,24 +288,32 @@ class BrowserRenderer:
         host = str(urlsplit(target).hostname or "")
         await GuardedResolver().resolve(host, 443)
 
-        for headless in (True, False):
+        has_display = os.name == "nt" or bool(
+            os.environ.get("DISPLAY") or os.environ.get("WAYLAND_DISPLAY")
+        )
+        modes: tuple[bool, ...] = (True, False) if has_display else (True,)
+        for headless in modes:
             failure: FetchError | None = None
             requests, blocked = 0, 0
             browser: Any = None
-            args: list[str] = []
+            args: list[str] = [
+                "--disable-dev-shm-usage",
+                "--disable-blink-features=AutomationControlled",
+            ]
             if not headless:
-                args = [
-                    "--window-position=-2000,-2000",
-                    "--disable-features=HttpsFirstBalancedModeAutoEnable",
-                    "--disable-blink-features=AutomationControlled",
-                ]
+                args.extend(
+                    [
+                        "--window-position=-2000,-2000",
+                        "--disable-features=HttpsFirstBalancedModeAutoEnable",
+                    ]
+                )
             try:
                 async with asyncio.timeout(self.settings.request_timeout):
                     async with self.slot, async_playwright() as runtime:
                         browser = await runtime.chromium.launch(
-                            channel=self.settings.browser_channel,
+                            channel=_launch_channel(self.settings.browser_channel),
                             headless=headless,
-                            chromium_sandbox=True,
+                            chromium_sandbox=self.settings.browser_sandbox,
                             args=args,
                         )
                         ctx_kwargs: dict[str, Any] = {

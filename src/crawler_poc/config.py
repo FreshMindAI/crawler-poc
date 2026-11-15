@@ -22,8 +22,10 @@ class Settings(BaseSettings):
     lease_seconds: float = Field(default=120, ge=30, le=600)
     api_requests_per_minute: int = Field(default=60, ge=1, le=10000)
     max_pending_jobs: int = Field(default=10000, ge=1, le=1000000)
+    embedded_worker: bool = False
     browser_fallback: bool = False
     browser_channel: str = Field(default="msedge", pattern=r"^(msedge|chrome|chromium)$")
+    browser_sandbox: bool = True
     browser_max_requests: int = Field(default=16, ge=1, le=64)
     user_agent: str = Field(
         default="CrawlerPOC/0.1 (+assignment research; respects robots.txt)",

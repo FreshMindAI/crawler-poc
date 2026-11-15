@@ -181,3 +181,33 @@ def test_invalid_auth_mode_does_not_open_api(monkeypatch, mode: str) -> None:
     monkeypatch.setenv("CRAWLER_AUTH_MODE", mode)
     with pytest.raises(ValidationError, match="auth_mode"):
         Settings(api_key=KEY)
+
+
+def test_embedded_worker_lifespan_starts_and_cancels_cleanly(monkeypatch, tmp_path: Path) -> None:
+    import asyncio
+
+    import crawler_poc.cli
+
+    started = False
+    cancelled = False
+
+    async def fake_run_workers(settings: Settings, store: Store, drain: bool) -> None:
+        nonlocal started, cancelled
+        started = True
+        try:
+            await asyncio.sleep(30)
+        except asyncio.CancelledError:
+            cancelled = True
+            raise
+
+    monkeypatch.setattr(crawler_poc.cli, "run_workers", fake_run_workers)
+    settings = Settings(
+        database_url=f"sqlite:///{tmp_path / 'embedded.db'}",
+        content_root=tmp_path / "content",
+        auth_mode="public",
+        embedded_worker=True,
+    )
+    with TestClient(create_app(settings)) as client:
+        assert client.get("/health/ready").status_code == 200
+        assert started
+    assert cancelled

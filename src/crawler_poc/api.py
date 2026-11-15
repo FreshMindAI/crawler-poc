@@ -1,4 +1,5 @@
 import asyncio
+import contextlib
 import hmac
 import uuid
 from collections.abc import AsyncIterator
@@ -69,9 +70,20 @@ def create_app(settings: Settings | None = None, store: Store | None = None) -> 
 
     @asynccontextmanager
     async def lifespan(_: FastAPI) -> AsyncIterator[None]:
-        yield
-        if store is None:
-            database.close()
+        worker_task: asyncio.Task[None] | None = None
+        if config.embedded_worker:
+            from crawler_poc.cli import run_workers
+
+            worker_task = asyncio.create_task(run_workers(config, database, drain=False))
+        try:
+            yield
+        finally:
+            if worker_task is not None:
+                worker_task.cancel()
+                with contextlib.suppress(asyncio.CancelledError):
+                    await worker_task
+            if store is None:
+                database.close()
 
     app = FastAPI(title="Crawler POC", version="0.1.0", lifespan=lifespan)
     app.add_middleware(BodyLimit)

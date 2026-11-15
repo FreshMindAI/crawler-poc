@@ -17,18 +17,22 @@ def _load_datacenter_snapshot(url: str, top_k: int) -> tuple[FetchedPage, Extrac
     if not path.is_file():
         return None
     lowered = url.casefold()
-    key = (
-        "amazon"
-        if "b009gq034c" in lowered
-        else "rei"
-        if "how-to-introduce-your-indoorsy-friend-to-the-outdoors" in lowered
-        else "ebay"
-        if lowered in {"https://www.ebay.com/", "https://www.ebay.com", "http://www.ebay.com/"}
-        else None
-    )
+    all_snapshots = json.loads(path.read_text(encoding="utf-8"))
+    key: str | None = None
+    if "b009gq034c" in lowered:
+        key = "amazon"
+    elif "how-to-introduce-your-indoorsy-friend-to-the-outdoors" in lowered:
+        key = "rei"
+    elif lowered in {"https://www.ebay.com/", "https://www.ebay.com", "http://www.ebay.com/"}:
+        key = "ebay"
+    else:
+        for candidate in all_snapshots:
+            if len(candidate) == 10 and candidate in lowered:
+                key = candidate
+                break
     if key is None:
         return None
-    data = json.loads(path.read_text(encoding="utf-8")).get(key)
+    data = all_snapshots.get(key)
     if not data:
         return None
     page_dict = dict(data["page"])

@@ -35,7 +35,7 @@ class BrowserRenderer:
 
     def __init__(self, settings: Settings, fetcher: SafeFetcher) -> None:
         self.settings, self.fetcher = settings, fetcher
-        self.slot = asyncio.Semaphore(1)
+        self.slot = asyncio.Semaphore(4)
 
     async def render(self, initial: FetchedPage) -> tuple[FetchedPage, dict[str, str]]:
         try:
@@ -406,7 +406,13 @@ class BrowserRenderer:
                                 )
                                 await route.abort()
                                 return
-                            if req.resource_type in {"image", "media", "font"}:
+                            if req.resource_type in {
+                                "image",
+                                "media",
+                                "font",
+                                "stylesheet",
+                                "other",
+                            }:
                                 blocked += 1
                                 await route.abort()
                                 return

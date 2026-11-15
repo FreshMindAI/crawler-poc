@@ -221,7 +221,14 @@ def extract_page(content: bytes, url: str, top_k: int = 5) -> ExtractedPage:
     language = tree.get("lang") or metadata.get("og:locale")
     normalized_types = {kind.rsplit("/", 1)[-1].lower() for kind in kinds}
     page_type, page_type_evidence = "other", []
-    if "product" in normalized_types or metadata.get("og:type") == "product" or commerce_fields:
+    url_path = urlsplit(url).path.lower()
+    if (
+        "product" in normalized_types
+        or metadata.get("og:type") == "product"
+        or commerce_fields
+        or "/dp/" in url_path
+        or "/gp/product/" in url_path
+    ):
         page_type = "product"
         page_type_evidence = ["structured-product" if not commerce_fields else "product-facts"]
     elif normalized_types & {"article", "newsarticle", "blogposting"}:

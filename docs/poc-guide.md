@@ -48,9 +48,43 @@ configuration**, start workers:
 .\.venv\Scripts\crawler.exe worker
 ```
 
-Requests need the same API key configured in the API process. Keep it in an
+By default, requests need the same API key configured in the API process. Keep it in an
 approved local secret mechanism; do not commit it. The API refuses an empty or
 short key. `.env.example` documents variables; it is **not automatically loaded**.
+
+### Public demo without an API key
+
+The owner-approved anonymous demo uses an explicit access mode:
+
+```powershell
+$env:CRAWLER_AUTH_MODE = 'public'
+$env:CRAWLER_BROWSER_FALLBACK = 'false'
+.\.venv\Scripts\crawler.exe serve
+```
+
+No `CRAWLER_API_KEY` or `X-API-Key` header is needed in this mode. The UI discovers
+the mode automatically, hides key entry, and retains Single URL and Multiple
+URLs submission, monitoring, resume, cancellation and reset. Mode-discovery
+failure disables submission rather than guessing that access is public.
+
+**Public means shared:** anyone who can reach the API can submit jobs, read job
+results/body/metrics and cancel jobs. There is no per-user isolation. Do not
+submit confidential URLs or URL credentials. The existing shared request quota,
+64 KiB request limit, 100-URL cap, pending-job cap and guarded HTTP/robots rules
+still apply; they are not a WAF, distributed abuse protection or a spending cap.
+
+For Cloud Run, use the new image, container port **8000**, environment variable
+`CRAWLER_AUTH_MODE=public`, `CRAWLER_BROWSER_FALLBACK=false` and the explicitly
+approved public access setting. Do not configure an API-key secret for this
+mode. Keep request-based billing, minimum 0 / maximum 1 instance and approved
+resource limits. An old image does not recognize this mode and still needs a key.
+The image starts only API/UI: it does not start a worker. Local SQLite/content
+are ephemeral and not shared across instances; successful HTTP startup does not
+prove functional or durable cloud crawling.
+
+To restore keyed mode, set `CRAWLER_AUTH_MODE=api_key`, configure a valid key and
+redeploy. A missing key never automatically selects public mode; unknown or empty
+mode values fail validation.
 
 ### Web workspace
 
@@ -85,8 +119,8 @@ an API error; **Resume monitoring** checks the existing job rather than recrawli
 Clearing the workspace does not cancel server-side work. Each new submission
 uses a fresh generation.
 
-The static page is public; crawl submission, status, content and cancellation
-still require `X-API-Key`. The UI keeps the key only in page memory, not browser
+The static page is public; in default keyed mode, crawl submission, status,
+content and cancellation require `X-API-Key`. The UI keeps the key only in page memory, not browser
 storage, cookies, URLs, or downloaded JSON. Use HTTPS for any approved remote
 deployment and do not share the operator key publicly. Extracted content is
 displayed as text, never embedded as executable HTML.

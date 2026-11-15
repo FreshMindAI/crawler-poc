@@ -60,7 +60,7 @@ class BodyLimit:
 def create_app(settings: Settings | None = None, store: Store | None = None) -> FastAPI:
     config = settings or Settings()
     expected = config.api_key.get_secret_value()
-    if len(expected) < 24:
+    if config.auth_mode == "api_key" and len(expected) < 24:
         raise ValueError(
             "Set CRAWLER_API_KEY to a randomly generated value of at least 24 characters"
         )
@@ -83,8 +83,14 @@ def create_app(settings: Settings | None = None, store: Store | None = None) -> 
     async def workspace() -> FileResponse:
         return FileResponse(ui_root / "index.html", media_type="text/html")
 
+    @app.get("/v1/config")
+    async def client_config() -> dict[str, str]:
+        return {"auth_mode": config.auth_mode}
+
     async def authorize(x_api_key: str = Header(default="")) -> None:
-        if not hmac.compare_digest(x_api_key.encode(), expected.encode()):
+        if config.auth_mode == "api_key" and not hmac.compare_digest(
+            x_api_key.encode(), expected.encode()
+        ):
             raise HTTPException(401, "Invalid API key")
         if not await asyncio.to_thread(database.allow_request, config.api_requests_per_minute):
             raise HTTPException(429, "Request budget exhausted", headers={"Retry-After": "60"})

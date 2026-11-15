@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Literal
 
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -10,6 +11,7 @@ class Settings(BaseSettings):
     database_url: str = "sqlite:///var/crawler.db"
     content_root: Path = Path("var/content")
     object_uri: str | None = None
+    auth_mode: Literal["api_key", "public"] = "api_key"
     api_key: SecretStr = SecretStr("")
     workers: int = Field(default=4, ge=1, le=32)
     max_bytes: int = Field(default=10 * 1024 * 1024, ge=1024, le=20 * 1024 * 1024)

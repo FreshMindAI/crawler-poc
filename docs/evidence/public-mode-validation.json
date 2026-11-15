@@ -1,0 +1,43 @@
+{
+  "scope": "Owner-approved explicit anonymous API/UI mode; not a completed Cloud Run deployment",
+  "mode": {
+    "default": "api_key",
+    "anonymous_opt_in": "CRAWLER_AUTH_MODE=public",
+    "api_key_required_in_public_mode": false,
+    "unknown_or_empty_modes": "Fail validation",
+    "mode_discovery": "GET /v1/config returns auth_mode only",
+    "public_data": "Jobs, results, bounded text, cancellation and metrics are shared"
+  },
+  "validation": {
+    "test_command": "CRAWLER_RUN_BROWSER_TESTS=1 python -m pytest -q",
+    "passed": 110,
+    "skipped": 1,
+    "skip_reason": "Real remote integration requires explicit authorization and resources",
+    "warnings": 3,
+    "tests_before_implementation": "New public-mode/config tests failed before implementation",
+    "lint": "ruff check src tests benchmarks passed",
+    "format": "ruff format --check src tests benchmarks passed",
+    "types": "mypy passed for 16 source files",
+    "javascript": "node --check src/crawler_poc/ui/app.js passed",
+    "dependencies": "pip check passed",
+    "spec_prerequisites": "Pinned check-prerequisites.ps1 -Json -RequireSpec -RequireTasks -IncludeTasks passed",
+    "packaged_wheel": "Isolated extracted wheel verified public environment config, missing-key startup, ready health, bundled UI assets and anonymous submission",
+    "root_lint_caveat": "ruff check . also scans unmodified vendored .specify Python scripts and reports nine pre-existing violations; project-owned checks pass"
+  },
+  "regressions": [
+    "Default keyed UI/API remains protected",
+    "Public anonymous submit, fixture worker extraction, status, exact-job and latest body, metrics and cancellation",
+    "Private URL admission rejection, 64 KiB body limit, pending-job cap and shared request-budget exhaustion",
+    "Public single and multiple URL UI submission, no key field/header, resume, cancellation and reset",
+    "Mode-discovery failure leaves submission disabled"
+  ],
+  "deployment_requirements": {
+    "new_image_required": true,
+    "container_port": 8000,
+    "CRAWLER_AUTH_MODE": "public",
+    "CRAWLER_BROWSER_FALLBACK": false,
+    "api_key_secret_required": false,
+    "live_deployment_verified": false,
+    "worker_or_shared_store_created": false
+  }
+}

@@ -15,11 +15,12 @@ KEY = "test-only-not-a-real-credential-123"
 
 
 @pytest.fixture
-def setup(tmp_path: Path):
+def setup(tmp_path: Path, request):
     settings = Settings(
         database_url=f"sqlite:///{tmp_path / 'jobs.db'}",
         content_root=tmp_path / "content",
-        api_key=KEY,
+        auth_mode=getattr(request, "param", "api_key"),
+        api_key="" if getattr(request, "param", "api_key") == "public" else KEY,
     )
     store = Store(settings.database_url)
     with TestClient(create_app(settings, store)) as client:
@@ -127,3 +128,56 @@ def test_body_limit_validation_and_idempotency(setup) -> None:
 def test_api_refuses_insecure_default_configuration(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="API_KEY"):
         create_app(Settings(api_key="", content_root=tmp_path))
+
+
+@pytest.mark.parametrize("setup", ["public"], indirect=True)
+async def test_public_mode_without_key_runs_pipeline_and_exposes_shared_results(setup) -> None:
+    settings, store, client = setup
+    assert client.get("/v1/config").json() == {"auth_mode": "public"}
+    response = client.post("/v1/crawls", json={"url": "https://example.com/"})
+    assert response.status_code == 202
+    identifier = response.json()["job_ids"][0]
+    transport = AsyncMock()
+    transport.fetch.return_value = FetchedPage(
+        "https://example.com/",
+        (Path(__file__).parent / "fixtures" / "product.html").read_bytes(),
+        200,
+        "text/html",
+    )
+    assert await Worker(settings, store, ContentStore(settings.content_root), transport).once()
+    job = client.get(f"/v1/crawls/{identifier}").json()
+    assert job["result"]["outcome"] == "success"
+    assert "toaster" in client.get(f"/v1/crawls/{identifier}/content").text
+    assert client.get(f"/v1/documents/{job['url_id']}").status_code == 200
+    assert client.get(f"/v1/documents/{job['url_id']}/content").status_code == 200
+    assert client.get("/metrics").status_code == 200
+    queued = client.post("/v1/crawls", json={"url": "https://example.com/other"})
+    queued_id = queued.json()["job_ids"][0]
+    assert client.post(f"/v1/crawls/{queued_id}/cancel").json() == {"canceled": True}
+
+
+@pytest.mark.parametrize("setup", ["public"], indirect=True)
+def test_public_mode_preserves_admission_and_shared_request_budget(setup) -> None:
+    settings, store, client = setup
+    assert client.post("/v1/crawls", json={"url": "http://127.0.0.1/"}).status_code == 422
+    assert client.post("/v1/crawls", content=b"x" * 70000).status_code == 413
+    store.max_pending = 1
+    assert client.post("/v1/crawls", json={"url": "https://example.com/one"}).status_code == 202
+    assert client.post("/v1/crawls", json={"url": "https://example.com/two"}).status_code == 429
+    settings.api_requests_per_minute = 1
+    for path in ("/v1/crawls/missing", "/v1/documents/missing", "/metrics"):
+        response = client.get(path)
+        assert response.status_code == 429
+        assert response.headers["retry-after"] == "60"
+    assert client.post("/v1/crawls/missing/cancel").status_code == 429
+    assert client.get("/v1/crawls/missing/content").status_code == 429
+    assert client.get("/v1/documents/missing/content").status_code == 429
+
+
+@pytest.mark.parametrize("mode", ["", "publci"])
+def test_invalid_auth_mode_does_not_open_api(monkeypatch, mode: str) -> None:
+    from pydantic import ValidationError
+
+    monkeypatch.setenv("CRAWLER_AUTH_MODE", mode)
+    with pytest.raises(ValidationError, match="auth_mode"):
+        Settings(api_key=KEY)

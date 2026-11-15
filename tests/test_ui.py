@@ -23,6 +23,7 @@ def ui_client(tmp_path: Path):
 
 def test_ui_assets_are_public_but_api_stays_protected(ui_client) -> None:
     client, _, settings = ui_client
+    assert client.get("/v1/config").json() == {"auth_mode": "api_key"}
     for path, mime in (
         ("/", "text/html"),
         ("/ui/app.css", "text/css"),

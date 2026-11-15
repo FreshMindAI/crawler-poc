@@ -23,12 +23,13 @@
     </div>
     <form id="crawl-form">
       <div class="connection">
-        <div class="key-field">
+        <div id="key-field" class="key-field">
           <label for="api-key">API key</label>
           <input id="api-key" type="password" required autocomplete="off" spellcheck="false"
             aria-describedby="key-help" placeholder="Enter your crawler API key">
           <p id="key-help" class="hint">Kept only in this page's memory. Never saved in browser storage.</p>
         </div>
+        <p id="public-notice" class="hint" hidden>Public demo: jobs, results and cancellation are shared. Do not submit confidential URLs or URL credentials.</p>
         <button id="clear-workspace" type="button" class="quiet">Clear workspace &amp; key</button>
       </div>
       <label class="mode-control" for="input-mode">Input mode
@@ -48,7 +49,7 @@
             placeholder="https://example.com/article&#10;https://example.com/product"></textarea>
           <p id="urls-help" class="hint">Up to 100 URLs, one per line. Spaces and tabs also separate URLs; commas inside URLs are preserved. Duplicate URLs share a job.</p>
         </div>
-        <button id="submit" class="primary" type="submit">Inspect page <span aria-hidden="true">&#8594;</span></button>
+        <button id="submit" class="primary" type="submit" disabled>Inspect page <span aria-hidden="true">&#8594;</span></button>
       </div>
       <div class="form-footer">
         <label class="topic-control" for="top-k">Topics

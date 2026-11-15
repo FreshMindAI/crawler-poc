@@ -44,8 +44,9 @@ Sample pages are an Amazon product, an REI outdoors article and a CNN technology
   through D-046); no protection bypass.
 - English-first quality evaluation; preserve Unicode metadata and report unsupported topic-language cases.
 - Return asynchronous job IDs and poll/read results; do not hold API requests open for a complete crawl.
-- Crawl data/actions require authentication, admission limits and abuse protection.
-  The later-authorized static POC workspace is public, with no embedded server key.
+- Crawl data/actions require authentication by default, admission limits and abuse
+  protection. D-056 explicitly authorizes opt-in anonymous demo access with shared
+  data/actions; a missing key alone never selects public mode.
 
 ### Out of scope
 
@@ -77,7 +78,7 @@ Sample pages are an Amazon product, an REI outdoors article and a CNN technology
 | FR-017 | A real Argo workflow drives bounded ingest/shard processing/publication/reconciliation with retries, cancellation and artifact references; individual URLs are not workflow nodes. |
 | FR-018 | A real BigQuery query validates the intended Iceberg publication or an explicitly documented materialized projection; a local emulator/mock cannot satisfy this requirement. |
 | FR-019 | Publication replay and partial failures reconcile source counts, job outcomes, content references and analytical results; crash-after-commit recovery does not append duplicates. |
-| FR-020 | The core service is reachable on an approved public Azure/GCP endpoint with authenticated examples and genuine live smoke-test evidence. |
+| FR-020 | The core service is reachable on an approved public Azure/GCP endpoint with examples matching the owner-approved access mode (D-056 selects anonymous demo access), retained admission/rate protections and genuine live smoke-test evidence. |
 | FR-021 | Reproducible correctness/quality tests and controlled 10k-100k-record performance tests report actual measured results and failure/resource breakdowns. |
 | FR-022 | The production design models billion-URL ingestion, large read demand, host skew, storage/network/query costs, backpressure, retention and failure domains with explicit assumptions. |
 | FR-023 | Documentation defines proposed SLOs, SLIs, exclusions, monitoring/alerts, error-budget handling and SLA limitations rather than claiming contractual guarantees from a short demo. |
@@ -85,7 +86,7 @@ Sample pages are an Amazon product, an REI outdoors article and a CNN technology
 | FR-025 | Submission includes runnable instructions, configuration examples, source/dependency/model/service inventory, licenses, limitations and a truthful AI-assistance disclosure. |
 | FR-026 | A local pretrained NLP alternative is documented as a backup, with an opt-in comparison plan using the same quality corpus and resource measurements. |
 | FR-027 | Runtime crawling, extraction and classification remain in the submitted implementation and its libraries, not outsourced to an equivalent third-party service. |
-| FR-028 | The optional neutral POC UI retains single-URL and bounded multiple-URL modes, accepts key/topic count, monitors real jobs individually, distinguishes failures, supports selected-job cancel/resume/reset, and presents metadata/topics/exact-job bounded body/selected or batch JSON download. It is responsive and keyboard-friendly, treats extracted HTML as text and does not persist or export the API key. |
+| FR-028 | The optional neutral POC UI retains single-URL and bounded multiple-URL modes, accepts topic count and a key only in keyed mode, monitors real jobs individually, distinguishes failures, supports selected-job cancel/resume/reset, and presents metadata/topics/exact-job bounded body/selected or batch JSON download. It is responsive and keyboard-friendly, treats extracted HTML as text and does not persist or export the API key. Public mode hides key entry and discloses shared data/actions. |
 
 ## 5. Non-functional requirements
 
@@ -137,7 +138,7 @@ Column-level mappings and invariants: `data-model.md`.
 All material implementation decisions must be added here or amend the existing row. Status does not imply user approval. Research IDs resolve in `research.md`.
 
 The original D-010 through D-025 proposals below preserve planning history.
-Their implementation selections are reconciled by D-027 through D-055; they were
+Their implementation selections are reconciled by D-027 through D-056; they were
 selected under plan/build authorization, **not separately answered user questions**.
 Cloud account/catalog/hosting choices remain deferred.
 
@@ -198,6 +199,7 @@ Cloud account/catalog/hosting choices remain deferred.
 | D-053 | User-authorized optional UI and confirmed design | Build a clean neutral POC workspace, no BrightEdge branding/decorative effects, responsive and keyboard-friendly. Bundle dependency-free HTML/CSS/JS with FastAPI rather than add a Node runtime or separate deployment. Keep keys in page memory only, render extracted data as text and poll existing authenticated jobs. Add an authenticated exact-job body endpoint rather than use the generation-mutable latest projection. | Supersedes D-003's UI exclusion only. FR-028/AC-011/T21/R-025; UI headers, packaging and real browser workflows in `docs\evidence\ui-validation.json`. Worker remains separate; no deployment or broader native-browser safety claim. |
 | D-054 | User request to retain single and multiple link parsing | Keep explicit Single URL and Multiple URLs modes. Reuse existing `url`/`urls` admission, 100-entry/64 KiB limits and whole-request validation. Split batch input on whitespace, not commas; show one row per distinct accepted job and separate selected body/result from sibling outcomes. Poll unfinished jobs sequentially at 1.5-second minimum spacing (single remains 4 seconds), pause on errors, and cancel only the selected job. | FR-028/AC-011/T21/R-026; mixed outcomes, duplicates, comma-bearing queries, mode switching, payload limits, exact bodies and stale row-response tests. Batch JSON is an observed snapshot, not a claim that unfinished jobs succeeded. No backend/storage/schema changes or cloud action. |
 | D-055 | User-requested Dockerfile relocation | Move the API/UI Dockerfile from `deploy` to the repository root for simpler Cloud Build discovery. Keep repository-root build context, all image instructions and port 8000 unchanged; leave the optional browser-worker Dockerfile under `deploy`. | T09/FR-025; build path is now `Dockerfile`. This is a layout-only change, not a verified fix for the uninspected failed cloud build, a deployment or a worker integration. |
+| D-056 | User explicitly requests public API without a key | Add `CRAWLER_AUTH_MODE=public` as an explicit opt-in; default `api_key` still rejects missing/short keys, and invalid modes fail validation. Public mode skips only key checks, retaining the shared request quota and all body/batch/pending-job/network controls. Publish only the selected mode via `/v1/config`; UI hides/disables key entry, sends no key header and supports both input modes/resume/reset without a key. | FR-020/FR-028/T05/T18/T21/R-027; constitution 0.3.0 makes this owner-approved demo exception explicit. Results, job actions and metrics are shared, not tenant-isolated. Do not submit confidential URLs. Deployment must set public mode, port 8000 and browser fallback false; source changes alone are not cloud readiness or durable worker evidence. |
 
 ## 9. Opening questions and assumptions
 
@@ -210,7 +212,7 @@ Cloud account/catalog/hosting choices remain deferred.
 | Q-005 | Evaluator / ingestion contract | Does year-month select source rows or require historical content? Assume source/run context only until clarified. |
 | Q-006 | Evaluator / final scale/SLO model | Required ingestion completion window, distinct origins, peak reads, freshness, content-size distribution, retention and deletion obligations? Model variables rather than invent throughput. |
 | Q-007 | User/evaluator / submission | Actual deadline, receipt acknowledgment, delivery format and estimation expectations? No email or public upload is authorized by this plan. |
-| Q-008 | Owner / T18 | API authentication/access policy and permission to expose the demo publicly? Proposed API-key or platform identity plus limits. |
+| Q-008 | Owner / T18 | Resolved for the demo by D-056: public anonymous API/UI, with retained limits and shared data/actions. Deployment identity, live validation, durable worker/storage and original remote stack gates remain separate. |
 | Q-009 | Evaluator / quality evaluation | How should unavailable sample URLs and anti-bot pages be scored? Record actual outcomes and use separate deterministic fixtures. |
 
 Q-004's supplied-URL/English-first/free-keyphrase defaults and Q-005's

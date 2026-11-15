@@ -28,6 +28,10 @@ The root `Dockerfile` builds the Python API/UI application. Use `Dockerfile` as
 the Cloud Build Dockerfile path and the repository root (`.`) as build context.
 The image still listens on port **8000** and does not start a crawl worker.
 The optional browser-worker image remains at `deploy\Dockerfile.browser`.
+For the owner-approved anonymous demo, the new application image needs
+`CRAWLER_AUTH_MODE=public` and `CRAWLER_BROWSER_FALLBACK=false`; it does not need
+an API-key secret. Keep the Cloud Run container port at 8000. Keyed mode remains
+the application default; see `poc-guide.md` for shared-data disclosure and rollback.
 A remote authorized builder
 must resolve the base image to a reviewed digest and publish an immutable image
 digest; placeholders in Kubernetes/Argo are intentionally not deployable values.

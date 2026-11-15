@@ -26,11 +26,12 @@ KEY = "fixture-only-ui-browser-key-12345678"
 
 
 @pytest_asyncio.fixture
-async def workspace(tmp_path: Path):
+async def workspace(tmp_path: Path, request):
     from playwright.async_api import async_playwright
 
     settings = Settings(
-        api_key=KEY,
+        auth_mode=getattr(request, "param", "api_key"),
+        api_key="" if getattr(request, "param", "api_key") == "public" else KEY,
         database_url=f"sqlite:///{tmp_path / 'jobs.db'}",
         content_root=tmp_path / "objects",
         api_requests_per_minute=1000,
@@ -67,6 +68,61 @@ async def submit(page, key: str = KEY) -> None:
     await page.get_by_label("API key", exact=True).fill(key)
     await page.get_by_label("Page URL", exact=True).fill("https://example.com/article")
     await page.get_by_role("button", name="Inspect page").click()
+
+
+@pytest.mark.parametrize("workspace", ["public"], indirect=True)
+@pytest.mark.parametrize("mode", ["single", "multiple"])
+async def test_public_workspace_submits_and_resumes_without_key(workspace, mode: str) -> None:
+    from playwright.async_api import expect
+
+    page, _, _, _ = workspace
+    requests = []
+    page.on("request", lambda request: requests.append(request))
+    await expect(page.get_by_label("API key", exact=True)).to_be_hidden()
+    await expect(page.locator("#public-notice")).to_be_visible()
+    assert not await page.locator("#api-key").evaluate("(input) => input.required")
+    await page.get_by_label("Input mode").select_option(mode)
+
+    async def limited(route):
+        if route.request.method == "GET":
+            await route.fulfill(status=429, json={"detail": "Request budget exhausted"})
+        else:
+            await route.continue_()
+
+    await page.route("**/v1/crawls/*", limited)
+    if mode == "multiple":
+        await page.get_by_label("Page URLs", exact=True).fill(
+            "https://example.com/one\nhttps://example.com/two"
+        )
+        await page.get_by_role("button", name="Inspect pages").click()
+    else:
+        await page.get_by_label("Page URL", exact=True).fill("https://example.com/one")
+        await page.get_by_role("button", name="Inspect page").click()
+    await expect(page.get_by_role("alert")).to_contain_text("60 seconds")
+    await page.unroute("**/v1/crawls/*", limited)
+    await page.get_by_role("button", name="Resume monitoring").click()
+    await expect(page.get_by_role("heading", name="Waiting for a worker")).to_be_visible()
+    await page.get_by_role("button", name="Cancel crawl", exact=True).click()
+    await expect(page.get_by_role("heading", name="Crawl canceled")).to_be_visible()
+    assert requests and all("x-api-key" not in request.headers for request in requests)
+    await page.get_by_role("button", name="Clear workspace", exact=True).click()
+    await expect(page.get_by_label("Page URL", exact=True)).to_be_focused()
+    await expect(page.get_by_label("API key", exact=True)).to_be_hidden()
+
+
+async def test_workspace_config_failure_does_not_enable_anonymous_submission(workspace) -> None:
+    from playwright.async_api import expect
+
+    page, _, _, _ = workspace
+
+    async def unavailable(route):
+        await route.fulfill(status=503, json={"detail": "unavailable"})
+
+    await page.route("**/v1/config", unavailable)
+    await page.reload()
+    await expect(page.get_by_role("alert")).to_contain_text("Cannot load service access settings")
+    await expect(page.get_by_role("button", name="Inspect page")).to_be_disabled()
+    await expect(page.locator("#public-notice")).to_be_hidden()
 
 
 async def test_real_ui_api_worker_content_and_responsive_layout(workspace, tmp_path: Path) -> None:

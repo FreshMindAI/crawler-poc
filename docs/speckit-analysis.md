@@ -19,7 +19,7 @@ The actual prerequisite script was executed from project root with
 plan/tasks and research/data-model documents. `.specify\extensions.yml` is absent;
 there were no extension hooks to invoke.
 
-Inputs analyzed: current constitution 0.2.0; specification FR/NFR/AC/decision/
+Inputs analyzed in the original pass: constitution 0.2.0; specification FR/NFR/AC/decision/
 question inventories; architecture/constraints; all 20 tasks/prerequisites;
 physical model; original source research and implementation evidence.
 Passes covered duplication, ambiguity, underspecification, constitution
@@ -215,6 +215,31 @@ T09/FR-025. Its instructions, root build context and port are unchanged; the
 browser-worker Dockerfile remains under `deploy`. Deployment instructions now
 name the root path. This layout change does not diagnose the failed cloud build
 or supply a container-build/deployment result; cloud logs remain unavailable.
+
+## Public-mode delta analysis
+
+The owner's later explicit no-key public API request is D-056/R-027, extending
+FR-020/FR-028 and T05/T18/T21. Constitution 0.3.0 records this intentional
+anonymous-demo exception rather than leaving an authentication contradiction.
+Default keyed mode and invalid-mode startup failure remain fail-closed; an empty
+key does not select public access. Public mode skips only key checks, retaining
+admission/request budgets and URL/network protections. Jobs/results/cancellation/
+metrics are intentionally shared, not tenant-isolated. No settings or secrets
+are returned by mode discovery. The UI disables submission if discovery fails.
+
+Targeted local API/browser regressions verify no-key submit/worker/read/body,
+shared cancellation/metrics, retained admission/rate controls, both UI input
+modes, no key header, resume/reset and fail-closed discovery alongside existing
+keyed tests. The scoped pre-change safety review supplied implementation
+requirements, not a full penetration test or a public-production certification.
+
+Observed later cloud evidence supersedes D-055's historical lack of logs:
+the image build/push succeeded; revision deployment failed. Port 8000 now
+matches, and a missing API key is independently reproduced as a startup blocker.
+These changes require a new image and explicit public-mode configuration;
+deployment success, cloud workers/shared durability and remote mandatory engines
+remain unproven until their actual checks pass. This is manual delta analysis,
+not an executed modern Spec Kit slash command.
 
 Human checklists are unchanged. This report does not assign SDD maturity or
 normalized coverage scores. Full modern CLI integration can be installed

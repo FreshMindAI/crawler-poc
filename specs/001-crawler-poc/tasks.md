@@ -27,7 +27,7 @@ execution gates; authoring a template/client is not a passed integration task.
 | T15 | Add metrics/tracing/structured-safe logs, alerts/runbook and remote failure drills | T12 | FR-009, FR-019, FR-023 | Interrupted workflow/lease/publication recovery, stall/reconciliation signals and retained evidence |
 | T16 | Add controlled `benchmarks` and evaluation report: parse/fetch/storage/API paths, 10k and 100k records | T07 | FR-021, FR-022 | Raw measured outputs, quality labels, environment/versions, CPU/RSS and bottleneck analysis |
 | T17 | Write local pretrained NLP backup study; implement opt-in local inference benchmark only if approved/feasible | T04, T16 | FR-026 | Same-corpus comparison plan; model/license/revision/resource record; no forced baseline change |
-| T18 | Choose approved Azure/GCP public hosting; deploy API/worker with durable state and demonstrate external requests | T05, T08, T16, hosting approval | FR-020 | Reachable HTTPS endpoint, authenticated submit/poll/read and abuse/safety smoke tests |
+| T18 | Choose approved Azure/GCP public hosting; deploy API/worker with durable state and demonstrate external requests | T05, T08, T16, hosting approval | FR-020 | Reachable HTTPS endpoint, owner-approved access-mode submit/poll/read and abuse/safety smoke tests |
 | T19 | Write `docs\scale-design.md`, `docs\poc-evaluation.md`, `docs\release-plan.md`, `docs\ai-usage.md`, quickstart and submission manifest | T10, T16, T17 | FR-022 through FR-026 | All assignment parts mapped; final scheduling/estimation deliverable and limitations present |
 | T20 | Final checks across code, images, SQL/YAML, remote stack, BigQuery, public demo and submission bundle | T12, T14, T15, T18, T19 | FR-001 through FR-027 | Formatter/lint/types/tests, genuine integration evidence, reviewer-owned release gate and clean deliverable |
 | T21 | User-authorized optional neutral POC UI, bundled assets, exact-job content route and browser tests | T05 | FR-028; FR-001, FR-013, FR-025 | Real submit/worker/result/body/download, auth/cancel/failure/resume/reset, Unicode/literal-HTML, mobile/keyboard and wheel-asset verification |
@@ -70,6 +70,17 @@ Part 3's final schedule/effort-estimation document must distinguish these catego
 | T20 | Local tests/format/lint/types/artifact checks | Remote/public/integration, image/security/license review and human release assertions |
 
 This table does not tick or supersede reviewer-owned checklists.
+
+## Public no-key demo follow-up
+
+D-056/R-027 extend T05/T18/T21 and FR-020/FR-028. Explicit public mode must start
+without a key while keyed/default/invalid modes fail closed. Verify anonymous
+submit/worker/result/body/cancel/metrics and retained request/admission limits.
+Real browser tests cover single/batch, missing key entry, absent key headers,
+resume/reset and failed mode discovery; existing keyed workflows must still pass.
+Use the approved remote build/port/public-mode configuration and verify live
+HTTP readiness before claiming deployment. Worker/durability and mandatory
+remote-engine evidence remain separate, not waived by anonymous HTTP access.
 
 ## Original-URL failure-fix follow-up
 

@@ -4,6 +4,8 @@
   const $ = (id) => document.getElementById(id);
   let epoch = 0;
   let key = "";
+  let publicMode = false;
+  let configured = false;
   let jobId = "";
   let lastJob = null;
   let timer = null;
@@ -36,6 +38,8 @@
 
   function busy(value) {
     for (const id of ["submit", "url", "urls", "input-mode", "api-key", "top-k"]) $(id).disabled = value;
+    $("submit").disabled = value || !configured;
+    $("api-key").disabled = value || publicMode;
     if (value) $("submit").textContent = "Inspecting...";
     else inputMode();
   }
@@ -43,7 +47,7 @@
   async function request(path, options = {}) {
     const response = await fetch(path, {
       ...options,
-      headers: { "X-API-Key": key, ...options.headers },
+      headers: { ...(!publicMode && key ? { "X-API-Key": key } : {}), ...options.headers },
       cache: "no-store",
       credentials: "omit",
       redirect: "error",
@@ -250,6 +254,7 @@
 
   $("crawl-form").addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (!configured) { message("Cannot load service access settings. Reload the page to retry."); return; }
     const multiple = $("input-mode").value === "multiple";
     const urls = multiple ? $("urls").value.trim().split(/\s+/u) : [$("url").value.trim()];
     let payload;
@@ -277,7 +282,7 @@
     const run = ++epoch;
     ++viewVersion;
     stop();
-    key = $("api-key").value.trim();
+    key = publicMode ? "" : $("api-key").value.trim();
     jobId = "";
     lastJob = null;
     jobs = new Map();
@@ -318,8 +323,8 @@
   });
 
   $("resume").addEventListener("click", () => {
-    key = $("api-key").value.trim();
-    if (!key) { message("Enter the API key before resuming."); $("api-key").focus(); return; }
+    key = publicMode ? "" : $("api-key").value.trim();
+    if (!publicMode && !key) { message("Enter the API key before resuming."); $("api-key").focus(); return; }
     message();
     $("resume").hidden = true;
     busy(true);
@@ -411,7 +416,27 @@
     $("body-text").textContent = "";
     for (const id of ["progress", "results", "json-panel", "batch"]) $(id).hidden = true;
     $("empty").hidden = false;
-    message("Workspace and key cleared. Any submitted job continues unless you canceled it.");
-    $("api-key").focus();
+    message(`${publicMode ? "Workspace cleared." : "Workspace and key cleared."} Any submitted job continues unless you canceled it.`);
+    $(publicMode ? "url" : "api-key").focus();
   });
+
+  async function configure() {
+    busy(true);
+    $("submit").textContent = "Connecting...";
+    try {
+      const config = await (await request("/v1/config")).json();
+      if (!["api_key", "public"].includes(config.auth_mode)) throw new Error("Unknown access mode");
+      publicMode = config.auth_mode === "public";
+      $("key-field").hidden = publicMode;
+      $("api-key").required = !publicMode;
+      $("public-notice").hidden = !publicMode;
+      $("clear-workspace").textContent = publicMode ? "Clear workspace" : "Clear workspace & key";
+      configured = true;
+      busy(false);
+    } catch {
+      busy(false);
+      message("Cannot load service access settings. Reload the page to retry.");
+    }
+  }
+  configure();
 })();

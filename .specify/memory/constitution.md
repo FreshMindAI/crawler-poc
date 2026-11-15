@@ -1,7 +1,8 @@
 # Crawler POC constitution
 
-Version: 0.2.0  
-Last amended: 2026-11-14  
+Version: 0.3.0
+
+Last amended: 2026-11-15
 Status: implementation baseline applied under the approved plan and build request.
 Independent human review/release assertions remain outstanding.
 
@@ -41,7 +42,7 @@ Record benchmark environment, input distribution, versions and raw outputs. Keep
 
 ## VII. Security and data handling
 
-No secrets in source, specs, notebooks, manifests, logs or submissions. Use least-privilege workload identities or approved secret storage. Authenticate and rate-limit public write endpoints. Redact sensitive URL query values and never log full HTML/body content by default.
+No secrets in source, specs, notebooks, manifests, logs or submissions. Use least-privilege workload identities or approved secret storage. Authenticate API operations by default. An explicitly owner-approved public demo may select anonymous access, with shared data/actions disclosed and all admission/rate/network limits retained (D-056). Redact sensitive URL query values and never log full HTML/body content by default.
 
 Keep raw objects private; serve bounded text/metadata, never executable retrieved HTML. Track retention, deletion and access requirements for crawled content.
 
@@ -76,3 +77,9 @@ for the failed modern CLI bootstrap (D-027). Safety, no-service-substitution,
 resource authorization, reviewer ownership and real remote-evidence gates are
 unchanged. Initial code preceded retained post-bootstrap semantic analysis; that
 process deviation remains visible in `docs\speckit-analysis.md`.
+
+0.3.0 records the owner's explicit public, no-API-key demo request (D-056).
+Anonymous mode must be opt-in, not inferred from a missing key; keyed mode
+remains the default. This is not tenant isolation, a guaranteed spending cap,
+or authorization to deploy workers, enable native-browser fallback or provision
+additional infrastructure.

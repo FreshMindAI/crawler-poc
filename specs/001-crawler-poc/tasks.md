@@ -30,6 +30,7 @@ execution gates; authoring a template/client is not a passed integration task.
 | T18 | Choose approved Azure/GCP public hosting; deploy API/worker with durable state and demonstrate external requests | T05, T08, T16, hosting approval | FR-020 | Reachable HTTPS endpoint, authenticated submit/poll/read and abuse/safety smoke tests |
 | T19 | Write `docs\scale-design.md`, `docs\poc-evaluation.md`, `docs\release-plan.md`, `docs\ai-usage.md`, quickstart and submission manifest | T10, T16, T17 | FR-022 through FR-026 | All assignment parts mapped; final scheduling/estimation deliverable and limitations present |
 | T20 | Final checks across code, images, SQL/YAML, remote stack, BigQuery, public demo and submission bundle | T12, T14, T15, T18, T19 | FR-001 through FR-027 | Formatter/lint/types/tests, genuine integration evidence, reviewer-owned release gate and clean deliverable |
+| T21 | User-authorized optional neutral POC UI, bundled assets, exact-job content route and browser tests | T05 | FR-028; FR-001, FR-013, FR-025 | Real submit/worker/result/body/download, auth/cancel/failure/resume/reset, Unicode/literal-HTML, mobile/keyboard and wheel-asset verification |
 
 ## Dependency notes
 
@@ -122,3 +123,25 @@ API/body reads and all six new-detail/status rows in local Iceberg. Same-HTML
 topic cleanup needs no repeat public requests. The optional browser image is
 only authored; v3 performance, independent semantic relevance, remote mandatory
 engines, image/sandbox/security review and public deployment remain release gates.
+
+## Optional POC workspace follow-up
+
+D-053/R-025 add T21 after the original 20-task baseline. The user confirmed
+neutral POC branding, no decorative effects, responsive and keyboard-friendly
+behavior. Bundled HTML/CSS/JS reuse the existing asynchronous API and separate
+worker. The additive authenticated body endpoint reads a specific successful
+job, preserving generation consistency without changing storage/schema identity.
+
+Local workflows cover submit, extraction, body, JSON download, wrong-key
+recovery, cancellation, blocked outcomes, rate-limit pause/resume, literal
+untrusted HTML, Unicode pagination and reset with a late response. Actual
+validation/package results are in `docs\evidence\ui-validation.json`.
+No public requests, deployment, remote engines or reviewer assertions are
+substituted by these tests. T20 remains blocked on its original final gates.
+
+D-054/R-026 extend T21 with both single and multiple URL modes, bounded
+whitespace parsing, per-job outcome/result/body selection, selected cancellation,
+duplicate identity and batch snapshot JSON. Browser follow-up covers mixed
+outcomes, preserved query commas, limits, mode switching and late-body isolation.
+Batch polling is sequential and quota-aware, not an unbounded request fan-out.
+See `docs\evidence\ui-batch-validation.json`; T21's dependency remains T05.

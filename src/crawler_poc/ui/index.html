@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>POC | Page inspector</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/ui/app.css">
+  <script src="/ui/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#workspace">Skip to workspace</a>
+  <header class="topbar">
+    <a class="wordmark" href="/" aria-label="POC home"><span aria-hidden="true">[ ]</span> POC</a>
+    <span class="top-label">PAGE INSPECTOR</span>
+    <a href="/docs">API docs <span aria-hidden="true">&#8599;</span></a>
+  </header>
+  <main id="workspace">
+    <div class="intro">
+      <p class="eyebrow">URL WORKSPACE</p>
+      <h1>Inspect a page.</h1>
+      <p>Inspect one page or a list of URLs for metadata, readable content, page types, and topics.</p>
+    </div>
+    <form id="crawl-form">
+      <div class="connection">
+        <div class="key-field">
+          <label for="api-key">API key</label>
+          <input id="api-key" type="password" required autocomplete="off" spellcheck="false"
+            aria-describedby="key-help" placeholder="Enter your crawler API key">
+          <p id="key-help" class="hint">Kept only in this page's memory. Never saved in browser storage.</p>
+        </div>
+        <button id="clear-workspace" type="button" class="quiet">Clear workspace &amp; key</button>
+      </div>
+      <label class="mode-control" for="input-mode">Input mode
+        <select id="input-mode">
+          <option value="single">Single URL</option>
+          <option value="multiple">Multiple URLs</option>
+        </select>
+      </label>
+      <label id="single-label" for="url">Page URL</label>
+      <div class="url-row">
+        <input id="url" type="url" required placeholder="https://example.com/article"
+          autocomplete="off" spellcheck="false">
+        <div id="multiple-field" hidden>
+          <label for="urls">Page URLs</label>
+          <textarea id="urls" rows="5" maxlength="60000" disabled
+            aria-describedby="urls-help" autocomplete="off" spellcheck="false"
+            placeholder="https://example.com/article&#10;https://example.com/product"></textarea>
+          <p id="urls-help" class="hint">Up to 100 URLs, one per line. Spaces and tabs also separate URLs; commas inside URLs are preserved. Duplicate URLs share a job.</p>
+        </div>
+        <button id="submit" class="primary" type="submit">Inspect page <span aria-hidden="true">&#8594;</span></button>
+      </div>
+      <div class="form-footer">
+        <label class="topic-control" for="top-k">Topics
+          <select id="top-k">
+            <option value="3">3</option>
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+          </select>
+        </label>
+        <p class="hint">Each submission starts a fresh crawl. A separate worker must be running.</p>
+      </div>
+    </form>
+
+    <p id="message" role="alert" hidden></p>
+    <section id="batch" aria-labelledby="batch-heading" hidden>
+      <div class="section-heading">
+        <h2 id="batch-heading">Batch results</h2>
+        <button id="download-all" type="button">Download batch JSON</button>
+      </div>
+      <p id="batch-summary" class="hint" aria-live="polite"></p>
+      <p class="hint">Select a URL to inspect its result or cancel that crawl. Statuses refresh in turn to limit API requests.</p>
+      <ol id="batch-list"></ol>
+    </section>
+    <section id="progress" aria-labelledby="progress-heading" hidden>
+      <div class="status-row">
+        <div><p class="eyebrow">CRAWL STATUS</p><h2 id="progress-heading" aria-live="polite">Ready</h2></div>
+        <div class="actions">
+          <button type="button" id="resume" hidden>Resume monitoring</button>
+          <button type="button" id="cancel" hidden>Cancel crawl</button>
+        </div>
+      </div>
+      <p id="progress-detail" class="hint"></p>
+      <p class="job-line">Job <code id="job-id"></code></p>
+    </section>
+
+    <div id="empty" class="empty">
+      <span class="empty-mark" aria-hidden="true">&#8599;</span>
+      <h2>A page, made readable.</h2>
+      <p>Results will appear here. Blocked pages and failed requests are reported as they are, not treated as extracted content.</p>
+    </div>
+
+    <article id="results" aria-labelledby="result-title" hidden>
+      <div class="result-header">
+        <div><p class="eyebrow">EXTRACTION RESULT</p><h2 id="result-title" tabindex="-1"></h2></div>
+        <button id="download" type="button">Download JSON</button>
+      </div>
+      <p id="result-url" class="mono wrap"></p>
+      <p id="description" class="description"></p>
+      <dl id="facts" class="facts"></dl>
+      <p id="warnings" class="notice" hidden></p>
+      <div class="result-columns">
+        <section aria-labelledby="metadata-heading">
+          <h3 id="metadata-heading">Metadata</h3>
+          <dl id="metadata" class="metadata"></dl>
+        </section>
+        <section aria-labelledby="topics-heading">
+          <h3 id="topics-heading">Ranked topics</h3>
+          <ol id="topics" class="topics"></ol>
+          <p class="hint">Lower weighted scores rank higher. Scores are not confidence probabilities.</p>
+        </section>
+      </div>
+      <section class="body-section" aria-labelledby="body-heading">
+        <div class="section-heading">
+          <h3 id="body-heading">Readable body</h3>
+          <span id="body-count" class="hint"></span>
+        </div>
+        <pre id="body-text" class="body-text"></pre>
+        <button id="more" type="button" hidden>Load more text</button>
+      </section>
+    </article>
+    <details id="json-panel" hidden>
+      <summary>Inspect response JSON</summary>
+      <pre id="json-output" class="json-output"></pre>
+    </details>
+    <footer>POC <span aria-hidden="true">/</span> Observed results, not guaranteed access.</footer>
+  </main>
+</body>
+</html>

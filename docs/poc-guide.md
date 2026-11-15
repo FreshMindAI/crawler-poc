@@ -52,6 +52,53 @@ Requests need the same API key configured in the API process. Keep it in an
 approved local secret mechanism; do not commit it. The API refuses an empty or
 short key. `.env.example` documents variables; it is **not automatically loaded**.
 
+### Web workspace
+
+Open **http://127.0.0.1:8000/** after starting the API and separate worker.
+Enter the configured crawler API key and a public page URL, select the number of
+topics, and choose **Inspect page**. No separate frontend process, Node runtime,
+CDN, or build step is needed.
+
+**Input mode** keeps both workflows available: **Single URL** for one page and
+**Multiple URLs** for up to 100 entries. Paste one URL per line; spaces/tabs also
+separate entries. Commas within a URL are preserved, not treated as separators.
+Malformed/non-HTTP(S) entries, more than 100 URLs and payloads over 64 KiB are
+rejected before submission. The API remains authoritative for all destination
+and URL restrictions, and rejects an invalid batch as a whole.
+
+Batch mode shows a status for each distinct accepted job. Duplicate normalized
+URLs share a job. Select a row to inspect that URL's metadata/topics/body/JSON
+or cancel only that crawl; other jobs continue. **Download batch JSON** exports
+the current observed states/results, including failures and unfinished jobs.
+Body reads stay bound to the selected job; switching rows cannot mix responses.
+
+Single mode polls every four seconds. Batch mode polls one unfinished job at a
+time, at least 1.5 seconds apart, rather than issuing a burst per URL. Large
+batches therefore refresh each URL less often (roughly 150 seconds for 100
+unfinished jobs, plus API time). Poll errors pause monitoring instead of
+automatically retrying into the API quota.
+
+The workspace shows queued/running states, actual failures, metadata, ranked
+topics, readable text and downloadable response JSON. It supports cancellation
+and clears the workspace/key on request. Polling pauses after five minutes or
+an API error; **Resume monitoring** checks the existing job rather than recrawling.
+Clearing the workspace does not cancel server-side work. Each new submission
+uses a fresh generation.
+
+The static page is public; crawl submission, status, content and cancellation
+still require `X-API-Key`. The UI keeps the key only in page memory, not browser
+storage, cookies, URLs, or downloaded JSON. Use HTTPS for any approved remote
+deployment and do not share the operator key publicly. Extracted content is
+displayed as text, never embedded as executable HTML.
+
+Full text uses `GET /v1/crawls/{job_id}/content?offset=0&limit=16000`, so a later
+crawl of the same URL cannot change the body shown for this result. The bounded
+viewer can load up to 256,000 characters in 16,000-character pages. The existing
+latest-document endpoint remains available. The UI does not alter fetching or
+remove the browser-native isolation and cloud release gates below.
+
+### API example
+
 ```powershell
 $headers = @{'X-API-Key' = $env:CRAWLER_API_KEY; 'Idempotency-Key' = 'example-1'}
 $job = Invoke-RestMethod http://127.0.0.1:8000/v1/crawls -Method Post `
@@ -152,8 +199,11 @@ with approved endpoints and expected publication counts. Do not enable them
 against an existing organizational account by assumption.
 With the optional library and browser installed, set
 `CRAWLER_RUN_BROWSER_TESTS=1` before pytest to execute real headless JS, private
-destination/redirect and size/request-limit tests. The retained full result is
-**91 passed / one authorized-cloud skip**, with these browser tests enabled.
+destination/redirect, size/request-limit and UI workflow tests. The current
+result is **103 passed / one authorized-cloud skip**. Initial
+single-URL verification is recorded in `docs\evidence\ui-validation.json`.
+Batch follow-up evidence is in `docs\evidence\ui-batch-validation.json`, including real
+headless Edge workflows against an isolated loopback API and synthetic content.
 Passing tests do not certify the native browser path's network isolation.
 
 ## Specifications and assignment evidence

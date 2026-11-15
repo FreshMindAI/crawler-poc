@@ -6,7 +6,7 @@ details are maintained in the documentation.
 ## Getting started
 
 See the [POC guide](docs/poc-guide.md) for prerequisites, local setup, API usage,
-optional browser configuration, and verification commands.
+the bundled web workspace, optional browser configuration, and verification commands.
 
 ## Documentation
 

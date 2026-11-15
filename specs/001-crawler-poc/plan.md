@@ -1,7 +1,7 @@
 # Technical plan and architecture
 
 Status: selected POC architecture, partially implemented and locally verified.
-See `spec.md` D-027 through D-050 and `docs\submission-manifest.md` for the
+See `spec.md` D-027 through D-055 and `docs\submission-manifest.md` for the
 implemented subset and explicit remote/public release gaps.
 
 ## 1. Component boundaries
@@ -9,6 +9,7 @@ implemented subset and explicit remote/public release gaps.
 | Component | Responsibility | Not responsible for |
 |---|---|---|
 | API/admission | Validate requests, authorize, apply quotas/idempotency and return jobs/results | Running unbounded crawls inside request handlers |
+| Optional web workspace | Same-origin, bundled static UI for authenticated job submission/monitoring and exact-job results | Running a worker, persisting API keys or executing extracted HTML |
 | Input readers | Stream text/MySQL rows, checkpoint and emit bounded source manifests | Materializing a billion-row list or interpreting reporting month as historical HTML |
 | Control/serving store | Durable job/lease state, origin state, aliases, latest results and publication ledger | Being the sole production analytical store |
 | Fetch workers/pipeline | Public-destination checks, robots, origin pacing, bounded HTTP and opt-in guarded JS-shell rendering | Recursive discovery, unrestricted browser sessions or bypass |
@@ -23,12 +24,14 @@ Actual implementation layout:
 
 ```text
 crawler-poc\
+  Dockerfile
   .specify\
   specs\001-crawler-poc\
   src\crawler_poc\
     api.py  cli.py  config.py  models.py  fetching.py  extraction.py
     storage.py  worker.py  ingestion.py  lakehouse.py  workflow.py
     benchmark.py  evaluation.py  pipeline.py  rendering.py
+    ui\index.html  ui\app.css  ui\app.js
   tests\test_*.py  tests\fixtures\
   benchmarks\
   sql\trino\  sql\bigquery\
@@ -50,11 +53,20 @@ crawler-poc\
 
 | Operation | Behavior |
 |---|---|
+| `GET /`, `GET /ui/*` | Public bundled POC workspace/assets; no API key or crawl data embedded |
 | `POST /v1/crawls` | Accept one URL or bounded URL list, optional idempotency key and requested top-k; return HTTP 202 and job IDs |
 | `GET /v1/crawls/{job_id}` | Return job state, outcome, metadata, topics, versions and provenance |
+| `POST /v1/crawls/{job_id}/cancel` | Authenticated cancellation with worker fencing |
+| `GET /v1/crawls/{job_id}/content` | Authenticated bounded plain text from this successful job, not the latest URL generation |
 | `GET /v1/documents/{url_id}` | Return latest stored metadata/topics without recrawling |
 | `GET /v1/documents/{url_id}/content` | Return bounded/paginated plain text, never execute stored HTML |
 | `GET /health/live`, `GET /health/ready` | Separate process liveness from backing-service readiness |
+
+The workspace keeps Single URL and Multiple URLs modes. Batches reuse existing
+`urls` admission; one row per unique job retains mixed outcomes and exact-job
+body/result selection. Automatic batch polling is sequential with 1.5-second
+minimum spacing, not a per-URL four-second polling fan-out. Single mode retains
+its four-second interval. Cancel applies only to the selected job.
 
 Bulk source ingestion is an authenticated operator CLI/workflow path; do not expose arbitrary MySQL connection strings or unrestricted object URIs to public callers.
 

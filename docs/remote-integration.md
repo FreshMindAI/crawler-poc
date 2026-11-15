@@ -24,7 +24,11 @@ identity, budget and teardown owner in the non-secret environment inventory.
 
 ## Configuration and least privilege
 
-`deploy\Dockerfile` builds the Python application. A remote authorized builder
+The root `Dockerfile` builds the Python API/UI application. Use `Dockerfile` as
+the Cloud Build Dockerfile path and the repository root (`.`) as build context.
+The image still listens on port **8000** and does not start a crawl worker.
+The optional browser-worker image remains at `deploy\Dockerfile.browser`.
+A remote authorized builder
 must resolve the base image to a reviewed digest and publish an immutable image
 digest; placeholders in Kubernetes/Argo are intentionally not deployable values.
 No local Docker/Kubernetes installation was performed.

@@ -3,6 +3,7 @@
 | Obligation | Concrete artifact / status |
 |---|---|
 | Part 1 generic crawler, metadata/body, page type/topics | `src\crawler_poc`, API/worker CLI and tests; implemented locally |
+| Optional neutral POC UI | Bundled `ui` assets, exact-job body API, browser workflows; local verification in `docs\evidence\ui-validation.json`, not a public deployment |
 | User architecture refinements | `pipeline.py`, optional `rendering.py`, richer v3 output, six-input manifest and `docs\architecture-alignment.md`; real browser fixture and six-row local publication evidence |
 | Part 1 public cloud demo | **Incomplete** pending authorized Azure/GCP deployment and external evidence |
 | Part 2 monthly file/MySQL ingestion and unified persistence | Streaming adapters, lineage/control schema and Iceberg writer; real MySQL/PostgreSQL/GCS validation still gated |
@@ -18,8 +19,9 @@
 Include source, tests/fixtures, examples, base/optional-browser locks, specifications, deploy/SQL
 templates, notices and documentation/evidence. Exclude `.venv`, `.git` internals,
 secrets/`.env`, caches, all `var` data/databases/raw pages, private cloud configs,
-build artifacts and local credential files. No submission archive/upload/commit
-has been performed.
+build artifacts and local credential files. Git publication and cloud deployment
+are separate actions; this manifest does not prove that the current checkout has
+been pushed or deployed. No assignment submission archive is produced by this change.
 
 The reviewer-owned checklists remain unchecked. Missing access does not waive
 public demo, genuine mandatory-stack execution, human review or release gates.

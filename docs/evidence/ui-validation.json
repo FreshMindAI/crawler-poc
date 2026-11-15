@@ -1,0 +1,74 @@
+{
+  "scope": "Local optional POC web workspace, D-053 / FR-028 / AC-011 / T21",
+  "provenance": "Actual commands against the uncommitted UI working tree; not cloud or public-site evidence",
+  "tests": {
+    "command": "$env:CRAWLER_RUN_BROWSER_TESTS='1'; .\\.venv\\Scripts\\python.exe -m pytest -q",
+    "passed": 100,
+    "skipped": 1,
+    "warnings": 3,
+    "skip_reason": "Remote integration requires explicit authorization and configured real resources",
+    "warning_categories": [
+      "Starlette TestClient httpx deprecation",
+      "Two PyIceberg delete operations did not match records"
+    ],
+    "new_api_cases": 3,
+    "new_browser_cases": 6,
+    "browser": "Existing Microsoft Edge, headless, isolated fresh contexts",
+    "ui_test_network": "Ephemeral loopback uvicorn API with temporary SQLite/content and synthetic worker input",
+    "verified_workflows": [
+      "Public bundled assets, UI security headers, authenticated crawl admission",
+      "Authenticated exact-job body remains consistent after a newer generation succeeds",
+      "Missing, queued and failed job content returns not found",
+      "Keyboard skip-link focus and Enter submission",
+      "Actual API admission, controlled worker extraction, poll, metadata, topics and body",
+      "JSON download excludes the API key",
+      "No localStorage, sessionStorage or cookies created",
+      "Invalid-key recovery and job cancellation",
+      "Blocked outcome remains a failure without successful content",
+      "Untrusted HTML displayed only as text",
+      "Unicode code-point body pagination without dropped astral characters",
+      "Rate-limited polling pauses and can resume the same job",
+      "Clearing key/workspace ignores an outstanding poll's late result"
+    ]
+  },
+  "checks": [
+    {"command": ".\\.venv\\Scripts\\python.exe -m ruff check src tests benchmarks", "result": "pass"},
+    {"command": ".\\.venv\\Scripts\\python.exe -m ruff format --check src tests benchmarks", "result": "pass, 36 files formatted"},
+    {"command": ".\\.venv\\Scripts\\python.exe -m mypy src benchmarks", "result": "pass, 17 source files"},
+    {"command": ".\\.venv\\Scripts\\python.exe -m pip check", "result": "pass"},
+    {"command": "node --check src\\crawler_poc\\ui\\app.js", "result": "pass"},
+    {"command": "git diff --check", "result": "pass"}
+  ],
+  "packaging": {
+    "command": ".\\.venv\\Scripts\\python.exe -m pip wheel --no-index --no-deps --no-build-isolation --wheel-dir <session-artifact-directory> .",
+    "wheel": "crawler_poc-0.1.0-py3-none-any.whl",
+    "sha256": "610a5496e8154218980daf59aaa7797005177efd9b30d6c9440f52b5e4b8bfe2",
+    "build_backend": "setuptools 84.2.1, installed in project venv after missing-backend failure",
+    "assets_verified": ["ui/index.html", "ui/app.css", "ui/app.js"],
+    "smoke": "Extracted wheel to temporary directory; asserted API import came from it; root/CSS/JS returned 200 and unauthenticated job read returned 401",
+    "result": "pass"
+  },
+  "visual_review": {
+    "desktop": "Actual result screenshot inspected",
+    "mobile": "390 by 844 viewport, no horizontal document overflow, actual screenshot inspected",
+    "accessibility_boundary": "Semantic labels, focus/live states and bounded keyboard checks, not an independent accessibility audit"
+  },
+  "spec_inventory": {
+    "functional_requirements": 28,
+    "nonfunctional_requirements": 8,
+    "acceptance_scenarios": 11,
+    "decisions": 53,
+    "questions": 9,
+    "tasks": 21,
+    "research_entries": 25
+  },
+  "limitations": [
+    "API and worker must run separately with matching durable-store configuration",
+    "No public deployment, container build, real remote Trino/Argo/BigQuery validation or scale claim",
+    "No public-site probe or load test was added for the UI",
+    "Underlying native-browser fallback still requires network/resource isolation and Linux cloud validation",
+    "No API key or credential is embedded in the UI or this evidence; test keys are synthetic fixtures",
+    "Reviewer-owned checklists remain unchecked",
+    "UI changes have not been committed or pushed"
+  ]
+}

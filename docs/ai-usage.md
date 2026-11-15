@@ -14,6 +14,12 @@ TLS; the global tool was not upgraded. No claim is made that every Spec Kit slas
 command ran. No subagents, hosted NLP models, Rust build, cloud deployment,
 container build or remote Kubernetes/BigQuery/Trino execution was used.
 
+The optional POC web workspace was also AI-assisted, using the confirmed product/
+design context and Impeccable guidance. It adds plain HTML/CSS/JavaScript served
+by FastAPI, not an external frontend service. Node was used only to check JS
+syntax. Playwright UI tests use synthetic content and an isolated local API/
+worker; they are not public-site crawls or an independent accessibility audit.
+
 Runtime services are target websites and, **only after explicit configuration
 and authorization**, operator MySQL, remote PostgreSQL, object storage/catalog,
 Trino and BigQuery. Argo is orchestration infrastructure. None provides outsourced

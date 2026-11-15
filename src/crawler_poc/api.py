@@ -3,10 +3,12 @@ import hmac
 import uuid
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import Any
 
 from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
-from fastapi.responses import PlainTextResponse
+from fastapi.responses import FileResponse, PlainTextResponse
+from fastapi.staticfiles import StaticFiles
 from starlette.types import ASGIApp, Receive, Scope, Send
 
 from crawler_poc.config import Settings
@@ -74,6 +76,12 @@ def create_app(settings: Settings | None = None, store: Store | None = None) -> 
     app = FastAPI(title="Crawler POC", version="0.1.0", lifespan=lifespan)
     app.add_middleware(BodyLimit)
     app.state.store = database
+    ui_root = Path(__file__).parent / "ui"
+    app.mount("/ui", StaticFiles(directory=ui_root), name="ui")
+
+    @app.get("/", include_in_schema=False)
+    async def workspace() -> FileResponse:
+        return FileResponse(ui_root / "index.html", media_type="text/html")
 
     async def authorize(x_api_key: str = Header(default="")) -> None:
         if not hmac.compare_digest(x_api_key.encode(), expected.encode()):
@@ -90,6 +98,13 @@ def create_app(settings: Settings | None = None, store: Store | None = None) -> 
         response.headers["X-Request-ID"] = correlation
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["Cache-Control"] = "no-store"
+        if request.url.path == "/" or request.url.path.startswith("/ui/"):
+            response.headers["Content-Security-Policy"] = (
+                "default-src 'none'; script-src 'self'; style-src 'self'; "
+                "connect-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+            )
+            response.headers["Referrer-Policy"] = "no-referrer"
+            response.headers["X-Frame-Options"] = "DENY"
         return response
 
     @app.get("/health/live")
@@ -143,6 +158,21 @@ def create_app(settings: Settings | None = None, store: Store | None = None) -> 
         if await asyncio.to_thread(database.get_job, job_id) is None:
             raise HTTPException(404, "Job not found")
         return {"canceled": await asyncio.to_thread(database.cancel, job_id)}
+
+    @app.get("/v1/crawls/{job_id}/content", dependencies=protected)
+    async def job_body(
+        job_id: str,
+        offset: int = Query(default=0, ge=0, le=250000),
+        limit: int = Query(default=16000, ge=1, le=64000),
+    ) -> PlainTextResponse:
+        value = await asyncio.to_thread(database.get_job, job_id)
+        if value is None:
+            raise HTTPException(404, "Job not found")
+        result = value.get("result") or {}
+        if result.get("outcome") != "success" or not result.get("body_ref"):
+            raise HTTPException(404, "Successful job content not found")
+        text = (await asyncio.to_thread(content.get, result["body_ref"])).decode("utf-8")
+        return PlainTextResponse(text[offset : offset + limit])
 
     @app.get("/v1/documents/{identifier}", dependencies=protected)
     async def document(identifier: str) -> dict[str, Any]:

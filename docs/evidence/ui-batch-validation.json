@@ -1,0 +1,63 @@
+{
+  "scope": "Single and multiple URL UI parsing, D-054 / R-026 / FR-028 / AC-011 / T21",
+  "provenance": "Actual local validation of the uncommitted single/batch UI follow-up; prior single-URL evidence is preserved in ui-validation.json",
+  "tests": {
+    "command": "$env:CRAWLER_RUN_BROWSER_TESTS='1'; .\\.venv\\Scripts\\python.exe -m pytest -q",
+    "passed": 103,
+    "skipped": 1,
+    "warnings": 3,
+    "skip_reason": "Remote integration requires explicit authorization and configured real resources",
+    "new_browser_tests": 3,
+    "browser": "Existing Microsoft Edge, headless, isolated fresh contexts",
+    "network": "Ephemeral loopback API, temporary SQLite/content, synthetic results only",
+    "verified": [
+      "Original single-URL admission, extraction, body, download, auth, cancel, resume, reset, keyboard and Unicode tests still pass",
+      "Explicit Multiple URLs and Single URL modes both submit via the existing API",
+      "Whitespace/newline/tab-separated URL parsing preserves query commas",
+      "Duplicate URLs share one result row/job",
+      "Three distinct jobs retain two successes and one blocked outcome",
+      "Selecting different successes retrieves each exact job body",
+      "A body response arriving after row selection changes is ignored",
+      "Selecting a blocked result hides successful content and reports HTTP status",
+      "Batch JSON includes all observed job outcomes and excludes the API key",
+      "Canceling one selected batch job leaves its sibling queued",
+      "More than 100 URLs, non-HTTP(S) URLs and UTF-8 payloads above 64 KiB are rejected before admission",
+      "Switching back to single mode ignores hidden batch validation state",
+      "Batch result layout has no horizontal document overflow at a 390 by 844 viewport"
+    ]
+  },
+  "checks": {
+    "ruff_check": "pass: src tests benchmarks",
+    "ruff_format": "pass: 36 files already formatted",
+    "mypy": "pass: 17 source files",
+    "pip_check": "pass",
+    "javascript_syntax": "pass: node --check src\\crawler_poc\\ui\\app.js"
+  },
+  "packaging": {
+    "command": ".\\.venv\\Scripts\\python.exe -m pip wheel --no-index --no-deps --no-build-isolation --wheel-dir <session-artifact-directory> .",
+    "wheel": "crawler_poc-0.1.0-py3-none-any.whl",
+    "sha256": "6b66a84d1a67534d09fafba144ec7044d3c9e0230b55b451811716ade5dea25d",
+    "result": "pass",
+    "smoke": "Verified exact source bytes for all three assets, extracted wheel, asserted import origin, served HTML/CSS/JS and confirmed unauthenticated job read returns 401"
+  },
+  "behavior": {
+    "maximum_batch_entries": 100,
+    "maximum_request_bytes": 65536,
+    "batch_polling": "One unfinished job per poll, at least 1500 ms between completed automatic polls",
+    "single_polling_interval_ms": 4000,
+    "monitor_pause_minutes": 5,
+    "cancel_scope": "Selected job only",
+    "download_scope": "Selected result or current entire-batch snapshot",
+    "backend_contract": "Unchanged"
+  },
+  "limitations": [
+    "No deployment, commit, push or cloud spending",
+    "No new public-site crawl or load test",
+    "100 unfinished jobs can take roughly 150 seconds plus API latency for a full status refresh",
+    "Shared API quota still applies to manual body/cancel actions and other clients",
+    "API remains authoritative for all URL restrictions and whole-batch acceptance",
+    "Batch UI does not replace streaming ingestion for large source datasets",
+    "Remote mandatory-engine, public demo and native-browser isolation gates remain open",
+    "Browser layout and keyboard checks are not an independent accessibility audit"
+  ]
+}

@@ -92,6 +92,7 @@ These are **planned task links**, not completion/adoption percentages.
 | FR-025 | T01,T09,T19 |
 | FR-026 | T17,T19 |
 | FR-027 | T03,T04,T20 |
+| FR-028 | T21 |
 | NFR-001 | T06,T07,T16 |
 | NFR-002 | T05,T16 |
 | NFR-003 | T15,T19 |
@@ -101,9 +102,10 @@ These are **planned task links**, not completion/adoption percentages.
 | NFR-007 | T08,T13,T16,T19 |
 | NFR-008 | T01,T09,T17,T20 |
 
-Inventory: 27 FRs, 8 NFRs, 10 acceptance scenarios, 50 decisions, 9 question IDs,
-20 tasks and 24 research IDs. All 35 formal functional/nonfunctional requirements
-have at least one planned task link; none of the 20 tasks is unmapped. The task
+Current inventory: 28 FRs, 8 NFRs, 11 acceptance scenarios, 55 decisions,
+9 question IDs, 21 tasks and 26 research IDs. All 36 formal
+functional/nonfunctional requirements have at least one planned task link;
+none of the 21 tasks is unmapped. The task
 prerequisite graph is acyclic. Acceptance scenarios trace to local tests or
 explicitly blocked remote/public/quality gates; they are not all passed.
 
@@ -177,6 +179,42 @@ modern CLI lifecycle.
 ID inventories, preservation of all three original inputs, environment defaults,
 optional dependency disclosure and all 20 retained passing-code/manifest hashes.
 Documentation-only reconciliation did not change that tested implementation.
+
+## Optional UI delta analysis
+
+Manual follow-up for D-053/R-025/FR-028/AC-011 adds T21 depending on T05.
+The original backend-only boundary is explicitly superseded by the user's
+later UI authorization and confirmed design context. The same-origin static
+workspace reuses existing job and auth contracts; exact-job body retrieval
+avoids mixing generations from the mutable latest-document projection.
+No data-model migration or external frontend/runtime/service is introduced.
+New asset package-data and real-browser tests cover the added surface.
+
+The prior architecture sections describe their dated snapshots, not the
+later D-051 robots policy or D-052 native browser behavior. D-052 has weaker
+network/resource isolation than D-046 and can use a headed window; UI success
+does not validate native redirects/subresources, Linux cloud compatibility,
+arbitrary-site access, or deployment readiness. See `poc-guide.md` for the
+current distinction. Remote/public/quality/security/human release gates remain
+open. UI verification commands/results are retained in
+`evidence\ui-validation.json`; reviewer boxes remain untouched. This is a
+manual delta consistency check, not a new automatic Spec Kit command run.
+
+The subsequent D-054/R-026 delta extends existing FR-028/AC-011/T21 with both
+single and multiple URL modes. Existing API cardinality, payload/auth/rate limits,
+job identity and whole-batch validation stay unchanged. Normalized duplicates
+share a row; mixed outcomes and exact-job bodies remain separate. Sequential
+bounded polling avoids a per-job request burst against the existing quota.
+Documentation distinguishes current snapshot export from terminal success and
+selected-job cancellation from batch-wide cancellation. No new formal requirement,
+task dependency, storage schema or remote gate is introduced. Actual follow-up
+evidence is in `evidence\ui-batch-validation.json`.
+
+D-055 relocates the API/UI Dockerfile to the repository root under existing
+T09/FR-025. Its instructions, root build context and port are unchanged; the
+browser-worker Dockerfile remains under `deploy`. Deployment instructions now
+name the root path. This layout change does not diagnose the failed cloud build
+or supply a container-build/deployment result; cloud logs remain unavailable.
 
 Human checklists are unchanged. This report does not assign SDD maturity or
 normalized coverage scores. Full modern CLI integration can be installed

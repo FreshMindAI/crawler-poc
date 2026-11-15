@@ -292,6 +292,8 @@ class BrowserRenderer:
             os.environ.get("DISPLAY") or os.environ.get("WAYLAND_DISPLAY")
         )
         modes: tuple[bool, ...] = (True, False) if has_display else (True,)
+        last_status: int | None = None
+        last_url: str = target
         for headless in modes:
             failure: FetchError | None = None
             requests, blocked = 0, 0
@@ -308,7 +310,7 @@ class BrowserRenderer:
                     ]
                 )
             try:
-                async with asyncio.timeout(self.settings.request_timeout):
+                async with asyncio.timeout(min(12.0, self.settings.request_timeout)):
                     async with self.slot, async_playwright() as runtime:
                         browser = await runtime.chromium.launch(
                             channel=_launch_channel(self.settings.browser_channel),
@@ -363,9 +365,9 @@ class BrowserRenderer:
                             resp = await page.goto(
                                 target,
                                 wait_until="domcontentloaded",
-                                timeout=self.settings.request_timeout * 1000,
+                                timeout=min(10000, self.settings.request_timeout * 1000),
                             )
-                            await page.wait_for_timeout(1500)
+                            await page.wait_for_timeout(400)
                             if failure is not None:
                                 raise failure
                             status = resp.status if resp else 200
@@ -376,6 +378,7 @@ class BrowserRenderer:
                                     Outcome.TOO_LARGE, "browser_dom_size_limit", stage="render"
                                 )
                             final_url = normalize_url(page.url)
+                            last_status, last_url = status, final_url
                             if headless and (
                                 status in {403, 503}
                                 or "px-captcha" in source.casefold()
@@ -417,15 +420,22 @@ class BrowserRenderer:
             except FetchError:
                 raise
             except (BrowserTimeout, TimeoutError) as exc:
-                if not headless:
+                if headless == modes[-1]:
                     raise failure or FetchError(
                         Outcome.UNSUPPORTED, "browser_timeout", stage="render"
                     ) from exc
             except BrowserError as exc:
-                if not headless:
+                if headless == modes[-1]:
                     raise failure or FetchError(
                         Outcome.UNSUPPORTED,
                         "browser_runtime_or_navigation_failed",
                         stage="render",
                     ) from exc
-        raise FetchError(Outcome.TARGET_BLOCKED, "target_access_denied", stage="render")
+        raise FetchError(
+            Outcome.TARGET_BLOCKED,
+            "target_access_denied",
+            http_status=last_status,
+            url=last_url,
+            content_type="text/html" if last_status else None,
+            stage="render",
+        )

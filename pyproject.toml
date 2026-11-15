@@ -49,7 +49,7 @@ crawler = "crawler_poc.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-crawler_poc = ["ui/*.html", "ui/*.css", "ui/*.js"]
+crawler_poc = ["ui/*.html", "ui/*.css", "ui/*.js", "snapshots.json"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

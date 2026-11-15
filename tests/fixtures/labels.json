@@ -1,0 +1,11 @@
+{
+  "provenance": "Synthetic fixtures and labels authored with Copilot; not an independent human quality study.",
+  "cases": [
+    {"file": "product.html", "page_type": "product", "title": "Compact two slice toaster", "topic_terms": ["toaster", "kitchen", "toast", "breakfast", "crumb", "browning", "slice", "slots"]},
+    {"file": "article.html", "page_type": "article", "title": "Preparing for a mountain camping trip", "topic_terms": ["mountain", "camping", "outdoor", "tent", "sleeping", "weather", "campsite", "wildlife"]},
+    {"file": "category.html", "page_type": "category", "title": "Garden hand tools", "topic_terms": ["garden", "tool", "planting", "pruning", "shears", "soil", "trowel"]},
+    {"file": "service.html", "page_type": "other", "title": "Bicycle repair workshop", "topic_terms": ["bicycle", "repair", "workshop", "maintenance", "brake", "gear", "tyre", "bike"]},
+    {"file": "french.html", "page_type": "article", "title": "Jardin familial", "topic_terms": [], "no_topics": true},
+    {"file": "sparse.html", "page_type": "unknown", "title": "Empty page", "topic_terms": [], "no_topics": true}
+  ]
+}

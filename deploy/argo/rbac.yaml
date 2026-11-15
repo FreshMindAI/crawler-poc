@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: crawler-workflow
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: crawler-workflow-executor
+rules:
+  - apiGroups: [argoproj.io]
+    resources: [workflowtaskresults]
+    verbs: [create, patch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: crawler-workflow-executor
+subjects:
+  - kind: ServiceAccount
+    name: crawler-workflow
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: crawler-workflow-executor
+

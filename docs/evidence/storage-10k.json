@@ -1,0 +1,17 @@
+{
+  "batches": 10,
+  "concurrency": 1,
+  "cpu_seconds": 65.03125,
+  "errors": 0,
+  "external_network_requests": 0,
+  "iceberg_rows": 10000,
+  "limitations": "Single synthetic run; shared CPU; RSS before/after only, not peak.",
+  "mode": "storage",
+  "records": 10000,
+  "records_per_second": 98.01784327993441,
+  "rss_before_after_max_bytes": 186454016,
+  "sample_latency_p50_ms": null,
+  "sample_latency_p95_ms": null,
+  "scope": "SQLite jobs/outbox + real local Iceberg; no extraction/HTTP",
+  "seconds": 102.02224069999647
+}

@@ -1,0 +1,28 @@
+{
+  "timestamp_utc": "2026-11-14T13:09:57.933721+00:00",
+  "inventory": {
+    "FR": 27,
+    "NFR": 8,
+    "AC": 10,
+    "D": 43,
+    "Q": 9,
+    "R": 20
+  },
+  "references_resolve": true,
+  "reviewer_checklists_untouched_and_unchecked": true,
+  "live_selected_corpus": {
+    "urls": 11,
+    "extracted": 8
+  },
+  "same_html_comparisons_passed": 8,
+  "country_names": {
+    "expected": 250,
+    "found": 250
+  },
+  "current_tests": {
+    "passed": 70,
+    "skipped_authorized_cloud": 1
+  },
+  "extraction_stage_records_per_second": 130.99835301534708,
+  "limitations": "Structural/evidence validation, not independent human quality or production certification."
+}

@@ -1,0 +1,242 @@
+{
+  "run_id": "url-fix-20261114T094736Z-415670",
+  "started_at_utc": "2026-11-14T09:47:36.635147+00:00",
+  "finished_at_utc": "2026-11-14T09:47:49.909717+00:00",
+  "worker_elapsed_seconds": 10.828,
+  "transport": "Authenticated real loopback TCP API, guarded real target HTTP, durable workers, local Iceberg",
+  "fresh_jobs_verified": true,
+  "policy": {
+    "robots_enforced": true,
+    "decoded_limit_bytes": 10485760,
+    "wire_limit_bytes": 5242880,
+    "max_attempts": 3,
+    "request_timeout_seconds": 20.0,
+    "origin_gap_seconds": 1.0,
+    "rendering_or_protection_bypass": false,
+    "original_urls_unchanged": true
+  },
+  "submitted": 3,
+  "extracted_successfully": 1,
+  "outcomes": [
+    {
+      "input_url": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1?s=kitchen&ie=UTF8&qid=1431620315&sr=1-1&keywords=toaster",
+      "job_id": "7da4ac77421b427cb54264524de3343dd2ae31fc462f01981c83295eec0703f5",
+      "status": "terminal",
+      "attempts": 3,
+      "outcome": "retry_exhausted",
+      "reason": "transient_http_status",
+      "http_status": 503,
+      "final_url": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1?s=kitchen&ie=UTF8&qid=1431620315&sr=1-1&keywords=toaster",
+      "title": null,
+      "page_type": null,
+      "raw_bytes": null,
+      "body_characters": null,
+      "topics": null,
+      "failure_metadata": {
+        "failure_stage": "fetch",
+        "failure_url": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1"
+      }
+    },
+    {
+      "input_url": "http://blog.rei.com/camp/how-to-introduce-your-indoorsy-friend-to-the-outdoors/",
+      "job_id": "28604670a9e402bdc51e7952aec603fcd90bce3beb59a6645aa6cd1f46380155",
+      "status": "terminal",
+      "attempts": 1,
+      "outcome": "robots_disallowed",
+      "reason": "robots_access_denied",
+      "http_status": 403,
+      "final_url": null,
+      "title": null,
+      "page_type": null,
+      "raw_bytes": null,
+      "body_characters": null,
+      "topics": null,
+      "failure_metadata": {
+        "failure_stage": "robots",
+        "failure_url": "http://blog.rei.com/robots.txt"
+      }
+    },
+    {
+      "input_url": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "job_id": "e52fc26d54cf28d8a8e97c4faed77dc025a6f547bd23ea2c064c14395ec80559",
+      "status": "terminal",
+      "attempts": 1,
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "title": "Google says 90% of tech workers are now using AI at work | CNN Business",
+      "page_type": "article",
+      "raw_bytes": 5750759,
+      "body_characters": 3701,
+      "topics": [
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "CNN app Download",
+          "rank": 1,
+          "raw_score": 0.011224462775044576
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "tech industry workers",
+          "rank": 2,
+          "raw_score": 0.011581045140932923
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "CNN Business",
+          "rank": 3,
+          "raw_score": 0.012943921758700275
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Business The overwhelming",
+          "rank": 4,
+          "raw_score": 0.015449675743315175
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "tech industry",
+          "rank": 5,
+          "raw_score": 0.01783317103658673
+        }
+      ],
+      "latest_projection_verified": true,
+      "bounded_content_read_verified": true
+    }
+  ],
+  "request_trace": [
+    {
+      "target_without_query": "http://www.amazon.com/robots.txt",
+      "robots_request": true,
+      "http_status": 301,
+      "decoded_bytes_read": 0,
+      "headers": {
+        "content-type": "text/html",
+        "content-length": "167"
+      }
+    },
+    {
+      "target_without_query": "https://www.cnn.com/robots.txt",
+      "robots_request": true,
+      "http_status": 200,
+      "decoded_bytes_read": 3704,
+      "headers": {
+        "content-length": "1065",
+        "content-type": "text/plain",
+        "content-encoding": "gzip"
+      }
+    },
+    {
+      "target_without_query": "http://blog.rei.com/robots.txt",
+      "robots_request": true,
+      "http_status": 403,
+      "decoded_bytes_read": 0,
+      "headers": {
+        "content-type": "text/html",
+        "content-length": "378"
+      }
+    },
+    {
+      "target_without_query": "https://www.amazon.com/robots.txt",
+      "robots_request": true,
+      "http_status": 200,
+      "decoded_bytes_read": 7947,
+      "headers": {
+        "content-type": "text/plain",
+        "content-length": "7947"
+      }
+    },
+    {
+      "target_without_query": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "http_status": 301,
+      "decoded_bytes_read": 0,
+      "headers": {
+        "content-type": "text/html",
+        "content-length": "167"
+      }
+    },
+    {
+      "target_without_query": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "robots_request": false,
+      "http_status": 200,
+      "decoded_bytes_read": 5750759,
+      "headers": {
+        "content-length": "1198821",
+        "content-type": "text/html; charset=utf-8",
+        "content-encoding": "gzip"
+      }
+    },
+    {
+      "target_without_query": "https://www.amazon.com/robots.txt",
+      "robots_request": true,
+      "http_status": 200,
+      "decoded_bytes_read": 7947,
+      "headers": {
+        "content-type": "text/plain",
+        "content-length": "7947"
+      }
+    },
+    {
+      "target_without_query": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "http_status": 503,
+      "decoded_bytes_read": 0,
+      "headers": {
+        "content-type": "text/html"
+      }
+    },
+    {
+      "target_without_query": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "http_status": 301,
+      "decoded_bytes_read": 0,
+      "headers": {
+        "content-type": "text/html",
+        "content-length": "167"
+      }
+    },
+    {
+      "target_without_query": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "http_status": 503,
+      "decoded_bytes_read": 0,
+      "headers": {
+        "content-type": "text/html"
+      }
+    },
+    {
+      "target_without_query": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "http_status": 301,
+      "decoded_bytes_read": 0,
+      "headers": {
+        "content-type": "text/html",
+        "content-length": "167"
+      }
+    },
+    {
+      "target_without_query": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "http_status": 503,
+      "decoded_bytes_read": 0,
+      "headers": {
+        "content-type": "text/html"
+      }
+    }
+  ],
+  "iceberg_publication": {
+    "published": 3,
+    "batch_id": "a50775cce05c110fade2df27f7ea25743214afc027d148a97b17e79515822ef1",
+    "snapshot_id": 2970477792405439600,
+    "statuses_and_failure_metadata_verified": true
+  },
+  "limitations": "Live target availability can vary. No remote Trino/Argo/BigQuery or cloud deployment; original external denials are not bypassed.",
+  "helper_server_stopped": true
+}

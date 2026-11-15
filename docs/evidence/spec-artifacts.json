@@ -1,0 +1,49 @@
+{
+  "id_counts": {
+    "FR": 27,
+    "NFR": 8,
+    "AC": 10,
+    "D": 36,
+    "Q": 9,
+    "R": 18
+  },
+  "markdown_files_checked": 20,
+  "tasks": 20,
+  "task_graph_acyclic": true,
+  "reviewer_checklists_untouched": true,
+  "yaml_objects_parsed": [
+    {
+      "file": "deploy\\argo\\crawl-shard.yaml",
+      "kind": "WorkflowTemplate"
+    },
+    {
+      "file": "deploy\\argo\\rbac.yaml",
+      "kind": "ServiceAccount"
+    },
+    {
+      "file": "deploy\\argo\\rbac.yaml",
+      "kind": "Role"
+    },
+    {
+      "file": "deploy\\argo\\rbac.yaml",
+      "kind": "RoleBinding"
+    },
+    {
+      "file": "deploy\\kubernetes\\application.yaml",
+      "kind": "ServiceAccount"
+    },
+    {
+      "file": "deploy\\kubernetes\\application.yaml",
+      "kind": "Deployment"
+    },
+    {
+      "file": "deploy\\kubernetes\\application.yaml",
+      "kind": "Service"
+    },
+    {
+      "file": "deploy\\kubernetes\\application.yaml",
+      "kind": "Deployment"
+    }
+  ],
+  "limitations": "Structural/reference checks only; YAML not validated against a live Kubernetes/Argo schema. No maturity, integration or release certification."
+}

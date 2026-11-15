@@ -1,0 +1,10 @@
+{
+  "upstream": "https://github.com/github/spec-kit",
+  "revision": "2ee2b1e8005905db05f5717300a469b3068b908f",
+  "method": "Pinned upstream source templates and scripts; custom thin Copilot prompt wrappers",
+  "reason": "Installed CLI 0.0.22 incompatible with current release assets; isolated 1.4.0 package fetch failed TLS",
+  "global_install_modified": false,
+  "prerequisite_check": "passed",
+  "full_cli_installation": false
+}
+

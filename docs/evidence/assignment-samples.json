@@ -1,0 +1,55 @@
+{
+  "attempts_per_job": 1,
+  "counts": {
+    "terminal": 3,
+    "unpublished": 0
+  },
+  "ingest": {
+    "counts": {
+      "admitted": 3
+    },
+    "last_offset": 3
+  },
+  "limitations": "Original public sample URLs, robots respected, no repair or bypass. Local Iceberg only; no hosted demo or remote query evidence.",
+  "manifest": "examples/assignment-urls.txt",
+  "outcomes": [
+    {
+      "body_characters": null,
+      "final_url": null,
+      "http_status": null,
+      "outcome": "too_large",
+      "reason": "decoded_size_limit",
+      "status": "terminal",
+      "title": null,
+      "url": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai"
+    },
+    {
+      "body_characters": null,
+      "final_url": null,
+      "http_status": null,
+      "outcome": "robots_disallowed",
+      "reason": "robots_disallowed",
+      "status": "terminal",
+      "title": null,
+      "url": "http://blog.rei.com/camp/how-to-introduce-your-indoorsy-friend-to-the-outdoors/"
+    },
+    {
+      "body_characters": null,
+      "final_url": null,
+      "http_status": null,
+      "outcome": "retry_exhausted",
+      "reason": "transient_http_status",
+      "status": "terminal",
+      "title": null,
+      "url": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1?s=kitchen&ie=UTF8&qid=1431620315&sr=1-1&keywords=toaster"
+    }
+  ],
+  "page_timeout_seconds": 20,
+  "publication": {
+    "batch_id": "c3551833ba48437a29cd53a99bceb62c77b6c378ea836e14f79de3d5619db928",
+    "metadata_location": "file://<repo-root>/var/assignment-iceberg/warehouse/crawler/crawl_events/metadata/00002-55e94bd7-8f30-4e06-a61d-04e7d0b89b06.metadata.json",
+    "published": 3,
+    "recovered": false,
+    "snapshot_id": 8618811985792964534
+  }
+}

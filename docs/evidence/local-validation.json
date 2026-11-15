@@ -1,0 +1,15 @@
+{
+  "checked_at_utc": "2026-11-14T09:20:13.017969+00:00",
+  "pytest": {
+    "tests": 53,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "passed": 52
+  },
+  "ruff_check": "passed",
+  "ruff_format": "passed",
+  "mypy_src_and_benchmarks": "passed",
+  "pip_check": "passed",
+  "limitations": "One cloud integration test deliberately skipped. This is local verification, not remote/image/public release evidence."
+}

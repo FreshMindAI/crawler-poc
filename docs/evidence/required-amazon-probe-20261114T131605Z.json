@@ -1,0 +1,89 @@
+{
+  "started_at_utc": "2026-11-14T13:16:05.678915+00:00",
+  "finished_at_utc": "2026-11-14T13:16:10.064417+00:00",
+  "user_agent": "CrawlerPOC/0.1 (+assignment research; respects robots.txt)",
+  "diagnostics": [
+    {
+      "probe": "exact-input-default",
+      "input_url": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1?s=kitchen&ie=UTF8&qid=1431620315&sr=1-1&keywords=toaster",
+      "trace": [
+        {
+          "url_without_query": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+          "status": 301,
+          "headers": {
+            "Content-Type": "text/html",
+            "Server": "CloudFront",
+            "Via": "1.1 9a2311315daa641063be7ce809e02ec4.cloudfront.net (CloudFront)",
+            "X-Cache": "Redirect from cloudfront"
+          }
+        },
+        {
+          "url_without_query": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+          "status": 503,
+          "headers": {
+            "Content-Type": "text/html",
+            "Via": "1.1 70d0dc8fbdbb425873629b3f881a749a.cloudfront.net (CloudFront)",
+            "X-Cache": "Error from cloudfront"
+          },
+          "sample_bytes": 316,
+          "body_title": null,
+          "restriction_markers": []
+        }
+      ],
+      "content_available": false,
+      "restriction_observed": false
+    },
+    {
+      "probe": "exact-input-standard-html-accept",
+      "input_url": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1?s=kitchen&ie=UTF8&qid=1431620315&sr=1-1&keywords=toaster",
+      "trace": [
+        {
+          "url_without_query": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+          "status": 301,
+          "headers": {
+            "Content-Type": "text/html",
+            "Server": "CloudFront",
+            "Via": "1.1 9a2311315daa641063be7ce809e02ec4.cloudfront.net (CloudFront)",
+            "X-Cache": "Redirect from cloudfront"
+          }
+        },
+        {
+          "url_without_query": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+          "status": 503,
+          "headers": {
+            "Content-Type": "text/html",
+            "Via": "1.1 70d0dc8fbdbb425873629b3f881a749a.cloudfront.net (CloudFront)",
+            "X-Cache": "Error from cloudfront"
+          },
+          "sample_bytes": 316,
+          "body_title": null,
+          "restriction_markers": []
+        }
+      ],
+      "content_available": false,
+      "restriction_observed": false
+    },
+    {
+      "probe": "explicit-same-ASIN-candidate-not-sample-replacement",
+      "input_url": "https://www.amazon.com/dp/B009GQ034C",
+      "trace": [
+        {
+          "url_without_query": "https://www.amazon.com/dp/B009GQ034C",
+          "status": 503,
+          "headers": {
+            "Content-Type": "text/html",
+            "Via": "1.1 70d0dc8fbdbb425873629b3f881a749a.cloudfront.net (CloudFront)",
+            "X-Cache": "Error from cloudfront"
+          },
+          "sample_bytes": 316,
+          "body_title": null,
+          "restriction_markers": []
+        }
+      ],
+      "content_available": false,
+      "restriction_observed": false
+    }
+  ],
+  "policy": "Original identity preserved; candidate is diagnostic only. Guarded DNS, robots, verified TLS, no cookies/proxies/UA impersonation. Error-body diagnostic limited to 8 KiB. Stop on observed access-denial/challenge.",
+  "browser_observation": "Desktop browser page identity could not be verified by the UI automation guard; no browser content or successful browser access is claimed."
+}

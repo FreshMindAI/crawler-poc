@@ -1,0 +1,94 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: crawler-bounded-shard
+spec:
+  entrypoint: pipeline
+  serviceAccountName: crawler-workflow
+  parallelism: 4
+  synchronization:
+    mutexes:
+      - name: crawler-poc-publication
+  arguments:
+    parameters:
+      - name: image
+        value: REPLACE_WITH_REGISTRY/crawler-poc@sha256:REPLACE_WITH_DIGEST
+      - name: source-uri
+        value: gs://REPLACE_WITH_APPROVED_BUCKET/bounded-shard.txt
+      - name: source-month
+        value: "2026-11"
+  podMetadata:
+    labels: {app: crawler-batch}
+  podSpecPatch: |
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 10001
+      fsGroup: 10001
+  templates:
+    - name: pipeline
+      dag:
+        tasks:
+          - name: ingest
+            template: run
+            arguments:
+              parameters:
+                - {name: operation, value: ingest}
+          - name: workers
+            dependencies: [ingest]
+            template: worker
+            withItems: [0, 1, 2, 3]
+          - name: publish
+            dependencies: [workers]
+            template: run
+            arguments:
+              parameters:
+                - {name: operation, value: publish}
+          - name: reconcile
+            dependencies: [publish]
+            template: run
+            arguments:
+              parameters:
+                - {name: operation, value: reconcile}
+          - name: reports
+            dependencies: [reconcile]
+            template: run
+            arguments:
+              parameters:
+                - {name: operation, value: reports}
+    - name: worker
+      retryStrategy: {limit: "2"}
+      container:
+        image: "{{workflow.parameters.image}}"
+        command: [crawler]
+        args: [worker, --drain]
+        envFrom: [{secretRef: {name: crawler-workflow-config}}]
+        resources:
+          requests: {cpu: "250m", memory: 512Mi}
+          limits: {cpu: "1", memory: 1Gi}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities: {drop: [ALL]}
+    - name: run
+      inputs:
+        parameters:
+          - name: operation
+      retryStrategy: {limit: "2"}
+      container:
+        image: "{{workflow.parameters.image}}"
+        command: [python, -m, crawler_poc.workflow]
+        args:
+          - "{{inputs.parameters.operation}}"
+          - "--source"
+          - "{{workflow.parameters.source-uri}}"
+          - "--month"
+          - "{{workflow.parameters.source-month}}"
+          - "--run-id"
+          - "{{workflow.name}}"
+        envFrom: [{secretRef: {name: crawler-workflow-config}}]
+        resources:
+          requests: {cpu: "250m", memory: 512Mi}
+          limits: {cpu: "1", memory: 1Gi}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities: {drop: [ALL]}
+

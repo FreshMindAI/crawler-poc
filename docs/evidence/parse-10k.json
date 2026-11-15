@@ -1,0 +1,17 @@
+{
+  "cpu_seconds": 0.59375,
+  "distinct_templates": 1,
+  "fixture": "product.html",
+  "limitations": "One repeated synthetic template; stage benchmark, not end-to-end capacity.",
+  "mode": "parse",
+  "network_requests": 0,
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.10",
+  "records": 10000,
+  "records_per_second": 18587.00129193006,
+  "rss_peak_sampled_bytes": 91602944,
+  "rss_start_bytes": 91201536,
+  "sample_latency_p50_ms": 0.042800005758181214,
+  "sample_latency_p95_ms": 0.07949999417178333,
+  "seconds": 0.5380104000068968
+}

@@ -1,0 +1,97 @@
+{
+  "cases": [
+    {
+      "actual_type": "product",
+      "expected_abstention_met": null,
+      "expected_type": "product",
+      "fixture": "product.html",
+      "title_match": true,
+      "topic_term_match_fraction": 0.8,
+      "topics": [
+        "Compact kitchen toaster",
+        "Compact",
+        "slice toaster",
+        "Compact kitchen",
+        "toaster"
+      ],
+      "warnings": []
+    },
+    {
+      "actual_type": "article",
+      "expected_abstention_met": null,
+      "expected_type": "article",
+      "fixture": "article.html",
+      "title_match": true,
+      "topic_term_match_fraction": 1.0,
+      "topics": [
+        "Mountain camping essentials",
+        "camping essentials Mountain",
+        "essentials Mountain camping",
+        "mountain camping",
+        "mountain"
+      ],
+      "warnings": []
+    },
+    {
+      "actual_type": "category",
+      "expected_abstention_met": null,
+      "expected_type": "category",
+      "fixture": "category.html",
+      "title_match": true,
+      "topic_term_match_fraction": 1.0,
+      "topics": [
+        "hand tools Compare",
+        "Garden hand tools",
+        "tools",
+        "garden tools",
+        "healthy garden Browse"
+      ],
+      "warnings": []
+    },
+    {
+      "actual_type": "other",
+      "expected_abstention_met": null,
+      "expected_type": "other",
+      "fixture": "service.html",
+      "title_match": true,
+      "topic_term_match_fraction": 1.0,
+      "topics": [
+        "Local bicycle maintenance",
+        "replaces worn tyres",
+        "maintenance Local bicycle",
+        "bicycle maintenance Local",
+        "Local bicycle"
+      ],
+      "warnings": []
+    },
+    {
+      "actual_type": "article",
+      "expected_abstention_met": true,
+      "expected_type": "article",
+      "fixture": "french.html",
+      "title_match": true,
+      "topic_term_match_fraction": null,
+      "topics": [],
+      "warnings": [
+        "topics_unsupported_language"
+      ]
+    },
+    {
+      "actual_type": "unknown",
+      "expected_abstention_met": true,
+      "expected_type": "unknown",
+      "fixture": "sparse.html",
+      "title_match": true,
+      "topic_term_match_fraction": null,
+      "topics": [],
+      "warnings": [
+        "insufficient_content"
+      ]
+    }
+  ],
+  "corpus_size": 6,
+  "limitations": "Tiny synthetic regression corpus. Topic term overlap is a lexical proxy, not human precision@k, nDCG or generalization evidence.",
+  "page_type_macro_f1": 1.0,
+  "provenance": "Synthetic fixtures and labels authored with Copilot; not an independent human quality study.",
+  "title_exact_match_rate": 1.0
+}

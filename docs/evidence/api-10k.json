@@ -1,0 +1,15 @@
+{
+  "concurrency": 8,
+  "cpu_seconds": 123.671875,
+  "errors": 0,
+  "external_network_requests": 0,
+  "limitations": "Single synthetic run; shared CPU; RSS before/after only, not peak.",
+  "mode": "api",
+  "records": 10000,
+  "records_per_second": 88.23288982329754,
+  "rss_before_after_max_bytes": 127598592,
+  "sample_latency_p50_ms": 85.26315000199247,
+  "sample_latency_p95_ms": 144.22259999264497,
+  "scope": "authenticated real loopback TCP API, warm single key, eight clients",
+  "seconds": 113.33642160000454
+}

@@ -1,0 +1,44 @@
+{
+  "scope": "Bounded diagnostics in this session; not application success evidence",
+  "timestamp_precision": "Session ordering only; before expanded-samples-20261114T134514Z.json",
+  "amazon_http": {
+    "source": "required-amazon-probe-20261114T131605Z.json",
+    "exact_input_status": 503,
+    "standard_accept_headers_status": 503,
+    "explicit_same_asin_candidate_status": 503
+  },
+  "amazon_native_http2": {
+    "source": "Manual record of this session's diagnostic output; no separate raw HTTP trace retained",
+    "authority": "www.amazon.com",
+    "same_original_https_path_and_query": true,
+    "robots_checked": true,
+    "public_ip_pinned_at_socket": true,
+    "tls_verified": true,
+    "ambient_proxy_and_cookies": false,
+    "user_agent": "CrawlerPOC/0.1 (+assignment research; respects robots.txt)",
+    "http_version": "2.0",
+    "http_status": 503,
+    "decoded_bytes": 316,
+    "product_content_present": false,
+    "response_description": "Small JavaScript/noscript error-page redirect, not product HTML",
+    "script_redirect_path": "/error/500"
+  },
+  "amazon_private_browser_ui": {
+    "source_input_preserved": true,
+    "observed_final_scheme": "https",
+    "observed_final_asin": "B009GQ034C",
+    "observed_added_query": "th=1",
+    "intended_product_title_observed": true,
+    "product_page_controls_and_cuisinart_store_link_observed": true,
+    "login_or_captcha_action": false,
+    "programmatic_extraction_verified": false,
+    "complete_product_body_verified": false,
+    "note": "The initial browser snapshot was unverified; a later fresh private window had a verified Amazon URL and product accessibility content. The temporary window later became untargetable; no further UI attempt was made."
+  },
+  "rei_private_browser_ui": {
+    "navigation_attempted": true,
+    "new_tab_title_observed": true,
+    "final_url_and_article_body_verified": false
+  },
+  "interpretation": "Normal browser product access differs from guarded HTTP results. No specific anti-bot/CAPTCHA root cause is established. The implemented renderer handles successfully fetched JS shells through guarded Python HTTP; it is not browser fingerprint evasion and does not resolve these Amazon 503 results."
+}

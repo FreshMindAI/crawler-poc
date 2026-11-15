@@ -1,0 +1,155 @@
+{
+  "timestamp_utc": "2026-11-14T13:04:52.253094+00:00",
+  "checks": [
+    {
+      "name": "pytest",
+      "exit_code": 0,
+      "output": "...............................................................s.......  [100%]\n============================== warnings summary ===============================\n.venv\\Lib\\site-packages\\fastapi\\testclient.py:1\n  <repo-root>\\.venv\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\ntests/test_lakehouse.py::test_failure_response_context_publishes_without_schema_change\ntests/test_lakehouse.py::test_real_iceberg_commit_and_crash_replay\n  <repo-root>\\.venv\\Lib\\site-packages\\pyiceberg\\table\\__init__.py:639: UserWarning: Delete operation did not match any records\n    self.delete(\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nSKIPPED [1] tests\\test_remote_integration.py:8: Requires explicit authorization and configured real remote resources\n70 passed, 1 skipped, 3 warnings in 16.53s\n",
+      "command": [
+        "<repo-root>\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q"
+      ]
+    },
+    {
+      "name": "ruff",
+      "exit_code": 0,
+      "output": "All checks passed!\n",
+      "command": [
+        "<repo-root>\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "benchmarks"
+      ]
+    },
+    {
+      "name": "format",
+      "exit_code": 0,
+      "output": "30 files already formatted\n",
+      "command": [
+        "<repo-root>\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "src",
+        "tests",
+        "benchmarks"
+      ]
+    },
+    {
+      "name": "mypy",
+      "exit_code": 0,
+      "output": "Success: no issues found in 15 source files\n",
+      "command": [
+        "<repo-root>\\.venv\\Scripts\\python.exe",
+        "-m",
+        "mypy",
+        "src",
+        "benchmarks"
+      ]
+    }
+  ],
+  "synthetic_quality": {
+    "corpus_size": 6,
+    "page_type_macro_f1": 1.0,
+    "title_exact_match_rate": 1.0,
+    "provenance": "Synthetic fixtures and labels authored with Copilot; not an independent human quality study.",
+    "limitations": "Tiny synthetic regression corpus. Topic term overlap is a lexical proxy, not human precision@k, nDCG or generalization evidence.",
+    "cases": [
+      {
+        "fixture": "product.html",
+        "expected_type": "product",
+        "actual_type": "product",
+        "title_match": true,
+        "topics": [
+          "toaster",
+          "Compact",
+          "kitchen",
+          "slice toaster",
+          "Compact kitchen toaster"
+        ],
+        "warnings": [],
+        "topic_term_match_fraction": 0.8,
+        "expected_abstention_met": null
+      },
+      {
+        "fixture": "article.html",
+        "expected_type": "article",
+        "actual_type": "article",
+        "title_match": true,
+        "topics": [
+          "camping",
+          "mountain camping",
+          "Mountain camping essentials",
+          "mountain",
+          "camping essentials"
+        ],
+        "warnings": [],
+        "topic_term_match_fraction": 1.0,
+        "expected_abstention_met": null
+      },
+      {
+        "fixture": "category.html",
+        "expected_type": "category",
+        "actual_type": "category",
+        "title_match": true,
+        "topics": [
+          "tools",
+          "Garden",
+          "Garden hand tools",
+          "hand tools",
+          "garden tools"
+        ],
+        "warnings": [],
+        "topic_term_match_fraction": 1.0,
+        "expected_abstention_met": null
+      },
+      {
+        "fixture": "service.html",
+        "expected_type": "other",
+        "actual_type": "other",
+        "title_match": true,
+        "topics": [
+          "Local bicycle maintenance",
+          "Bicycle",
+          "bicycle maintenance",
+          "Local bicycle",
+          "maintenance"
+        ],
+        "warnings": [],
+        "topic_term_match_fraction": 1.0,
+        "expected_abstention_met": null
+      },
+      {
+        "fixture": "french.html",
+        "expected_type": "article",
+        "actual_type": "article",
+        "title_match": true,
+        "topics": [],
+        "warnings": [
+          "topics_unsupported_language"
+        ],
+        "topic_term_match_fraction": null,
+        "expected_abstention_met": true
+      },
+      {
+        "fixture": "sparse.html",
+        "expected_type": "unknown",
+        "actual_type": "unknown",
+        "title_match": true,
+        "topics": [],
+        "warnings": [
+          "insufficient_content"
+        ],
+        "topic_term_match_fraction": null,
+        "expected_abstention_met": true
+      }
+    ]
+  },
+  "limitations": "Project-owned source scope. Six AI-authored labels are regression evidence only; real corpus completeness checks are separate."
+}

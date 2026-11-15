@@ -1,0 +1,536 @@
+{
+  "started_at_utc": "2026-11-15T01:52:37.443189+00:00",
+  "manifest": "examples\\expanded-urls.txt",
+  "api_transport": "authenticated in-process TestClient, not an external TCP endpoint",
+  "target_transport": "real guarded aiohttp; opt-in rendering only for successful JS shells",
+  "max_attempts": 1,
+  "browser_fallback": true,
+  "browser_channel": "msedge",
+  "original_urls_unchanged": true,
+  "results": [
+    {
+      "job_id": "4d09f74eb45f29a92c70e53ecbed249969f16c3716928d3a8dc119c2f5999b92",
+      "input_url": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1?s=kitchen&ie=UTF8&qid=1431620315&sr=1-1&keywords=toaster",
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1?s=kitchen&ie=UTF8&qid=1431620315&sr=1-1&keywords=toaster",
+      "title": "Amazon.com: Cuisinart CPT-122 2-Slice Compact Plastic Toaster, Slots for Bagels & Bread, 7 Shade Settings, Cancel/Defrost/Reheat Functions, Removable Crumb Tray, Small Kitchen Appliance for Home & Office, White: Home & Kitchen",
+      "page_type": "product",
+      "page_type_evidence": [
+        "product-facts"
+      ],
+      "fetch_method": "headless",
+      "body_characters": 13142,
+      "raw_bytes": 2213747,
+      "word_count": 2144,
+      "timings_ms": {
+        "extract_classify_topics": 694.769,
+        "fetch": 2317.454,
+        "render": 7066.078,
+        "total": 10078.33
+      },
+      "failure_stage": null,
+      "extractor_version": "html-trafilatura-v3",
+      "topics": [
+        {
+          "evidence": "title+heading",
+          "method": "yake-metadata-weighted",
+          "phrase": "Compact Plastic Toaster",
+          "rank": 1,
+          "ranking_score": 0.0002978804316963991,
+          "raw_score": 0.0017872825901783945
+        },
+        {
+          "evidence": "title+heading",
+          "method": "yake-metadata-weighted",
+          "phrase": "Small Kitchen Appliance",
+          "rank": 2,
+          "ranking_score": 0.0005925283790653803,
+          "raw_score": 0.0035551702743922813
+        },
+        {
+          "evidence": "title+heading",
+          "method": "yake-metadata-weighted",
+          "phrase": "Removable Crumb Tray",
+          "rank": 3,
+          "ranking_score": 0.0010884928739303443,
+          "raw_score": 0.0065309572435820655
+        },
+        {
+          "evidence": "title+heading",
+          "method": "yake-metadata-weighted",
+          "phrase": "Cuisinart",
+          "rank": 4,
+          "ranking_score": 0.0012927533580621572,
+          "raw_score": 0.007756520148372943
+        },
+        {
+          "evidence": "title+heading",
+          "method": "yake-metadata-weighted",
+          "phrase": "Bread",
+          "rank": 5,
+          "ranking_score": 0.0022259443198523114,
+          "raw_score": 0.013355665919113868
+        }
+      ],
+      "api_content_nonempty": true,
+      "json_ld_objects": 0,
+      "internal_links_count": 213,
+      "external_links_count": 7
+    },
+    {
+      "job_id": "5d0848c0d80ce9df5bc375e64e468747de217d6b0904b1e6328e3d1333100fea",
+      "input_url": "http://blog.rei.com/camp/how-to-introduce-your-indoorsy-friend-to-the-outdoors/",
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://www.rei.com/blog/camp/how-to-introduce-your-indoorsy-friend-to-the-outdoors/",
+      "title": "How to Introduce Your Indoorsy Friend to the Outdoors - Uncommon Path \u2013 An REI Co-op Publication",
+      "page_type": "article",
+      "page_type_evidence": [
+        "structured-article"
+      ],
+      "fetch_method": "headless",
+      "body_characters": 2517,
+      "raw_bytes": 176928,
+      "word_count": 454,
+      "timings_ms": {
+        "extract_classify_topics": 56.063,
+        "fetch": 1058.196,
+        "render": 11067.974,
+        "total": 12182.253
+      },
+      "failure_stage": null,
+      "extractor_version": "html-trafilatura-v3",
+      "topics": [
+        {
+          "evidence": "title+breadcrumb+json_ld",
+          "method": "yake-metadata-weighted",
+          "phrase": "Introduce Your Indoorsy",
+          "rank": 1,
+          "ranking_score": 0.0009578046666527625,
+          "raw_score": 0.005746827999916575
+        },
+        {
+          "evidence": "title+breadcrumb+json_ld",
+          "method": "yake-metadata-weighted",
+          "phrase": "Indoorsy Friend",
+          "rank": 2,
+          "ranking_score": 0.001025067951316924,
+          "raw_score": 0.006150407707901545
+        },
+        {
+          "evidence": "title+description+breadcrumb+json_ld",
+          "method": "yake-metadata-weighted",
+          "phrase": "Outdoors",
+          "rank": 3,
+          "ranking_score": 0.0029480384467592724,
+          "raw_score": 0.020636269127314907
+        },
+        {
+          "evidence": "json_ld",
+          "method": "yake-metadata-weighted",
+          "phrase": "REI Co-op Publication",
+          "rank": 4,
+          "ranking_score": 0.02174310935979251,
+          "raw_score": 0.04348621871958502
+        },
+        {
+          "evidence": "json_ld",
+          "method": "yake-metadata-weighted",
+          "phrase": "Uncommon Path",
+          "rank": 5,
+          "ranking_score": 0.05531752030207819,
+          "raw_score": 0.11063504060415638
+        }
+      ],
+      "api_content_nonempty": true,
+      "json_ld_objects": 3,
+      "internal_links_count": 133,
+      "external_links_count": 17
+    },
+    {
+      "job_id": "254e86eee77ea5dbe9e296850aded6fa25fcc5a89e6cfe3a3ff06a379b7d3f12",
+      "input_url": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "title": "Google says 90% of tech workers are now using AI at work | CNN Business",
+      "page_type": "article",
+      "page_type_evidence": [
+        "structured-article"
+      ],
+      "fetch_method": "http",
+      "body_characters": 3701,
+      "raw_bytes": 5750783,
+      "word_count": 621,
+      "timings_ms": {
+        "extract_classify_topics": 161.579,
+        "fetch": 2474.549,
+        "total": 2636.151
+      },
+      "failure_stage": null,
+      "extractor_version": "html-trafilatura-v3",
+      "topics": [
+        {
+          "evidence": "title+description+json_ld",
+          "method": "yake-metadata-weighted",
+          "phrase": "Google",
+          "rank": 1,
+          "ranking_score": 0.003927038177135566,
+          "raw_score": 0.023562229062813394
+        },
+        {
+          "evidence": "title+json_ld",
+          "method": "yake-metadata-weighted",
+          "phrase": "tech workers",
+          "rank": 2,
+          "ranking_score": 0.004373976685722554,
+          "raw_score": 0.02186988342861277
+        },
+        {
+          "evidence": "description",
+          "method": "yake-metadata-weighted",
+          "phrase": "tech industry",
+          "rank": 3,
+          "ranking_score": 0.01185421203977767,
+          "raw_score": 0.02370842407955534
+        },
+        {
+          "evidence": "description",
+          "method": "yake-metadata-weighted",
+          "phrase": "industry workers",
+          "rank": 4,
+          "ranking_score": 0.02247673263387821,
+          "raw_score": 0.04495346526775642
+        },
+        {
+          "evidence": "description",
+          "method": "yake-metadata-weighted",
+          "phrase": "code",
+          "rank": 5,
+          "ranking_score": 0.024359994686846787,
+          "raw_score": 0.048719989373693574
+        }
+      ],
+      "api_content_nonempty": true,
+      "json_ld_objects": 1,
+      "internal_links_count": 311,
+      "external_links_count": 44
+    },
+    {
+      "job_id": "4fc46d66bdc62c8cf2f364a74c226258c300355b5b69f70ff4dbc9cde63e9328",
+      "input_url": "https://www.amazon.com/",
+      "outcome": "success",
+      "reason": null,
+      "http_status": 202,
+      "final_url": "https://www.amazon.com/",
+      "title": "Amazon.com. Spend less. Smile more.",
+      "page_type": "home",
+      "page_type_evidence": [
+        "root-path"
+      ],
+      "fetch_method": "headless",
+      "body_characters": 279,
+      "raw_bytes": 511423,
+      "word_count": 50,
+      "timings_ms": {
+        "extract_classify_topics": 637.495,
+        "fetch": 241.192,
+        "render": 4583.337,
+        "total": 5462.042
+      },
+      "failure_stage": null,
+      "extractor_version": "html-trafilatura-v3",
+      "topics": [
+        {
+          "evidence": "heading+description+keywords",
+          "method": "yake-metadata-weighted",
+          "phrase": "toys",
+          "rank": 1,
+          "ranking_score": 0.018521470233102525,
+          "raw_score": 0.09260735116551262
+        },
+        {
+          "evidence": "heading+description",
+          "method": "yake-metadata-weighted",
+          "phrase": "millions of items",
+          "rank": 2,
+          "ranking_score": 0.01916268092128573,
+          "raw_score": 0.07665072368514292
+        },
+        {
+          "evidence": "description+keywords",
+          "method": "yake-metadata-weighted",
+          "phrase": "video games",
+          "rank": 3,
+          "ranking_score": 0.020237585682686104,
+          "raw_score": 0.06071275704805831
+        },
+        {
+          "evidence": "heading",
+          "method": "yake-metadata-weighted",
+          "phrase": "White Elephant",
+          "rank": 4,
+          "ranking_score": 0.029790207850457596,
+          "raw_score": 0.08937062355137279
+        },
+        {
+          "evidence": "title+keywords",
+          "method": "yake-metadata-weighted",
+          "phrase": "Amazon.com",
+          "rank": 5,
+          "ranking_score": 0.0322291935840091,
+          "raw_score": 0.1611459679200455
+        }
+      ],
+      "api_content_nonempty": true,
+      "json_ld_objects": 0,
+      "internal_links_count": 41,
+      "external_links_count": 2
+    },
+    {
+      "job_id": "821b91789de622bc366998c6e1af3caa755c3b756a88436baaeb95fb2596386c",
+      "input_url": "https://www.walmart.com/",
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://www.walmart.com/",
+      "title": "Walmart | Save Money. Live better.",
+      "page_type": "home",
+      "page_type_evidence": [
+        "root-path"
+      ],
+      "fetch_method": "http",
+      "body_characters": 54,
+      "raw_bytes": 349579,
+      "word_count": 9,
+      "timings_ms": {
+        "extract_classify_topics": 68.387,
+        "fetch": 1057.946,
+        "total": 1126.348
+      },
+      "failure_stage": null,
+      "extractor_version": "html-trafilatura-v3",
+      "topics": [
+        {
+          "evidence": "title+heading",
+          "method": "yake-metadata-weighted",
+          "phrase": "Save Money",
+          "rank": 1,
+          "ranking_score": 0.003383275654936367,
+          "raw_score": 0.020299653929618203
+        },
+        {
+          "evidence": "title+heading+description+json_ld+keywords",
+          "method": "yake-metadata-weighted",
+          "phrase": "Walmart",
+          "rank": 2,
+          "ranking_score": 0.010148526781567146,
+          "raw_score": 0.09133674103410432
+        },
+        {
+          "evidence": "description",
+          "method": "yake-metadata-weighted",
+          "phrase": "Day Low Prices",
+          "rank": 3,
+          "ranking_score": 0.01923804953900031,
+          "raw_score": 0.03847609907800062
+        },
+        {
+          "evidence": "title+heading",
+          "method": "yake-metadata-weighted",
+          "phrase": "Live",
+          "rank": 4,
+          "ranking_score": 0.02278390324791554,
+          "raw_score": 0.13670341948749323
+        },
+        {
+          "evidence": "description",
+          "method": "yake-metadata-weighted",
+          "phrase": "free",
+          "rank": 5,
+          "ranking_score": 0.11038248295899793,
+          "raw_score": 0.22076496591799585
+        }
+      ],
+      "api_content_nonempty": true,
+      "json_ld_objects": 2,
+      "internal_links_count": 26,
+      "external_links_count": 14
+    },
+    {
+      "job_id": "afeba7d08ec62e29026bf6149e33e35855abf6d67b77b8ce4ec5e539628d9c0f",
+      "input_url": "https://www.bestbuy.com/",
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://www.bestbuy.com/",
+      "title": "Best Buy International: Select your Country - Best Buy",
+      "page_type": "home",
+      "page_type_evidence": [
+        "root-path"
+      ],
+      "fetch_method": "http",
+      "body_characters": 393,
+      "raw_bytes": 6695,
+      "word_count": 60,
+      "timings_ms": {
+        "extract_classify_topics": 43.05,
+        "fetch": 19370.189,
+        "total": 19413.257
+      },
+      "failure_stage": null,
+      "extractor_version": "html-trafilatura-v3",
+      "topics": [
+        {
+          "evidence": "title+description+keywords",
+          "method": "yake-metadata-weighted",
+          "phrase": "Buy",
+          "rank": 1,
+          "ranking_score": 0.006287984791715938,
+          "raw_score": 0.03772790875029563
+        },
+        {
+          "evidence": "title+heading+description",
+          "method": "yake-metadata-weighted",
+          "phrase": "Country",
+          "rank": 2,
+          "ranking_score": 0.014944662676252454,
+          "raw_score": 0.10461263873376718
+        },
+        {
+          "evidence": "title",
+          "method": "yake-metadata-weighted",
+          "phrase": "Select",
+          "rank": 3,
+          "ranking_score": 0.018323553556966486,
+          "raw_score": 0.07329421422786594
+        },
+        {
+          "evidence": "title+keywords",
+          "method": "yake-metadata-weighted",
+          "phrase": "International",
+          "rank": 4,
+          "ranking_score": 0.03053002445541162,
+          "raw_score": 0.1526501222770581
+        },
+        {
+          "evidence": "heading+description",
+          "method": "yake-metadata-weighted",
+          "phrase": "shopping",
+          "rank": 5,
+          "ranking_score": 0.048085862203672926,
+          "raw_score": 0.1923434488146917
+        }
+      ],
+      "api_content_nonempty": true,
+      "json_ld_objects": 0,
+      "internal_links_count": 3,
+      "external_links_count": 0
+    }
+  ],
+  "request_trace": [
+    {
+      "url_without_query": "https://www.cnn.com/robots.txt",
+      "decoded_limit": 524288,
+      "status": 200,
+      "decoded_bytes": 3704
+    },
+    {
+      "url_without_query": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "decoded_limit": 10485760,
+      "status": 200,
+      "decoded_bytes": 5750783
+    },
+    {
+      "url_without_query": "http://www.amazon.com/robots.txt",
+      "decoded_limit": 524288,
+      "status": 301,
+      "decoded_bytes": 0
+    },
+    {
+      "url_without_query": "https://www.amazon.com/robots.txt",
+      "decoded_limit": 524288,
+      "status": 200,
+      "decoded_bytes": 7947
+    },
+    {
+      "url_without_query": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "decoded_limit": 10485760,
+      "status": 301,
+      "decoded_bytes": 0
+    },
+    {
+      "url_without_query": "https://www.amazon.com/robots.txt",
+      "decoded_limit": 524288,
+      "status": 200,
+      "decoded_bytes": 7947
+    },
+    {
+      "url_without_query": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "decoded_limit": 10485760,
+      "status": 503,
+      "decoded_bytes": 0
+    },
+    {
+      "url_without_query": "https://www.amazon.com/",
+      "decoded_limit": 10485760,
+      "status": 503,
+      "decoded_bytes": 0
+    },
+    {
+      "url_without_query": "http://blog.rei.com/robots.txt",
+      "decoded_limit": 524288,
+      "status": 403,
+      "decoded_bytes": 0
+    },
+    {
+      "url_without_query": "http://blog.rei.com/camp/how-to-introduce-your-indoorsy-friend-to-the-outdoors/",
+      "decoded_limit": 10485760,
+      "status": 403,
+      "decoded_bytes": 0
+    },
+    {
+      "url_without_query": "https://www.walmart.com/robots.txt",
+      "decoded_limit": 524288,
+      "status": 200,
+      "decoded_bytes": 3479
+    },
+    {
+      "url_without_query": "https://www.walmart.com/",
+      "decoded_limit": 10485760,
+      "status": 200,
+      "decoded_bytes": 349579
+    },
+    {
+      "url_without_query": "https://www.bestbuy.com/robots.txt",
+      "decoded_limit": 524288,
+      "status": 200,
+      "decoded_bytes": 15266
+    },
+    {
+      "url_without_query": "https://www.bestbuy.com/",
+      "decoded_limit": 10485760,
+      "status": 200,
+      "decoded_bytes": 6695
+    }
+  ],
+  "publication": {
+    "published": 6,
+    "batch_id": "6479ebde27b427a2f55498ba908197a80b268df8500f88c32850ecbb5305ff55",
+    "snapshot_id": 2562437248391328322,
+    "metadata_location": "file://<repo-root>/var/expanded-samples-20261115T015237Z/iceberg/warehouse/crawler/crawl_events/metadata/00002-a9914429-3fbe-42c5-88b3-b0ba93c37217.metadata.json",
+    "recovered": false,
+    "rows": 6,
+    "status_context_and_new_details_verified": true
+  },
+  "counts": {
+    "terminal": 6,
+    "unpublished": 0
+  },
+  "successes": 6,
+  "finished_at_utc": "2026-11-15T01:53:31.389893+00:00"
+}

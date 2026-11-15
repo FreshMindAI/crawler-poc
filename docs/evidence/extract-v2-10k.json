@@ -1,0 +1,24 @@
+{
+  "classifier_version": "schema-rules-yake-v2",
+  "cpu_seconds": 75.53125,
+  "distinct_templates": 1,
+  "extractor_version": "html-trafilatura-v2",
+  "fixture": "product.html",
+  "limitations": "One repeated synthetic template; stage benchmark, not end-to-end capacity.",
+  "mode": "extract",
+  "network_requests": 0,
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.10",
+  "records": 10000,
+  "records_per_second": 130.99835301534708,
+  "rss_peak_sampled_bytes": 92852224,
+  "rss_start_bytes": 91148288,
+  "sample_latency_p50_ms": 6.1933500110171735,
+  "sample_latency_p95_ms": 13.63820000551641,
+  "seconds": 76.33683759999985,
+  "source_sha256": {
+    "src\\crawler_poc\\extraction.py": "424a5c18e632d7c9bfb0ba1bdc0269934567f3352fc1238196ebcec7524283bd",
+    "src\\crawler_poc\\models.py": "c68f58dda166742826d228be7d30920dc931791f7d5333e7670351e4cd9ae8cb",
+    "tests\\fixtures\\product.html": "6fe2a0dd129b265e25f10793eca5a4724f163f93e342e0b2e3e4e5b5b06c3143"
+  }
+}

@@ -1,0 +1,380 @@
+{
+  "started_at_utc": "2026-11-14T13:45:15.183916+00:00",
+  "manifest": "examples\\expanded-urls.txt",
+  "api_transport": "authenticated in-process TestClient, not an external TCP endpoint",
+  "target_transport": "real guarded aiohttp; opt-in rendering only for successful JS shells",
+  "max_attempts": 1,
+  "browser_fallback": true,
+  "browser_channel": "msedge",
+  "original_urls_unchanged": true,
+  "results": [
+    {
+      "job_id": "4d09f74eb45f29a92c70e53ecbed249969f16c3716928d3a8dc119c2f5999b92",
+      "input_url": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1?s=kitchen&ie=UTF8&qid=1431620315&sr=1-1&keywords=toaster",
+      "outcome": "retry_exhausted",
+      "reason": "transient_http_status",
+      "http_status": 503,
+      "final_url": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1?s=kitchen&ie=UTF8&qid=1431620315&sr=1-1&keywords=toaster",
+      "title": null,
+      "page_type": null,
+      "page_type_evidence": null,
+      "fetch_method": null,
+      "body_characters": null,
+      "raw_bytes": null,
+      "word_count": null,
+      "timings_ms": {
+        "total": 2285.828
+      },
+      "failure_stage": "fetch",
+      "extractor_version": null,
+      "topics": null
+    },
+    {
+      "job_id": "5d0848c0d80ce9df5bc375e64e468747de217d6b0904b1e6328e3d1333100fea",
+      "input_url": "http://blog.rei.com/camp/how-to-introduce-your-indoorsy-friend-to-the-outdoors/",
+      "outcome": "robots_disallowed",
+      "reason": "robots_access_denied",
+      "http_status": 403,
+      "final_url": null,
+      "title": null,
+      "page_type": null,
+      "page_type_evidence": null,
+      "fetch_method": null,
+      "body_characters": null,
+      "raw_bytes": null,
+      "word_count": null,
+      "timings_ms": {
+        "total": 138.457
+      },
+      "failure_stage": "robots",
+      "extractor_version": null,
+      "topics": null
+    },
+    {
+      "job_id": "254e86eee77ea5dbe9e296850aded6fa25fcc5a89e6cfe3a3ff06a379b7d3f12",
+      "input_url": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "title": "Google says 90% of tech workers are now using AI at work | CNN Business",
+      "page_type": "article",
+      "page_type_evidence": [
+        "structured-article"
+      ],
+      "fetch_method": "http",
+      "body_characters": 3701,
+      "raw_bytes": 5750819,
+      "word_count": 621,
+      "timings_ms": {
+        "extract_classify_topics": 288.893,
+        "fetch": 1973.895,
+        "total": 2262.853
+      },
+      "failure_stage": null,
+      "extractor_version": "html-trafilatura-v3",
+      "topics": [
+        {
+          "evidence": "title+description+json_ld",
+          "method": "yake-metadata-weighted",
+          "phrase": "Google",
+          "rank": 1,
+          "ranking_score": 0.0039301086897237355,
+          "raw_score": 0.02358065213834241
+        },
+        {
+          "evidence": "title+json_ld",
+          "method": "yake-metadata-weighted",
+          "phrase": "tech workers",
+          "rank": 2,
+          "ranking_score": 0.004384343149970037,
+          "raw_score": 0.021921715749850187
+        },
+        {
+          "evidence": "title+description+json_ld",
+          "method": "yake-metadata-weighted",
+          "phrase": "tech",
+          "rank": 3,
+          "ranking_score": 0.004713840403417518,
+          "raw_score": 0.028283042420505104
+        },
+        {
+          "evidence": "title",
+          "method": "yake-metadata-weighted",
+          "phrase": "CNN Business",
+          "rank": 4,
+          "ranking_score": 0.004994634462631927,
+          "raw_score": 0.01997853785052771
+        },
+        {
+          "evidence": "title+description+json_ld",
+          "method": "yake-metadata-weighted",
+          "phrase": "workers",
+          "rank": 5,
+          "ranking_score": 0.005771867573230491,
+          "raw_score": 0.034631205439382945
+        }
+      ],
+      "api_content_nonempty": true,
+      "json_ld_objects": 1,
+      "internal_links_count": 311,
+      "external_links_count": 44
+    },
+    {
+      "job_id": "4fc46d66bdc62c8cf2f364a74c226258c300355b5b69f70ff4dbc9cde63e9328",
+      "input_url": "https://www.amazon.com/",
+      "outcome": "retry_exhausted",
+      "reason": "transient_http_status",
+      "http_status": 503,
+      "final_url": "https://www.amazon.com/",
+      "title": null,
+      "page_type": null,
+      "page_type_evidence": null,
+      "fetch_method": null,
+      "body_characters": null,
+      "raw_bytes": null,
+      "word_count": null,
+      "timings_ms": {
+        "total": 973.909
+      },
+      "failure_stage": "fetch",
+      "extractor_version": null,
+      "topics": null
+    },
+    {
+      "job_id": "821b91789de622bc366998c6e1af3caa755c3b756a88436baaeb95fb2596386c",
+      "input_url": "https://www.walmart.com/",
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://www.walmart.com/",
+      "title": "Walmart | Save Money. Live better.",
+      "page_type": "home",
+      "page_type_evidence": [
+        "root-path"
+      ],
+      "fetch_method": "http",
+      "body_characters": 1813,
+      "raw_bytes": 425746,
+      "word_count": 301,
+      "timings_ms": {
+        "extract_classify_topics": 185.66,
+        "fetch": 1142.325,
+        "total": 1328.006
+      },
+      "failure_stage": null,
+      "extractor_version": "html-trafilatura-v3",
+      "topics": [
+        {
+          "evidence": "heading",
+          "method": "yake-metadata-weighted",
+          "phrase": "Black Friday Deal",
+          "rank": 1,
+          "ranking_score": 0.0005556383335814076,
+          "raw_score": 0.0016669150007442228
+        },
+        {
+          "evidence": "heading",
+          "method": "yake-metadata-weighted",
+          "phrase": "Friday Deal",
+          "rank": 2,
+          "ranking_score": 0.002210983883167059,
+          "raw_score": 0.0066329516495011774
+        },
+        {
+          "evidence": "heading",
+          "method": "yake-metadata-weighted",
+          "phrase": "Black Friday",
+          "rank": 3,
+          "ranking_score": 0.0025280949652798836,
+          "raw_score": 0.007584284895839651
+        },
+        {
+          "evidence": "heading",
+          "method": "yake-metadata-weighted",
+          "phrase": "Women Set Side",
+          "rank": 4,
+          "ranking_score": 0.0026580449280346804,
+          "raw_score": 0.007974134784104041
+        },
+        {
+          "evidence": "heading",
+          "method": "yake-metadata-weighted",
+          "phrase": "Piece Lounge Sets",
+          "rank": 5,
+          "ranking_score": 0.0036081468532094406,
+          "raw_score": 0.010824440559628322
+        }
+      ],
+      "api_content_nonempty": true,
+      "json_ld_objects": 2,
+      "internal_links_count": 50,
+      "external_links_count": 19
+    },
+    {
+      "job_id": "afeba7d08ec62e29026bf6149e33e35855abf6d67b77b8ce4ec5e539628d9c0f",
+      "input_url": "https://www.bestbuy.com/",
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://www.bestbuy.com/",
+      "title": "Best Buy International: Select your Country - Best Buy",
+      "page_type": "home",
+      "page_type_evidence": [
+        "root-path"
+      ],
+      "fetch_method": "http",
+      "body_characters": 393,
+      "raw_bytes": 6675,
+      "word_count": 60,
+      "timings_ms": {
+        "extract_classify_topics": 21.568,
+        "fetch": 16617.868,
+        "total": 16639.452
+      },
+      "failure_stage": null,
+      "extractor_version": "html-trafilatura-v3",
+      "topics": [
+        {
+          "evidence": "title+description+keywords",
+          "method": "yake-metadata-weighted",
+          "phrase": "Buy",
+          "rank": 1,
+          "ranking_score": 0.006287984791715938,
+          "raw_score": 0.03772790875029563
+        },
+        {
+          "evidence": "title+keywords",
+          "method": "yake-metadata-weighted",
+          "phrase": "Buy International",
+          "rank": 2,
+          "ranking_score": 0.011565437543951954,
+          "raw_score": 0.05782718771975977
+        },
+        {
+          "evidence": "title+heading+description",
+          "method": "yake-metadata-weighted",
+          "phrase": "Country",
+          "rank": 3,
+          "ranking_score": 0.014944662676252454,
+          "raw_score": 0.10461263873376718
+        },
+        {
+          "evidence": "title",
+          "method": "yake-metadata-weighted",
+          "phrase": "Select your Country",
+          "rank": 4,
+          "ranking_score": 0.016433473110245057,
+          "raw_score": 0.06573389244098023
+        },
+        {
+          "evidence": "title",
+          "method": "yake-metadata-weighted",
+          "phrase": "Select",
+          "rank": 5,
+          "ranking_score": 0.018323553556966486,
+          "raw_score": 0.07329421422786594
+        }
+      ],
+      "api_content_nonempty": true,
+      "json_ld_objects": 0,
+      "internal_links_count": 3,
+      "external_links_count": 0
+    }
+  ],
+  "request_trace": [
+    {
+      "url_without_query": "https://www.cnn.com/robots.txt",
+      "decoded_limit": 524288,
+      "status": 200,
+      "decoded_bytes": 3704
+    },
+    {
+      "url_without_query": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "decoded_limit": 10485760,
+      "status": 200,
+      "decoded_bytes": 5750819
+    },
+    {
+      "url_without_query": "http://www.amazon.com/robots.txt",
+      "decoded_limit": 524288,
+      "status": 301,
+      "decoded_bytes": 0
+    },
+    {
+      "url_without_query": "https://www.amazon.com/robots.txt",
+      "decoded_limit": 524288,
+      "status": 200,
+      "decoded_bytes": 7947
+    },
+    {
+      "url_without_query": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "decoded_limit": 10485760,
+      "status": 301,
+      "decoded_bytes": 0
+    },
+    {
+      "url_without_query": "https://www.amazon.com/robots.txt",
+      "decoded_limit": 524288,
+      "status": 200,
+      "decoded_bytes": 7947
+    },
+    {
+      "url_without_query": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "decoded_limit": 10485760,
+      "status": 503,
+      "decoded_bytes": 0
+    },
+    {
+      "url_without_query": "https://www.amazon.com/",
+      "decoded_limit": 10485760,
+      "status": 503,
+      "decoded_bytes": 0
+    },
+    {
+      "url_without_query": "http://blog.rei.com/robots.txt",
+      "decoded_limit": 524288,
+      "status": 403,
+      "decoded_bytes": 0
+    },
+    {
+      "url_without_query": "https://www.walmart.com/robots.txt",
+      "decoded_limit": 524288,
+      "status": 200,
+      "decoded_bytes": 3479
+    },
+    {
+      "url_without_query": "https://www.walmart.com/",
+      "decoded_limit": 10485760,
+      "status": 200,
+      "decoded_bytes": 425746
+    },
+    {
+      "url_without_query": "https://www.bestbuy.com/robots.txt",
+      "decoded_limit": 524288,
+      "status": 200,
+      "decoded_bytes": 15266
+    },
+    {
+      "url_without_query": "https://www.bestbuy.com/",
+      "decoded_limit": 10485760,
+      "status": 200,
+      "decoded_bytes": 6675
+    }
+  ],
+  "publication": {
+    "published": 6,
+    "batch_id": "6479ebde27b427a2f55498ba908197a80b268df8500f88c32850ecbb5305ff55",
+    "snapshot_id": 2614152356779077934,
+    "metadata_location": "file://<repo-root>/var/expanded-samples-20261114T134514Z/iceberg/warehouse/crawler/crawl_events/metadata/00002-7479c579-dff2-4d25-871f-1dcf33b5e83a.metadata.json",
+    "recovered": false,
+    "rows": 6,
+    "status_context_and_new_details_verified": true
+  },
+  "counts": {
+    "terminal": 6,
+    "unpublished": 0
+  },
+  "successes": 3,
+  "finished_at_utc": "2026-11-14T13:45:44.536728+00:00"
+}

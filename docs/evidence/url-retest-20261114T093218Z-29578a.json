@@ -1,0 +1,170 @@
+{
+  "run_id": "url-retest-20261114T093218Z-29578a",
+  "started_at_utc": "2026-11-14T09:32:18.108989+00:00",
+  "finished_at_utc": "2026-11-14T09:32:29.487722+00:00",
+  "elapsed_seconds": 10.959,
+  "manifest": "examples\\assignment-urls.txt",
+  "fresh_jobs_verified": true,
+  "policy": {
+    "robots_enforced": true,
+    "max_attempts": 3,
+    "fetch_timeout_seconds": 20.0,
+    "page_wire_and_decoded_limit_bytes": 5242880,
+    "origin_gap_seconds": 1.0,
+    "rendering_or_protection_bypass": false
+  },
+  "submitted": 3,
+  "extracted_successfully": 0,
+  "outcomes": [
+    {
+      "input_url": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1?s=kitchen&ie=UTF8&qid=1431620315&sr=1-1&keywords=toaster",
+      "job_id": "3299f227be68b78bfaf444bb932f92d4a7308905a0eb84aabe10a01aa022791c",
+      "status": "terminal",
+      "attempts": 3,
+      "outcome": "retry_exhausted",
+      "reason": "transient_http_status",
+      "http_status": null,
+      "final_url": null,
+      "title": null,
+      "page_type": null,
+      "body_characters": null,
+      "extractor_version": null,
+      "classifier_version": null,
+      "topics": [],
+      "bounded_content_read_verified": false
+    },
+    {
+      "input_url": "http://blog.rei.com/camp/how-to-introduce-your-indoorsy-friend-to-the-outdoors/",
+      "job_id": "adc5002399907e4c048f9bc183576541335af4f971d8b1283327206adcbfcaae",
+      "status": "terminal",
+      "attempts": 1,
+      "outcome": "robots_disallowed",
+      "reason": "robots_disallowed",
+      "http_status": null,
+      "final_url": null,
+      "title": null,
+      "page_type": null,
+      "body_characters": null,
+      "extractor_version": null,
+      "classifier_version": null,
+      "topics": [],
+      "bounded_content_read_verified": false
+    },
+    {
+      "input_url": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "job_id": "13cb139d0eb1d5e225f34fd373bc74121c16d88369d73a8ea33575c1c6d6fedf",
+      "status": "terminal",
+      "attempts": 1,
+      "outcome": "too_large",
+      "reason": "decoded_size_limit",
+      "http_status": null,
+      "final_url": null,
+      "title": null,
+      "page_type": null,
+      "body_characters": null,
+      "extractor_version": null,
+      "classifier_version": null,
+      "topics": [],
+      "bounded_content_read_verified": false
+    }
+  ],
+  "request_trace": [
+    {
+      "target_without_query": "https://www.cnn.com/robots.txt",
+      "robots_request": true,
+      "decoded_limit_bytes": 524288,
+      "http_status": 200,
+      "decoded_bytes": 3704,
+      "elapsed_seconds": 0.11
+    },
+    {
+      "target_without_query": "http://www.amazon.com/robots.txt",
+      "robots_request": true,
+      "decoded_limit_bytes": 524288,
+      "http_status": 301,
+      "decoded_bytes": 0,
+      "elapsed_seconds": 0.099
+    },
+    {
+      "target_without_query": "http://blog.rei.com/robots.txt",
+      "robots_request": true,
+      "decoded_limit_bytes": 524288,
+      "http_status": 403,
+      "decoded_bytes": 380,
+      "elapsed_seconds": 0.232
+    },
+    {
+      "target_without_query": "https://www.amazon.com/robots.txt",
+      "robots_request": true,
+      "decoded_limit_bytes": 524288,
+      "http_status": 200,
+      "decoded_bytes": 7947,
+      "elapsed_seconds": 0.408
+    },
+    {
+      "target_without_query": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "decoded_limit_bytes": 5242880,
+      "http_status": 301,
+      "decoded_bytes": 0,
+      "elapsed_seconds": 0.731
+    },
+    {
+      "target_without_query": "https://www.amazon.com/robots.txt",
+      "robots_request": true,
+      "decoded_limit_bytes": 524288,
+      "http_status": 200,
+      "decoded_bytes": 7947,
+      "elapsed_seconds": 0.595
+    },
+    {
+      "target_without_query": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "robots_request": false,
+      "decoded_limit_bytes": 5242880,
+      "error_type": "FetchError",
+      "reason": "decoded_size_limit",
+      "elapsed_seconds": 1.964
+    },
+    {
+      "target_without_query": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "decoded_limit_bytes": 5242880,
+      "http_status": 503,
+      "decoded_bytes": 316,
+      "elapsed_seconds": 1.297
+    },
+    {
+      "target_without_query": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "decoded_limit_bytes": 5242880,
+      "http_status": 301,
+      "decoded_bytes": 0,
+      "elapsed_seconds": 0.043
+    },
+    {
+      "target_without_query": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "decoded_limit_bytes": 5242880,
+      "http_status": 503,
+      "decoded_bytes": 316,
+      "elapsed_seconds": 0.357
+    },
+    {
+      "target_without_query": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "decoded_limit_bytes": 5242880,
+      "http_status": 301,
+      "decoded_bytes": 0,
+      "elapsed_seconds": 0.068
+    },
+    {
+      "target_without_query": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "decoded_limit_bytes": 5242880,
+      "http_status": 503,
+      "decoded_bytes": 316,
+      "elapsed_seconds": 0.295
+    }
+  ],
+  "limitations": "Live target outcomes, not deterministic unit-test results. No policy bypass, replacement URLs, cloud deployment, raw page redistribution or external crawler service."
+}

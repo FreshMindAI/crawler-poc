@@ -1,0 +1,130 @@
+{
+  "started_at_utc": "2026-11-14T09:36:06.228646+00:00",
+  "finished_at_utc": "2026-11-14T09:36:08.526147+00:00",
+  "purpose": "Single diagnostic fetch per original URL; observes headers, wire byte counts and error-page titles without altering fetch policy.",
+  "policy": {
+    "robots_enforced": true,
+    "max_bytes": 5242880,
+    "request_timeout": 20.0,
+    "origin_delay": 1.0,
+    "user_agent": "CrawlerPOC/0.1 (+assignment research; respects robots.txt)",
+    "limit_changes_or_bypass": false
+  },
+  "outcomes": [
+    {
+      "input_url": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1?s=kitchen&ie=UTF8&qid=1431620315&sr=1-1&keywords=toaster",
+      "fetch_outcome": "retry_exhausted",
+      "reason": "transient_http_status",
+      "retryable": true
+    },
+    {
+      "input_url": "http://blog.rei.com/camp/how-to-introduce-your-indoorsy-friend-to-the-outdoors/",
+      "fetch_outcome": "robots_disallowed",
+      "reason": "robots_disallowed",
+      "retryable": false
+    },
+    {
+      "input_url": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "fetch_outcome": "too_large",
+      "reason": "decoded_size_limit",
+      "retryable": false
+    }
+  ],
+  "request_trace": [
+    {
+      "target_without_query": "http://www.amazon.com/robots.txt",
+      "robots_request": true,
+      "wire_bytes_read": 0,
+      "http_status": 301,
+      "headers": {
+        "Content-Type": "text/html",
+        "Content-Length": "167",
+        "Server": "CloudFront"
+      },
+      "elapsed_seconds": 0.047
+    },
+    {
+      "target_without_query": "http://blog.rei.com/robots.txt",
+      "robots_request": true,
+      "wire_bytes_read": 380,
+      "http_status": 403,
+      "headers": {
+        "Content-Type": "text/html",
+        "Content-Length": "380"
+      },
+      "elapsed_seconds": 0.109,
+      "response_title": "Access Denied"
+    },
+    {
+      "target_without_query": "https://www.cnn.com/robots.txt",
+      "robots_request": true,
+      "wire_bytes_read": 1065,
+      "http_status": 200,
+      "headers": {
+        "Content-Type": "text/plain",
+        "Content-Encoding": "gzip",
+        "Content-Length": "1065"
+      },
+      "elapsed_seconds": 0.093
+    },
+    {
+      "target_without_query": "https://www.amazon.com/robots.txt",
+      "robots_request": true,
+      "wire_bytes_read": 7947,
+      "http_status": 200,
+      "headers": {
+        "Content-Type": "text/plain",
+        "Content-Length": "7947",
+        "Server": "Server"
+      },
+      "elapsed_seconds": 0.343
+    },
+    {
+      "target_without_query": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "robots_request": false,
+      "wire_bytes_read": 1066596,
+      "http_status": 200,
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8",
+        "Content-Encoding": "gzip",
+        "Content-Length": "1198821"
+      },
+      "reason": "decoded_size_limit",
+      "elapsed_seconds": 0.125
+    },
+    {
+      "target_without_query": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "wire_bytes_read": 0,
+      "http_status": 301,
+      "headers": {
+        "Content-Type": "text/html",
+        "Content-Length": "167",
+        "Server": "CloudFront"
+      },
+      "elapsed_seconds": 0.015
+    },
+    {
+      "target_without_query": "https://www.amazon.com/robots.txt",
+      "robots_request": true,
+      "wire_bytes_read": 7947,
+      "http_status": 200,
+      "headers": {
+        "Content-Type": "text/plain",
+        "Content-Length": "7947",
+        "Server": "Server"
+      },
+      "elapsed_seconds": 0.297
+    },
+    {
+      "target_without_query": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "wire_bytes_read": 316,
+      "http_status": 503,
+      "headers": {
+        "Content-Type": "text/html"
+      },
+      "elapsed_seconds": 0.234
+    }
+  ]
+}

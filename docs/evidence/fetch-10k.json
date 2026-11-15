@@ -1,0 +1,16 @@
+{
+  "body_bytes": 631,
+  "concurrency": 8,
+  "cpu_seconds": 3.15625,
+  "errors": 0,
+  "external_network_requests": 0,
+  "limitations": "One run, synthetic fixture, no isolated CPU; RSS only before/after, not peak.",
+  "mode": "fetch",
+  "records": 10000,
+  "records_per_second": 3151.046749360106,
+  "rss_before_after_max_bytes": 118591488,
+  "sample_latency_p50_ms": 1.9777499983320013,
+  "sample_latency_p95_ms": 4.717899995739572,
+  "scope": "raw pooled loopback HTTP; not full SafeFetcher",
+  "seconds": 3.1735486000106903
+}

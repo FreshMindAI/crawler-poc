@@ -1,0 +1,31 @@
+{
+  "checked_at_utc": "2026-11-14T13:58:09.543390+00:00",
+  "artifact_inventory": {
+    "FR": 27,
+    "NFR": 8,
+    "AC": 10,
+    "D": 50,
+    "Q": 9,
+    "R": 24,
+    "tasks": 20
+  },
+  "task_id_counting": "Unique IDs; historical implementation ledger repeats some IDs by design",
+  "validated_source_and_manifest_hashes_unchanged": 20,
+  "retained_test_result": "89 passed, 1 gated cloud skip; browser tests enabled",
+  "original_three_urls_preserved_in_six_input_manifest": true,
+  "live_outcomes": {
+    "content_results": 3,
+    "explicit_failures": 3
+  },
+  "browser_environment_examples_match_actual_defaults": true,
+  "actual_pinned_prerequisite_check": {
+    "FEATURE_DIR": "<repo-root>\\specs\\001-crawler-poc",
+    "AVAILABLE_DOCS": [
+      "research.md",
+      "data-model.md",
+      "tasks.md"
+    ]
+  },
+  "dependency_inventory_distributions": 116,
+  "all_checks_passed": true
+}

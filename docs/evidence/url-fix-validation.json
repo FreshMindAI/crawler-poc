@@ -1,0 +1,69 @@
+{
+  "timestamp_utc": "2026-11-14T09:47:00.034407+00:00",
+  "checks": [
+    {
+      "name": "pytest",
+      "command": [
+        "<repo-root>\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 0,
+      "output": "...........................................................s.......      [100%]\n============================== warnings summary ===============================\n.venv\\Lib\\site-packages\\fastapi\\testclient.py:1\n  <repo-root>\\.venv\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\ntests/test_lakehouse.py::test_failure_response_context_publishes_without_schema_change\ntests/test_lakehouse.py::test_real_iceberg_commit_and_crash_replay\n  <repo-root>\\.venv\\Lib\\site-packages\\pyiceberg\\table\\__init__.py:639: UserWarning: Delete operation did not match any records\n    self.delete(\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nSKIPPED [1] tests\\test_remote_integration.py:8: Requires explicit authorization and configured real remote resources\n66 passed, 1 skipped, 3 warnings in 16.06s\n"
+    },
+    {
+      "name": "ruff",
+      "command": [
+        "<repo-root>\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "benchmarks"
+      ],
+      "exit_code": 0,
+      "output": "All checks passed!\n"
+    },
+    {
+      "name": "format",
+      "command": [
+        "<repo-root>\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "src",
+        "tests",
+        "benchmarks"
+      ],
+      "exit_code": 0,
+      "output": "30 files already formatted\n"
+    },
+    {
+      "name": "mypy",
+      "command": [
+        "<repo-root>\\.venv\\Scripts\\python.exe",
+        "-m",
+        "mypy",
+        "src",
+        "benchmarks"
+      ],
+      "exit_code": 0,
+      "output": "Success: no issues found in 15 source files\n"
+    },
+    {
+      "name": "dependencies",
+      "command": [
+        "<repo-root>\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "output": "No broken requirements found.\n"
+    }
+  ],
+  "scope": "Project-owned src/tests/benchmarks; pinned vendored .specify upstream scripts excluded as in README verification commands."
+}

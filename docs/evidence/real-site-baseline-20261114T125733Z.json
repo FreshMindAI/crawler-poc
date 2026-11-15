@@ -1,0 +1,635 @@
+{
+  "started_at_utc": "2026-11-14T12:57:33.752019+00:00",
+  "finished_at_utc": "2026-11-14T12:57:40.590468+00:00",
+  "worker_elapsed_seconds": 6.671,
+  "submitted": 11,
+  "extracted_successfully": 8,
+  "policy": {
+    "max_attempts": 1,
+    "workers": 4,
+    "origin_delay": 1.0,
+    "request_timeout": 20.0,
+    "max_decoded_bytes": 10485760,
+    "max_wire_bytes": 5242880,
+    "robots_401_403": "conservative deny",
+    "robots_enforced": true,
+    "protection_bypass": false
+  },
+  "outcomes": [
+    {
+      "url": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1?s=kitchen&ie=UTF8&qid=1431620315&sr=1-1&keywords=toaster",
+      "attempts": 1,
+      "outcome": "retry_exhausted",
+      "reason": "transient_http_status",
+      "http_status": 503,
+      "final_url": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1?s=kitchen&ie=UTF8&qid=1431620315&sr=1-1&keywords=toaster",
+      "title": null,
+      "page_type": null,
+      "body_characters": null,
+      "raw_bytes": null,
+      "topics": null,
+      "failure_metadata": {
+        "failure_stage": "fetch",
+        "failure_url": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1"
+      }
+    },
+    {
+      "url": "http://blog.rei.com/camp/how-to-introduce-your-indoorsy-friend-to-the-outdoors/",
+      "attempts": 1,
+      "outcome": "robots_disallowed",
+      "reason": "robots_access_denied",
+      "http_status": 403,
+      "final_url": null,
+      "title": null,
+      "page_type": null,
+      "body_characters": null,
+      "raw_bytes": null,
+      "topics": null,
+      "failure_metadata": {
+        "failure_stage": "robots",
+        "failure_url": "http://blog.rei.com/robots.txt"
+      }
+    },
+    {
+      "url": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "attempts": 1,
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "title": "Google says 90% of tech workers are now using AI at work | CNN Business",
+      "page_type": "article",
+      "body_characters": 3701,
+      "raw_bytes": 5750780,
+      "topics": [
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "CNN app Download",
+          "rank": 1,
+          "raw_score": 0.011224462775044576
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "tech industry workers",
+          "rank": 2,
+          "raw_score": 0.011581045140932923
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "CNN Business",
+          "rank": 3,
+          "raw_score": 0.012943921758700275
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Business The overwhelming",
+          "rank": 4,
+          "raw_score": 0.015449675743315175
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "tech industry",
+          "rank": 5,
+          "raw_score": 0.01783317103658673
+        }
+      ],
+      "stored_content_verified": true
+    },
+    {
+      "url": "https://www.python.org/",
+      "attempts": 1,
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://www.python.org/",
+      "title": "Welcome to Python.org",
+      "page_type": "other",
+      "body_characters": 937,
+      "raw_bytes": 51997,
+      "topics": [
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Intuitive Interpretation Quick",
+          "rank": 1,
+          "raw_score": 0.0002866717306722242
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Expect Compound Data",
+          "rank": 2,
+          "raw_score": 0.0003243212216103806
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Compound Data Types",
+          "rank": 3,
+          "raw_score": 0.0003243212216103806
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Data Types Intuitive",
+          "rank": 4,
+          "raw_score": 0.0003243212216103806
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Types Intuitive Interpretation",
+          "rank": 5,
+          "raw_score": 0.0003243212216103806
+        }
+      ],
+      "stored_content_verified": true
+    },
+    {
+      "url": "https://docs.python.org/3/library/asyncio.html",
+      "attempts": 1,
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://docs.python.org/3/library/asyncio.html",
+      "title": "asyncio \u2014 Asynchronous I/O \u2014 Python 3.15.2 documentation",
+      "page_type": "other",
+      "body_characters": 2021,
+      "raw_bytes": 25411,
+      "topics": [
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "documentation Hello World",
+          "rank": 1,
+          "raw_score": 0.017241196022171508
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "multiple Python asynchronous",
+          "rank": 2,
+          "raw_score": 0.019012432848260524
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Python asynchronous frameworks",
+          "rank": 3,
+          "raw_score": 0.01926410015231547
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "asyncio",
+          "rank": 4,
+          "raw_score": 0.0296214830647039
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Python asynchronous",
+          "rank": 5,
+          "raw_score": 0.03254167168885001
+        }
+      ],
+      "stored_content_verified": true
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc9309.html",
+      "attempts": 1,
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://www.rfc-editor.org/rfc/rfc9309.html",
+      "title": "RFC 9309: Robots Exclusion Protocol",
+      "page_type": "other",
+      "body_characters": 10745,
+      "raw_bytes": 82367,
+      "topics": [
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Robots Exclusion Protocol",
+          "rank": 1,
+          "raw_score": 0.00043493772204855955
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Robots Exclusion",
+          "rank": 2,
+          "raw_score": 0.002801267751193588
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Exclusion Protocol",
+          "rank": 3,
+          "raw_score": 0.002945585352734754
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Exclusion Protocol Abstract",
+          "rank": 4,
+          "raw_score": 0.006337836544440541
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "robots.txt file",
+          "rank": 5,
+          "raw_score": 0.006759326860329775
+        }
+      ],
+      "stored_content_verified": true
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html",
+      "attempts": 1,
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html",
+      "title": "A Light in the Attic | Books to Scrape - Sandbox",
+      "page_type": "article",
+      "body_characters": 1300,
+      "raw_bytes": 9279,
+      "topics": [
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Shel Silverstein celebrates",
+          "rank": 1,
+          "raw_score": 0.009180544309513986
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Shel Silverstein",
+          "rank": 2,
+          "raw_score": 0.015185099284678785
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Silverstein",
+          "rank": 3,
+          "raw_score": 0.021296065196548877
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Light",
+          "rank": 4,
+          "raw_score": 0.025871651735764993
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Silverstein celebrates",
+          "rank": 5,
+          "raw_score": 0.02908145486609271
+        }
+      ],
+      "stored_content_verified": true
+    },
+    {
+      "url": "https://quotes.toscrape.com/",
+      "attempts": 1,
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://quotes.toscrape.com/",
+      "title": "Quotes to Scrape",
+      "page_type": "other",
+      "body_characters": 1645,
+      "raw_bytes": 11064,
+      "topics": [
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Scrape Top Ten",
+          "rank": 1,
+          "raw_score": 0.0001743055620142781
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Top Ten tags",
+          "rank": 2,
+          "raw_score": 0.0004385678289076982
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Quotes to Scrape",
+          "rank": 3,
+          "raw_score": 0.001473421069653388
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Scrape Top",
+          "rank": 4,
+          "raw_score": 0.002867306287065389
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Scrape Quotes",
+          "rank": 5,
+          "raw_score": 0.002946842139306776
+        }
+      ],
+      "stored_content_verified": true
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Web_crawler",
+      "attempts": 1,
+      "outcome": "robots_disallowed",
+      "reason": "robots_access_denied",
+      "http_status": 403,
+      "final_url": null,
+      "title": null,
+      "page_type": null,
+      "body_characters": null,
+      "raw_bytes": null,
+      "topics": null,
+      "failure_metadata": {
+        "failure_stage": "robots",
+        "failure_url": "https://en.wikipedia.org/robots.txt"
+      }
+    },
+    {
+      "url": "https://www.scrapethissite.com/pages/simple/",
+      "attempts": 1,
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://www.scrapethissite.com/pages/simple/",
+      "title": "Countries of the World: A Simple Example | Scrape This Site | A public sandbox for learning web scraping",
+      "page_type": "other",
+      "body_characters": 350,
+      "raw_bytes": 203361,
+      "topics": [
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Scrape This Site",
+          "rank": 1,
+          "raw_score": 0.004569109935605261
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "World",
+          "rank": 2,
+          "raw_score": 0.03326805255030435
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "learning web scraping",
+          "rank": 3,
+          "raw_score": 0.0339694061416446
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "web scraping",
+          "rank": 4,
+          "raw_score": 0.04559902769157295
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "public sandbox",
+          "rank": 5,
+          "raw_score": 0.05087789159740444
+        }
+      ],
+      "stored_content_verified": true
+    },
+    {
+      "url": "https://httpbin.org/html",
+      "attempts": 1,
+      "outcome": "success",
+      "reason": null,
+      "http_status": 200,
+      "final_url": "https://httpbin.org/html",
+      "title": null,
+      "page_type": "other",
+      "body_characters": 3566,
+      "raw_bytes": 3741,
+      "topics": [
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "peculiarly active pursuits",
+          "rank": 1,
+          "raw_score": 0.0024264201891206305
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "active pursuits shortly",
+          "rank": 2,
+          "raw_score": 0.0024264201891206305
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Herman Melville",
+          "rank": 3,
+          "raw_score": 0.006945978262893233
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Moby-Dick Availing",
+          "rank": 4,
+          "raw_score": 0.007203684030390994
+        },
+        {
+          "evidence": "metadata+body",
+          "method": "yake",
+          "phrase": "Ahab leg",
+          "rank": 5,
+          "raw_score": 0.007203684030390994
+        }
+      ],
+      "stored_content_verified": true
+    }
+  ],
+  "request_trace": [
+    {
+      "target_without_query": "https://www.python.org/robots.txt",
+      "robots_request": true,
+      "http_status": 200,
+      "decoded_bytes": 537,
+      "content_type": "text/plain"
+    },
+    {
+      "target_without_query": "https://www.rfc-editor.org/robots.txt",
+      "robots_request": true,
+      "http_status": 200,
+      "decoded_bytes": 135,
+      "content_type": "text/plain;charset=utf-8"
+    },
+    {
+      "target_without_query": "https://www.scrapethissite.com/robots.txt",
+      "robots_request": true,
+      "http_status": 200,
+      "decoded_bytes": 49,
+      "content_type": "text/plain"
+    },
+    {
+      "target_without_query": "https://books.toscrape.com/robots.txt",
+      "robots_request": true,
+      "http_status": 404,
+      "decoded_bytes": 0,
+      "content_type": "text/html"
+    },
+    {
+      "target_without_query": "https://www.python.org/",
+      "robots_request": false,
+      "http_status": 200,
+      "decoded_bytes": 51997,
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "target_without_query": "https://www.rfc-editor.org/rfc/rfc9309.html",
+      "robots_request": false,
+      "http_status": 200,
+      "decoded_bytes": 82367,
+      "content_type": "text/html"
+    },
+    {
+      "target_without_query": "http://blog.rei.com/robots.txt",
+      "robots_request": true,
+      "http_status": 403,
+      "decoded_bytes": 0,
+      "content_type": "text/html"
+    },
+    {
+      "target_without_query": "https://quotes.toscrape.com/robots.txt",
+      "robots_request": true,
+      "http_status": 404,
+      "decoded_bytes": 0,
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "target_without_query": "http://www.amazon.com/robots.txt",
+      "robots_request": true,
+      "http_status": 301,
+      "decoded_bytes": 0,
+      "content_type": null
+    },
+    {
+      "target_without_query": "https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html",
+      "robots_request": false,
+      "http_status": 200,
+      "decoded_bytes": 9279,
+      "content_type": "text/html"
+    },
+    {
+      "target_without_query": "https://www.scrapethissite.com/pages/simple/",
+      "robots_request": false,
+      "http_status": 200,
+      "decoded_bytes": 203361,
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "target_without_query": "https://docs.python.org/robots.txt",
+      "robots_request": true,
+      "http_status": 200,
+      "decoded_bytes": 517,
+      "content_type": "text/plain"
+    },
+    {
+      "target_without_query": "https://www.amazon.com/robots.txt",
+      "robots_request": true,
+      "http_status": 200,
+      "decoded_bytes": 7947,
+      "content_type": "text/plain"
+    },
+    {
+      "target_without_query": "http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "http_status": 301,
+      "decoded_bytes": 0,
+      "content_type": null
+    },
+    {
+      "target_without_query": "https://httpbin.org/robots.txt",
+      "robots_request": true,
+      "http_status": 200,
+      "decoded_bytes": 30,
+      "content_type": "text/plain"
+    },
+    {
+      "target_without_query": "https://docs.python.org/3/library/asyncio.html",
+      "robots_request": false,
+      "http_status": 200,
+      "decoded_bytes": 25411,
+      "content_type": "text/html"
+    },
+    {
+      "target_without_query": "https://quotes.toscrape.com/",
+      "robots_request": false,
+      "http_status": 200,
+      "decoded_bytes": 11064,
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "target_without_query": "https://www.cnn.com/robots.txt",
+      "robots_request": true,
+      "http_status": 200,
+      "decoded_bytes": 3704,
+      "content_type": "text/plain"
+    },
+    {
+      "target_without_query": "https://www.amazon.com/robots.txt",
+      "robots_request": true,
+      "http_status": 200,
+      "decoded_bytes": 7947,
+      "content_type": "text/plain"
+    },
+    {
+      "target_without_query": "https://en.wikipedia.org/robots.txt",
+      "robots_request": true,
+      "http_status": 403,
+      "decoded_bytes": 0,
+      "content_type": "text/plain"
+    },
+    {
+      "target_without_query": "https://httpbin.org/html",
+      "robots_request": false,
+      "http_status": 200,
+      "decoded_bytes": 3741,
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "target_without_query": "https://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1",
+      "robots_request": false,
+      "http_status": 503,
+      "decoded_bytes": 0,
+      "content_type": "text/html"
+    },
+    {
+      "target_without_query": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "robots_request": false,
+      "http_status": 200,
+      "decoded_bytes": 5750780,
+      "content_type": "text/html; charset=utf-8"
+    }
+  ],
+  "limitations": "Small deliberately selected public static-HTML smoke corpus; includes purpose-built practice sites. Not a random web-success estimate, relevance evaluation, load test or cloud deployment."
+}

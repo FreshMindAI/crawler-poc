@@ -1,0 +1,11 @@
+connector.name=iceberg
+iceberg.catalog.type=rest
+iceberg.rest-catalog.uri=https://REPLACE_WITH_APPROVED_REST_CATALOG
+iceberg.rest-catalog.warehouse=REPLACE_WITH_APPROVED_WAREHOUSE
+iceberg.file-format=PARQUET
+# Select the real provider filesystem and workload identity after the compatibility spike.
+# For a validated GCS deployment:
+fs.native-gcs.enabled=true
+# Supply approved catalog authentication via the deployment secret mechanism.
+# Never point independent writers at BigQuery-managed Iceberg files.
+

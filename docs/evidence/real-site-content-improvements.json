@@ -1,0 +1,845 @@
+{
+  "timestamp_utc": "2026-11-14T13:02:43.620918+00:00",
+  "baseline": "docs\\evidence\\real-site-baseline-20261114T125733Z.json",
+  "method": "Offline paired extraction using exactly the saved raw HTML from the guarded live crawl; no additional public requests.",
+  "pages": 8,
+  "elapsed_seconds": 1.407,
+  "comparisons": [
+    {
+      "url": "https://www.cnn.com/2025/09/23/tech/google-study-90-percent-tech-jobs-ai",
+      "same_saved_html": true,
+      "before": {
+        "body_characters": 3701,
+        "page_type": "article",
+        "topics": [
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "CNN app Download",
+            "rank": 1,
+            "raw_score": 0.011224462775044576
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "tech industry workers",
+            "rank": 2,
+            "raw_score": 0.011581045140932923
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "CNN Business",
+            "rank": 3,
+            "raw_score": 0.012943921758700275
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Business The overwhelming",
+            "rank": 4,
+            "raw_score": 0.015449675743315175
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "tech industry",
+            "rank": 5,
+            "raw_score": 0.01783317103658673
+          }
+        ]
+      },
+      "after": {
+        "body_characters": 3701,
+        "page_type": "article",
+        "headings": [],
+        "title": "Google says 90% of tech workers are now using AI at work | CNN Business",
+        "topics": [
+          {
+            "phrase": "tech industry workers",
+            "rank": 1,
+            "raw_score": 0.014970419305647398,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "CNN Business",
+            "rank": 2,
+            "raw_score": 0.019159903628059593,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "tech industry",
+            "rank": 3,
+            "raw_score": 0.022208523876870757,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Google",
+            "rank": 4,
+            "raw_score": 0.03297526009532957,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "tech",
+            "rank": 5,
+            "raw_score": 0.03299836013531471,
+            "method": "yake",
+            "evidence": "metadata+body"
+          }
+        ],
+        "metadata": {
+          "body_extraction": "trafilatura-precision",
+          "content_scope": "article"
+        },
+        "warnings": [],
+        "extractor_version": "html-trafilatura-v2",
+        "classifier_version": "schema-rules-yake-v2"
+      },
+      "checks": {
+        "nonempty_content": true,
+        "no_empty_topics": true,
+        "no_download_dialog_headings": true,
+        "no_download_topic": true,
+        "no_known_cross_boundary_topic": true
+      }
+    },
+    {
+      "url": "https://www.python.org/",
+      "same_saved_html": true,
+      "before": {
+        "body_characters": 937,
+        "page_type": "other",
+        "topics": [
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Intuitive Interpretation Quick",
+            "rank": 1,
+            "raw_score": 0.0002866717306722242
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Expect Compound Data",
+            "rank": 2,
+            "raw_score": 0.0003243212216103806
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Compound Data Types",
+            "rank": 3,
+            "raw_score": 0.0003243212216103806
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Data Types Intuitive",
+            "rank": 4,
+            "raw_score": 0.0003243212216103806
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Types Intuitive Interpretation",
+            "rank": 5,
+            "raw_score": 0.0003243212216103806
+          }
+        ]
+      },
+      "after": {
+        "body_characters": 970,
+        "page_type": "other",
+        "headings": [
+          "Get Started",
+          "Download",
+          "Docs",
+          "Jobs",
+          "Latest News"
+        ],
+        "title": "Welcome to Python.org",
+        "topics": [
+          {
+            "phrase": "Python",
+            "rank": 1,
+            "raw_score": 0.03856948636438812,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Python Programming Language",
+            "rank": 2,
+            "raw_score": 0.05175130169939023,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Python.org",
+            "rank": 3,
+            "raw_score": 0.06738293126800249,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Python Programming",
+            "rank": 4,
+            "raw_score": 0.09405463546588055,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Programming Language",
+            "rank": 5,
+            "raw_score": 0.11758763204217057,
+            "method": "yake",
+            "evidence": "metadata+body"
+          }
+        ],
+        "metadata": {
+          "body_extraction": "trafilatura-precision",
+          "content_scope": "section"
+        },
+        "warnings": [],
+        "extractor_version": "html-trafilatura-v2",
+        "classifier_version": "schema-rules-yake-v2"
+      },
+      "checks": {
+        "nonempty_content": true,
+        "no_empty_topics": true
+      }
+    },
+    {
+      "url": "https://docs.python.org/3/library/asyncio.html",
+      "same_saved_html": true,
+      "before": {
+        "body_characters": 2021,
+        "page_type": "other",
+        "topics": [
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "documentation Hello World",
+            "rank": 1,
+            "raw_score": 0.017241196022171508
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "multiple Python asynchronous",
+            "rank": 2,
+            "raw_score": 0.019012432848260524
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Python asynchronous frameworks",
+            "rank": 3,
+            "raw_score": 0.01926410015231547
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "asyncio",
+            "rank": 4,
+            "raw_score": 0.0296214830647039
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Python asynchronous",
+            "rank": 5,
+            "raw_score": 0.03254167168885001
+          }
+        ]
+      },
+      "after": {
+        "body_characters": 2021,
+        "page_type": "other",
+        "headings": [
+          "asyncio \u2014 Asynchronous I/O\u00b6"
+        ],
+        "title": "asyncio \u2014 Asynchronous I/O \u2014 Python 3.15.2 documentation",
+        "topics": [
+          {
+            "phrase": "asyncio",
+            "rank": 1,
+            "raw_score": 0.03341120280369405,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Python asynchronous frameworks",
+            "rank": 2,
+            "raw_score": 0.037383575862087175,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "multiple Python asynchronous",
+            "rank": 3,
+            "raw_score": 0.038009676209213736,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Asynchronous",
+            "rank": 4,
+            "raw_score": 0.04470943589062163,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Python",
+            "rank": 5,
+            "raw_score": 0.048157197843974466,
+            "method": "yake",
+            "evidence": "metadata+body"
+          }
+        ],
+        "metadata": {
+          "body_extraction": "trafilatura-precision",
+          "content_scope": "div"
+        },
+        "warnings": [],
+        "extractor_version": "html-trafilatura-v2",
+        "classifier_version": "schema-rules-yake-v2"
+      },
+      "checks": {
+        "nonempty_content": true,
+        "no_empty_topics": true
+      }
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc9309.html",
+      "same_saved_html": true,
+      "before": {
+        "body_characters": 10745,
+        "page_type": "other",
+        "topics": [
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Robots Exclusion Protocol",
+            "rank": 1,
+            "raw_score": 0.00043493772204855955
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Robots Exclusion",
+            "rank": 2,
+            "raw_score": 0.002801267751193588
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Exclusion Protocol",
+            "rank": 3,
+            "raw_score": 0.002945585352734754
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Exclusion Protocol Abstract",
+            "rank": 4,
+            "raw_score": 0.006337836544440541
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "robots.txt file",
+            "rank": 5,
+            "raw_score": 0.006759326860329775
+          }
+        ]
+      },
+      "after": {
+        "body_characters": 10745,
+        "page_type": "other",
+        "headings": [
+          "RFC 9309",
+          "Robots Exclusion Protocol",
+          "Abstract",
+          "Status of This Memo",
+          "Copyright Notice"
+        ],
+        "title": "RFC 9309: Robots Exclusion Protocol",
+        "topics": [
+          {
+            "phrase": "Robots Exclusion Protocol",
+            "rank": 1,
+            "raw_score": 0.0014260727850945805,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Exclusion Protocol",
+            "rank": 2,
+            "raw_score": 0.006050166691687815,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Robots Exclusion",
+            "rank": 3,
+            "raw_score": 0.006272548753713384,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "robots.txt file",
+            "rank": 4,
+            "raw_score": 0.009437706049873401,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "URI",
+            "rank": 5,
+            "raw_score": 0.013328158338702422,
+            "method": "yake",
+            "evidence": "metadata+body"
+          }
+        ],
+        "metadata": {
+          "body_extraction": "trafilatura-precision",
+          "content_scope": "body"
+        },
+        "warnings": [],
+        "extractor_version": "html-trafilatura-v2",
+        "classifier_version": "schema-rules-yake-v2"
+      },
+      "checks": {
+        "nonempty_content": true,
+        "no_empty_topics": true
+      }
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html",
+      "same_saved_html": true,
+      "before": {
+        "body_characters": 1300,
+        "page_type": "article",
+        "topics": [
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Shel Silverstein celebrates",
+            "rank": 1,
+            "raw_score": 0.009180544309513986
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Shel Silverstein",
+            "rank": 2,
+            "raw_score": 0.015185099284678785
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Silverstein",
+            "rank": 3,
+            "raw_score": 0.021296065196548877
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Light",
+            "rank": 4,
+            "raw_score": 0.025871651735764993
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Silverstein celebrates",
+            "rank": 5,
+            "raw_score": 0.02908145486609271
+          }
+        ]
+      },
+      "after": {
+        "body_characters": 1300,
+        "page_type": "product",
+        "headings": [
+          "A Light in the Attic",
+          "Product Description",
+          "Product Information"
+        ],
+        "title": "A Light in the Attic | Books to Scrape - Sandbox",
+        "topics": [
+          {
+            "phrase": "Shel Silverstein celebrates",
+            "rank": 1,
+            "raw_score": 0.014025569961351809,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Shel Silverstein",
+            "rank": 2,
+            "raw_score": 0.019637344389760808,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Silverstein",
+            "rank": 3,
+            "raw_score": 0.02436318686519618,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Attic",
+            "rank": 4,
+            "raw_score": 0.029439441478614218,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Light",
+            "rank": 5,
+            "raw_score": 0.03048964937056568,
+            "method": "yake",
+            "evidence": "metadata+body"
+          }
+        ],
+        "metadata": {
+          "body_extraction": "trafilatura-precision",
+          "content_scope": "article",
+          "product_evidence": "identifier-and-price-fields"
+        },
+        "warnings": [],
+        "extractor_version": "html-trafilatura-v2",
+        "classifier_version": "schema-rules-yake-v2"
+      },
+      "checks": {
+        "nonempty_content": true,
+        "no_empty_topics": true,
+        "product_classified": true
+      }
+    },
+    {
+      "url": "https://quotes.toscrape.com/",
+      "same_saved_html": true,
+      "before": {
+        "body_characters": 1645,
+        "page_type": "other",
+        "topics": [
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Scrape Top Ten",
+            "rank": 1,
+            "raw_score": 0.0001743055620142781
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Top Ten tags",
+            "rank": 2,
+            "raw_score": 0.0004385678289076982
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Quotes to Scrape",
+            "rank": 3,
+            "raw_score": 0.001473421069653388
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Scrape Top",
+            "rank": 4,
+            "raw_score": 0.002867306287065389
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Scrape Quotes",
+            "rank": 5,
+            "raw_score": 0.002946842139306776
+          }
+        ]
+      },
+      "after": {
+        "body_characters": 1645,
+        "page_type": "other",
+        "headings": [
+          "Quotes to Scrape",
+          "Top Ten tags"
+        ],
+        "title": "Quotes to Scrape",
+        "topics": [
+          {
+            "phrase": "Quotes to Scrape",
+            "rank": 1,
+            "raw_score": 0.007626731305768178,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Albert Einstein",
+            "rank": 2,
+            "raw_score": 0.02822957597738184,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Scrape",
+            "rank": 3,
+            "raw_score": 0.04575081034468999,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Top Ten tags",
+            "rank": 4,
+            "raw_score": 0.0804838185426805,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Quotes",
+            "rank": 5,
+            "raw_score": 0.08209849208173575,
+            "method": "yake",
+            "evidence": "metadata+body"
+          }
+        ],
+        "metadata": {
+          "body_extraction": "trafilatura-precision",
+          "content_scope": "body"
+        },
+        "warnings": [],
+        "extractor_version": "html-trafilatura-v2",
+        "classifier_version": "schema-rules-yake-v2"
+      },
+      "checks": {
+        "nonempty_content": true,
+        "no_empty_topics": true
+      }
+    },
+    {
+      "url": "https://www.scrapethissite.com/pages/simple/",
+      "same_saved_html": true,
+      "before": {
+        "body_characters": 350,
+        "page_type": "other",
+        "topics": [
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Scrape This Site",
+            "rank": 1,
+            "raw_score": 0.004569109935605261
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "World",
+            "rank": 2,
+            "raw_score": 0.03326805255030435
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "learning web scraping",
+            "rank": 3,
+            "raw_score": 0.0339694061416446
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "web scraping",
+            "rank": 4,
+            "raw_score": 0.04559902769157295
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "public sandbox",
+            "rank": 5,
+            "raw_score": 0.05087789159740444
+          }
+        ]
+      },
+      "after": {
+        "body_characters": 18089,
+        "page_type": "other",
+        "headings": [
+          "Countries of the World: A Simple Example 250 items"
+        ],
+        "title": "Countries of the World: A Simple Example | Scrape This Site | A public sandbox for learning web scraping",
+        "topics": [
+          {
+            "phrase": "Area",
+            "rank": 1,
+            "raw_score": 0.00013290542576647248,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Capital",
+            "rank": 2,
+            "raw_score": 0.0004058550230109786,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Population",
+            "rank": 3,
+            "raw_score": 0.00040593075537345247,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Islands",
+            "rank": 4,
+            "raw_score": 0.017449028275396565,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Scrape This Site",
+            "rank": 5,
+            "raw_score": 0.04376767232031175,
+            "method": "yake",
+            "evidence": "metadata+body"
+          }
+        ],
+        "metadata": {
+          "body_extraction": "structured-visible-text",
+          "content_scope": "body"
+        },
+        "warnings": [
+          "structured_content_fallback"
+        ],
+        "extractor_version": "html-trafilatura-v2",
+        "classifier_version": "schema-rules-yake-v2"
+      },
+      "checks": {
+        "nonempty_content": true,
+        "no_empty_topics": true,
+        "first_country_present": true,
+        "last_country_present": true,
+        "afghanistan_present": true,
+        "listing_not_just_intro": true,
+        "all_country_names_present": true
+      },
+      "record_completeness": {
+        "expected_country_names": 250,
+        "found_country_names": 250,
+        "labels_source": "All h3 record names in the saved page country section; presence check, not independent source-data verification."
+      }
+    },
+    {
+      "url": "https://httpbin.org/html",
+      "same_saved_html": true,
+      "before": {
+        "body_characters": 3566,
+        "page_type": "other",
+        "topics": [
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "peculiarly active pursuits",
+            "rank": 1,
+            "raw_score": 0.0024264201891206305
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "active pursuits shortly",
+            "rank": 2,
+            "raw_score": 0.0024264201891206305
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Herman Melville",
+            "rank": 3,
+            "raw_score": 0.006945978262893233
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Moby-Dick Availing",
+            "rank": 4,
+            "raw_score": 0.007203684030390994
+          },
+          {
+            "evidence": "metadata+body",
+            "method": "yake",
+            "phrase": "Ahab leg",
+            "rank": 5,
+            "raw_score": 0.007203684030390994
+          }
+        ]
+      },
+      "after": {
+        "body_characters": 3566,
+        "page_type": "other",
+        "headings": [
+          "Herman Melville - Moby-Dick"
+        ],
+        "title": null,
+        "topics": [
+          {
+            "phrase": "Herman Melville",
+            "rank": 1,
+            "raw_score": 0.006973569014059555,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "blacksmith",
+            "rank": 2,
+            "raw_score": 0.04698188359999948,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "Melville",
+            "rank": 3,
+            "raw_score": 0.054794977953860555,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "peculiarly active pursuits",
+            "rank": 4,
+            "raw_score": 0.05767500810191742,
+            "method": "yake",
+            "evidence": "metadata+body"
+          },
+          {
+            "phrase": "active pursuits shortly",
+            "rank": 5,
+            "raw_score": 0.05767500810191742,
+            "method": "yake",
+            "evidence": "metadata+body"
+          }
+        ],
+        "metadata": {
+          "body_extraction": "trafilatura-precision",
+          "content_scope": "body"
+        },
+        "warnings": [],
+        "extractor_version": "html-trafilatura-v2",
+        "classifier_version": "schema-rules-yake-v2"
+      },
+      "checks": {
+        "nonempty_content": true,
+        "no_empty_topics": true
+      }
+    }
+  ],
+  "all_explicit_checks_passed": true,
+  "limitations": "Targeted completeness/boilerplate checks, not independent human relevance labels or a general web-quality score."
+}

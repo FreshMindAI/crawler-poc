@@ -1,0 +1,25 @@
+{
+  "cpu_seconds": 71.453125,
+  "jobs": {
+    "queued": 1000,
+    "unpublished": 0
+  },
+  "limitations": "Streaming local file, SQLite, 1000 distinct URL variants with duplicates and invalid rows. Admission/accounting only; no HTTP crawl/publication.",
+  "mode": "ingest",
+  "network_requests": 0,
+  "platform": "Windows-11-10.0.26300-SP0",
+  "progress": {
+    "counts": {
+      "admitted": 1000,
+      "duplicate": 97969,
+      "rejected": 1031
+    },
+    "last_offset": 100000
+  },
+  "python": "3.12.10",
+  "records": 100000,
+  "records_per_second": 1267.155384760484,
+  "rss_peak_sampled_bytes": 95948800,
+  "rss_start_bytes": 92790784,
+  "seconds": 78.91691990000254
+}

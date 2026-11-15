@@ -291,13 +291,10 @@ class BrowserRenderer:
         has_display = os.name == "nt" or bool(
             os.environ.get("DISPLAY") or os.environ.get("WAYLAND_DISPLAY")
         )
-        modes: tuple[str, ...] = (
-            ("headless_new", "headed") if has_display else ("headless_new", "headless")
-        )
+        modes: tuple[bool, ...] = (True, False) if has_display else (True,)
         last_status: int | None = None
         last_url: str = target
-        for mode in modes:
-            headless = mode == "headless"
+        for headless in modes:
             failure: FetchError | None = None
             requests, blocked = 0, 0
             browser: Any = None
@@ -305,10 +302,9 @@ class BrowserRenderer:
                 "--disable-dev-shm-usage",
                 "--disable-blink-features=AutomationControlled",
                 "--disable-features=HttpsFirstBalancedModeAutoEnable",
+                "--disable-gpu",
             ]
-            if mode == "headless_new":
-                args.append("--headless=new")
-            elif mode == "headed":
+            if not headless:
                 args.append("--window-position=-2000,-2000")
             try:
                 async with asyncio.timeout(min(15.0, self.settings.request_timeout)):
@@ -326,7 +322,7 @@ class BrowserRenderer:
                             "viewport": {"width": 1366, "height": 768},
                             "locale": "en-US",
                         }
-                        if mode != "headed":
+                        if headless:
                             ctx_kwargs["user_agent"] = (
                                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                                 "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0"
@@ -380,10 +376,14 @@ class BrowserRenderer:
                                 )
                             final_url = normalize_url(page.url)
                             last_status, last_url = status, final_url
-                            if mode != modes[-1] and (
-                                status in {403, 503}
-                                or "px-captcha" in source.casefold()
-                                or "access to this page has been denied" in source.casefold()
+                            if (
+                                headless
+                                and len(modes) > 1
+                                and (
+                                    status in {403, 503}
+                                    or "px-captcha" in source.casefold()
+                                    or "access to this page has been denied" in source.casefold()
+                                )
                             ):
                                 continue
                             if status in {403, 503}:
@@ -421,12 +421,12 @@ class BrowserRenderer:
             except FetchError:
                 raise
             except (BrowserTimeout, TimeoutError) as exc:
-                if mode == modes[-1]:
+                if headless == modes[-1]:
                     raise failure or FetchError(
                         Outcome.UNSUPPORTED, "browser_timeout", stage="render"
                     ) from exc
             except BrowserError as exc:
-                if mode == modes[-1]:
+                if headless == modes[-1]:
                     raise failure or FetchError(
                         Outcome.UNSUPPORTED,
                         "browser_runtime_or_navigation_failed",

@@ -243,7 +243,7 @@
         message("Monitoring paused after five minutes. Submitted jobs continue on the server; resume to check them.");
         return;
       }
-      timer = setTimeout(() => poll(run), batch ? 1500 : 4000);
+      timer = setTimeout(() => poll(run), batch ? 1200 : 1200);
     } catch (error) {
       if (run !== epoch) return;
       stop();

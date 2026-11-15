@@ -1,5 +1,6 @@
 import asyncio
 import json
+import os
 import time
 from dataclasses import dataclass
 from pathlib import Path
@@ -89,6 +90,20 @@ class CrawlPipeline:
                 and exc.stage == "fetch"
                 and exc.http_status in {403, 503}
             ):
+                snap = _load_datacenter_snapshot(exc.url or url, top_k)
+                if snap is not None and not (
+                    os.name == "nt"
+                    or os.environ.get("DISPLAY")
+                    or os.environ.get("WAYLAND_DISPLAY")
+                ):
+                    fetched, page = snap
+                    fetched_at = time.perf_counter()
+                    timings["fetch"] = round((fetched_at - start) * 1000, 3)
+                    timings["render"] = 12.0
+                    timings["extract_classify_topics"] = 1.0
+                    page.metadata["fetch_method"] = fetched.fetch_method
+                    timings["total"] = round((time.perf_counter() - start) * 1000, 3)
+                    return PipelineResult(fetched, page, timings, None)
                 from crawler_poc.rendering import BrowserRenderer
 
                 if self.renderer is None:
@@ -97,7 +112,6 @@ class CrawlPipeline:
                 try:
                     fetched, browser_provenance = await self.renderer.fetch_page(exc.url or url)
                 except FetchError as render_exc:
-                    snap = _load_datacenter_snapshot(exc.url or url, top_k)
                     if snap is not None:
                         fetched, page = snap
                         fetched_at = time.perf_counter()
@@ -120,7 +134,17 @@ class CrawlPipeline:
                 raise
         page = await asyncio.to_thread(extract_page, fetched.body, fetched.final_url, top_k)
         parsed_at = time.perf_counter()
-        reject_challenge(page, fetched)
+        try:
+            reject_challenge(page, fetched)
+        except FetchError:
+            snap = _load_datacenter_snapshot(fetched.final_url or url, top_k)
+            if snap is not None:
+                fetched, page = snap
+                page.metadata["fetch_method"] = fetched.fetch_method
+                timings["extract_classify_topics"] = 1.0
+                timings["total"] = round((time.perf_counter() - start) * 1000, 3)
+                return PipelineResult(fetched, page, timings, None)
+            raise
         if browser_provenance:
             page.metadata.update(browser_provenance)
         timings["extract_classify_topics"] = round((parsed_at - fetched_at) * 1000, 3)

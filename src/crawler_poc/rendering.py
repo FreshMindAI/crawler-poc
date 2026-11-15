@@ -312,12 +312,19 @@ class BrowserRenderer:
                         break
                     imp_url = normalize_url(urljoin(imp_url, loc))
                     continue
-                if imp_resp.status_code == 200 and len(imp_resp.content) <= self.settings.max_bytes:
+                if (
+                    imp_resp.status_code == 200
+                    and len(imp_resp.content) >= 8192
+                    and len(imp_resp.content) <= self.settings.max_bytes
+                ):
                     imp_text = imp_resp.content.decode("utf-8", errors="ignore").casefold()
                     if (
                         "px-captcha" not in imp_text
                         and "access to this page has been denied" not in imp_text
                         and "robot check" not in imp_text
+                        and "validatecaptcha" not in imp_text
+                        and "automated access to amazon" not in imp_text
+                        and "sorry! something went wrong" not in imp_text
                     ):
                         ctype = (
                             imp_resp.headers.get("content-type", "text/html").split(";")[0].lower()

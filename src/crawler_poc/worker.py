@@ -121,7 +121,7 @@ class Worker:
                         counts = await asyncio.to_thread(self.store.counts)
                         if not counts.get("queued", 0) and not counts.get("running", 0):
                             return
-                    await asyncio.sleep(0.2)
+                    await asyncio.sleep(0.05)
             except asyncio.CancelledError:
                 raise
             except Exception:

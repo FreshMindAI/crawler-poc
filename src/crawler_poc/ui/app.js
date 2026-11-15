@@ -225,12 +225,27 @@
       $("resume").hidden = true;
       return;
     }
-    const identifier = pending[pollCursor++ % pending.length].id;
     try {
-      const job = await (await request(`/v1/crawls/${encodeURIComponent(identifier)}`)).json();
+      const slice = pending.slice(0, 6);
+      const fetched = await Promise.all(
+        slice.map(async (item) =>
+          (await request(`/v1/crawls/${encodeURIComponent(item.id)}`)).json()
+        )
+      );
       if (run !== epoch) return;
-      jobs.set(identifier, job);
-      if (identifier === jobId) showJob(job);
+      for (const job of fetched) {
+        jobs.set(job.id, job);
+      }
+      if (batch) {
+        const current = jobs.get(jobId);
+        if (!current || current.status !== "terminal" || current.result?.outcome !== "success") {
+          const firstSuccess = [...jobs.values()].find(
+            (item) => item.status === "terminal" && item.result?.outcome === "success"
+          );
+          if (firstSuccess) jobId = firstSuccess.id;
+        }
+      }
+      if (jobs.has(jobId)) showJob(jobs.get(jobId));
       updateBatch();
       if ([...jobs.values()].every((item) => item.status === "terminal")) {
         stop();
@@ -243,7 +258,7 @@
         message("Monitoring paused after five minutes. Submitted jobs continue on the server; resume to check them.");
         return;
       }
-      timer = setTimeout(() => poll(run), batch ? 1200 : 1200);
+      timer = setTimeout(() => poll(run), 400);
     } catch (error) {
       if (run !== epoch) return;
       stop();
@@ -252,11 +267,20 @@
     }
   }
 
+  function cleanUrls(rawInput, multiple) {
+    if (!multiple) return [rawInput.trim().replace(/^[,;\s]+|[,;\s]+$/g, "")];
+    return rawInput
+      .trim()
+      .split(/\s+/u)
+      .map((entry) => entry.replace(/^[,;]+|[,;]+$/g, ""))
+      .filter(Boolean);
+  }
+
   $("crawl-form").addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!configured) { message("Cannot load service access settings. Reload the page to retry."); return; }
     const multiple = $("input-mode").value === "multiple";
-    const urls = multiple ? $("urls").value.trim().split(/\s+/u) : [$("url").value.trim()];
+    const urls = cleanUrls(multiple ? $("urls").value : $("url").value, multiple);
     let payload;
     try {
       if (urls.length > 100) throw new Error("Submit at most 100 URLs at a time.");

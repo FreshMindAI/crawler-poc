@@ -81,7 +81,7 @@ class Worker:
                 content_type=fetched.content_type,
                 raw_ref=raw_ref,
                 body_ref=body_ref,
-                body_preview=page.body[:4000],
+                body_preview=page.body[:16000],
                 body_characters=len(page.body),
                 raw_bytes=len(fetched.body),
                 fetch_method=fetched.fetch_method,

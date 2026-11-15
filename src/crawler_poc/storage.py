@@ -227,6 +227,18 @@ class Store:
         result["result"] = json.loads(result["result"]) if result["result"] else None
         return result
 
+    def get_jobs(self, identifiers: list[str]) -> list[dict[str, Any]]:
+        if not identifiers:
+            return []
+        with self.engine.connect() as conn:
+            rows = conn.execute(sa.select(jobs).where(jobs.c.id.in_(identifiers))).mappings().all()
+        by_id: dict[str, dict[str, Any]] = {}
+        for row in rows:
+            item = dict(row)
+            item["result"] = json.loads(item["result"]) if item["result"] else None
+            by_id[str(item["id"])] = item
+        return [by_id[identifier] for identifier in identifiers if identifier in by_id]
+
     def get_document(self, identifier: str) -> dict[str, Any] | None:
         with self.engine.connect() as conn:
             value = conn.scalar(

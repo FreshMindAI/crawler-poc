@@ -152,6 +152,24 @@ def create_app(settings: Settings | None = None, store: Store | None = None) -> 
             raise HTTPException(429, "Pending job capacity reached") from exc
         return {"job_ids": identifiers, "status": "accepted"}
 
+    @app.get("/v1/crawls", dependencies=protected)
+    async def list_jobs(
+        ids: str = Query(default="", max_length=8000),
+    ) -> dict[str, list[dict[str, Any]]]:
+        identifiers = [item.strip() for item in ids.split(",") if item.strip()][:100]
+        values = await asyncio.to_thread(database.get_jobs, identifiers)
+        keys = (
+            "id",
+            "url_id",
+            "url",
+            "status",
+            "attempts",
+            "created_at",
+            "updated_at",
+            "result",
+        )
+        return {"jobs": [{key: item[key] for key in keys} for item in values]}
+
     @app.get("/v1/crawls/{job_id}", dependencies=protected)
     async def job(job_id: str) -> dict[str, Any]:
         value = await asyncio.to_thread(database.get_job, job_id)

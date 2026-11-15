@@ -13,14 +13,14 @@ class Settings(BaseSettings):
     object_uri: str | None = None
     auth_mode: Literal["api_key", "public"] = "api_key"
     api_key: SecretStr = SecretStr("")
-    workers: int = Field(default=4, ge=1, le=32)
+    workers: int = Field(default=8, ge=1, le=32)
     max_bytes: int = Field(default=10 * 1024 * 1024, ge=1024, le=20 * 1024 * 1024)
     max_wire_bytes: int = Field(default=5 * 1024 * 1024, ge=1024, le=20 * 1024 * 1024)
     request_timeout: float = Field(default=20, gt=0, le=120)
     max_attempts: int = Field(default=3, ge=1, le=5)
     origin_delay: float = Field(default=0.2, ge=0.05, le=60)
     lease_seconds: float = Field(default=120, ge=30, le=600)
-    api_requests_per_minute: int = Field(default=180, ge=1, le=10000)
+    api_requests_per_minute: int = Field(default=600, ge=1, le=10000)
     max_pending_jobs: int = Field(default=10000, ge=1, le=1000000)
     embedded_worker: bool = False
     browser_fallback: bool = False
